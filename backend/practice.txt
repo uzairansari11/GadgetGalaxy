@@ -1,0 +1,4 @@
+Make sure to change the branch everyday.
+Please make a proper commit : ex-"signupFunctionality_fw21_0735(uzair_ansari)" 
+Please make proper component don't write dirty code which means it must be separable and easy to use anywhere.
+Please try to do  the part you have asked.
