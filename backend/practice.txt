@@ -2,3 +2,35 @@ Make sure to change the branch everyday.
 Please make a proper commit : ex-"signupFunctionality_fw21_0735(uzair_ansari)" 
 Please make proper component don't write dirty code which means it must be separable and easy to use anywhere.
 Please try to do  the part you have asked.
+
+
+
+
+
+
+Backend---->
+
+
+frontend ---->home navbar footer
+
+pooja ----> cart checkout
+
+
+nitin ---->single product page 
+
+uzair ---->admin 
+
+
+
+/<---------------font family ----------------->/
+font-family (stack):
+"Graphik Regular"
+sans-serif
+Font being Rendered:
+Graphik Regular
+100.0% (remote)
+font-size:
+13px
+Similar Fonts:
+
+<--------------------------------->
