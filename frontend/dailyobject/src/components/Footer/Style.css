@@ -1,0 +1,144 @@
+@import url("https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap");
+
+.foot_main {
+    border: 1px solid red;
+    padding: 40px 10px;
+    margin: 40px auto 0px auto;
+    background-color: whitesmoke;
+}
+.foot_one {
+    text-align: center;
+}
+.foot_one > h3 {
+    font-size: 26px;
+    font-family: "Gothic A1", sans-serif;
+    margin-bottom: 29px;
+    line-height: 20px;
+    font-weight: 600;
+}
+.foot_one > input {
+    padding: 15px 10px;
+    border: none;
+    width: 30%;
+    margin-right: 2px;
+    border-radius: 5px;
+    background-color: white;
+}
+.foot_one > input:focus-visible {
+    outline: 0.5px solid gray;
+}
+.foot_one > button {
+    font-family: "Pathway Gothic One", sans-serif;
+    background-color: #bfbfbf;
+    text-transform: uppercase;
+    padding: 16px 5px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    border-radius: 5px;
+}
+.foot_two {
+    text-align: center;
+    border-bottom: 0.5px solid hsla(0, 0%, 75%, 0.5);
+}
+.foot_two > h3 {
+    font-size: 26px;
+    font-family: "Gothic A1", sans-serif;
+    margin: 5rem auto 2rem auto;
+    line-height: 20px;
+    font-weight: 600;
+}
+.foot_three {
+    text-align: center;
+    border-bottom: 0.5px solid hsla(0, 0%, 75%, 0.5);
+}
+.foot_three > h3 {
+    font-size: 26px;
+    font-family: "Gothic A1", sans-serif;
+    margin: 4rem auto 2rem auto;
+    line-height: 20px;
+    font-weight: 600;
+}
+.foot_four {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 0.5px solid hsla(0, 0%, 75%, 0.5);
+}
+.four_one {
+    padding: 31px 17px;
+    display: flex;
+    flex-direction: row;
+    width: 40%;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.four_one > img {
+    margin-right: 10px;
+    display: inline;
+}
+.four_one > div {
+    flex: 1 1 0%;
+    font-size: 14px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.four_one > div > p {
+    padding-bottom: 10px;
+}
+.foot_five {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid red;
+}
+.five_one {
+    border: 1px solid blue;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    padding: 0px 30px;
+}
+.five_one > div {
+    width: 30%;
+    padding: 0px 30px;
+}
+.five_one > div > h4 {
+    font-weight: 600;
+    font-size: 16px;
+    font-family: "Pathway Gothic One", sans-serif;
+    letter-spacing: 2.5px;
+    margin-bottom: 15px;
+}
+ul > li {
+    font-family: "Gothic A1", sans-serif;
+    list-style-type: none;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 30px;
+    cursor: pointer;
+}
+ul > li:hover {
+    text-decoration: underline;
+}
+.five_two {
+    border: 1px solid green;
+    width: 30%;
+    text-align: center;
+}
+.five_icon {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.five_icon > div {
+    width: 9%;
+    border: 1px solid purple;
+
+}
