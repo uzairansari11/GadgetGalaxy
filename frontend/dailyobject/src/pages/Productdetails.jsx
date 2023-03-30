@@ -1,7 +1,7 @@
 import { Box,Image } from "@chakra-ui/react"
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-const Productdetails=()=>{
+export const ProductDetails=()=>{
       return(
             <>
             <Box display={"flex"}>
@@ -19,4 +19,3 @@ const Productdetails=()=>{
       )
 }
 
-export default Productdetails

@@ -5,9 +5,9 @@ import { getData } from "../../redux/adminproduct/action";
 import { ProductCard } from "../component/Card";
 import { LoadingSkeleton } from "../component/LoadingSkeleton";
 
-export const AllProduct = () => {
+export const Product = () => {
 	const product = useSelector((store) => store.adminProductReducer.products);
-	// const loading = useSelector((store) => store.productreducer.isLoading);
+	
 	const dispatch = useDispatch();
 
 	console.log("Products are there", product);
