@@ -1,16 +1,19 @@
 import { Flex, Box, Text, Button, Image } from "@chakra-ui/react";
 import { useState } from "react";
 import HoverImage from "react-hover-image";
+import { useNavigate } from "react-router-dom";
 const AllProductsCart = ({
 	Image1,
 	Image2,
 	Title,
 	Discount_price,
-	Original_price,
+	Original_price,_id
 }) => {
 	const [wishlist, setwishlist] = useState(true);
+	const navigate=useNavigate()
 	return (
 		<Box>
+			
 			<Flex alignItems="center" justifyContent="center">
 				<Box
 					backgroundColor={"#fafafa"}
@@ -19,6 +22,7 @@ const AllProductsCart = ({
 					rounded="lg"
 					shadow="lg"
 					position="relative"
+					h="560px"
 				>
 					{wishlist ? (
 						<Image
@@ -47,6 +51,7 @@ const AllProductsCart = ({
 						hoverSrc={Image2}
 						alt={`Picture of `}
 						roundedTop="xl"
+						onClick={() => navigate(`/productdetails/${_id}`)}
 					/>
 
 					<Box backgroundColor={"white"} p="6">
@@ -59,7 +64,7 @@ const AllProductsCart = ({
 								isTruncated
 							></Box>
 						</Flex>
-						<Text>{Title}</Text>
+						<Text textAlign={"center"}>{Title}</Text>
 						<Flex mt="10px" justifyContent={"space-evenly"}>
 							<Text fontWeight={"bold"} fontSize="lg">
 								Rs.{Discount_price}
@@ -74,7 +79,7 @@ const AllProductsCart = ({
 								</Text>
 							</Box>
 						</Flex>
-						<Flex mt="20px">
+						<Flex mt="10%" >
 							<Button
 								bg="#20a87e"
 								color={"white"}
