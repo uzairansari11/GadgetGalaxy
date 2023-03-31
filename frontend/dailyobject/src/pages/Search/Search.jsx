@@ -6,7 +6,7 @@ import { VscArrowLeft, VscArrowRight } from "react-icons/vsc";
 import "./Style.css";
 import Footer from "../../components/Footer/Footer";
 import { NotFoundImage } from "../../components/404/404";
-import { Navbar } from "../../components/Navbar/Navbar";
+import  Navbar  from "../../components/Navbar/Navbar";
 
 const Search = (props) => {
     const theme = useMantineTheme();

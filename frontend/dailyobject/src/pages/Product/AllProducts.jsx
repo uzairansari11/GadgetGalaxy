@@ -2,6 +2,10 @@ import { Box, Button, Grid, Text, Image } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import AllProductsCart from "./AllProductsCart";
+import Footer from "../../components/Footer/Footer";
+import Navbar from "../../components/Navbar/Navbar";
+
+
 
 const AllProducts = () => {
     const [filters, setfilters] = useState(false);
