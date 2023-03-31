@@ -6,17 +6,22 @@ import { Dashboard } from "../admin/pages/Dashboard";
 import { EditProduct } from "../admin/pages/EditProduct";
 import Home from "../pages/Home/Home";
 import AllProducts from "../pages/Product/AllProducts";
-export const AllRoutes = () => {
-	return (
-		<Routes>
-			<Route path="/" element={<Home />} />
-			<Route path="/products" element={<AllProducts />} />
+import { NotFoundImage } from "../components/404/404";
+import { Login } from "../pages/Login/login";
+import Search from "../pages/Search/Search";
 
-			<Route path="/admin/dashboard" element={<Dashboard />} />
-			<Route path="/admin/product" element={<Product />} />
-			<Route path="/admin/product/add" element={<AddProduct />} />
-			<Route path="/admin/product/edit/:id" element={<EditProduct />} />
-			<Route path="*" element={<h1>Page Not Found</h1>} />
-		</Routes>
-	);
+export const AllRoutes = () => {
+    return (
+        <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/products" element={<AllProducts />} />
+            <Route path="/admin/dashboard" element={<Dashboard />} />
+            <Route path="/admin/product" element={<Product />} />
+            <Route path="/admin/product/add" element={<AddProduct />} />
+            <Route path="/admin/product/edit/:id" element={<EditProduct />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="*" element={<NotFoundImage />} />
+        </Routes>
+    );
 };
