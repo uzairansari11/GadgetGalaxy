@@ -15,6 +15,7 @@ import {
 import Carousel from "better-react-carousel";
 import "./home.css";
 import NavigatetoTop from "../../components/NavigateTop/NavigateTop";
+import Footer from "../../components/Footer/Footer";
 
 const Home = () => {
   const marquee = keyframes`
@@ -547,6 +548,9 @@ const Home = () => {
         </Box>
       </Box>
       <NavigatetoTop />
+      <Box>
+        <Footer/>
+      </Box>
     </>
   );
 };

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { NotFoundImage } from "../../components/404/404";
 import Footer from "../../components/Footer/Footer";
 import "./Style.css";
-import { Navbar } from "../../components/Navbar/Navbar";
+import Navbar from "../../components/Navbar/Navbar";
 import AllProductsCart from "../Product/AllProductsCart.jsx";
 import axios from "axios";
 import { Box, Button, Grid, Text, Image } from "@chakra-ui/react";
