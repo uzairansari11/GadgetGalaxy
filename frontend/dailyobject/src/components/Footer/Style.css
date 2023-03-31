@@ -2,8 +2,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap");
 
 .foot_main {
-    border: 1px solid red;
-    padding: 40px 10px;
+    border: 0px solid red;
+    padding: 40px 0px 0px 0px;
     margin: 40px auto 0px auto;
     background-color: whitesmoke;
 }
@@ -93,16 +93,17 @@
 .foot_five {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    border: 1px solid red;
+    align-items: start;
+    border: 0px solid red;
+    border-bottom: 0.5px solid hsla(0, 0%, 75%, 0.5);
 }
 .five_one {
-    border: 1px solid blue;
+    border: 0px solid blue;
     width: 70%;
     display: flex;
     justify-content: space-between;
     align-items: start;
-    padding: 0px 30px;
+    padding: 30px;
 }
 .five_one > div {
     width: 30%;
@@ -127,18 +128,131 @@ ul > li:hover {
     text-decoration: underline;
 }
 .five_two {
-    border: 1px solid green;
+    border: 0px solid green;
     width: 30%;
-    text-align: center;
+    border-left: 0.5px solid hsla(0, 0%, 75%, 0.5);
+
+    /* height: 100%; */
+    padding: 0px 30px;
+    text-align: left;
+}
+.social {
+    padding: 30px 0px;
+    border-bottom: 0.5px solid hsla(0, 0%, 75%, 0.5);
+}
+.social > h3 {
+    font-size: 26px;
+    font-family: "Gothic A1", sans-serif;
+    margin: 0rem auto 0.5rem auto;
+    font-weight: 600;
 }
 .five_icon {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    width: 70%;
     align-items: center;
 }
 
 .five_icon > div {
+    border: 0px solid purple;
+    /* width: 10%; */
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 1.5px solid black;
+    transition: all 0.3s ease-in-out;
+}
+.five_icon > div:hover {
+    box-shadow: 10px 10px 47px 0px rgba(0, 0, 0, 0.75);
+}
+.five_three {
+    padding: 0px 0px 20px 0px;
+}
+.five_three > h3 {
+    font-size: 26px;
+    font-family: "Gothic A1", sans-serif;
+    margin: 2rem auto 0.5rem auto;
+    font-weight: 600;
+}
+.ads {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+}
+.foot_six {
+    text-align: center;
+    padding: 0px 0px 2rem 0px;
+    border-bottom: 0.5px solid hsla(0, 0%, 75%, 0.5);
+}
+.foot_six > h4 {
+    font-size: 16px;
+    font-family: "Gothic A1", sans-serif;
+    margin: 2rem auto 0.5rem auto;
+    font-weight: 700;
+}
+.pay_img {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 60%;
+    margin: auto;
+    border: 0px solid red;
+}
+.pay_img > img {
     width: 9%;
-    border: 1px solid purple;
+    border-radius: 8px;
+    transition: all 0.3s ease-in-out;
+}
+.pay_img > img:hover {
+    box-shadow: 10px 10px 47px 0px rgba(0, 0, 0, 0.75);
+}
+.foot_seven {
+    padding: 3rem 2rem;
+    border-bottom: 0.5px solid hsla(0, 0%, 75%, 0.5);
+}
+.seven_one {
+    padding: 0px 30px;
+}
+.seven_one > h4 {
+    font-size: 16px;
+    font-family: "Pathway Gothic One", sans-serif;
+    margin: 0rem auto 0.5rem auto;
+    font-weight: 700;
+    padding-bottom: 15px;
+    text-transform: uppercase;
+}
+.seven_two {
+    padding: 0px 30px;
+}
 
+.seven_two > h5 {
+    font-size: 14px;
+    font-family: "Pathway Gothic One", sans-serif;
+    margin: 0rem auto 0.5rem auto;
+    font-weight: 600;
+    padding-bottom: 10px;
+}
+.seven_two > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 70%;
+}
+.seven_two > div > p {
+    font-size: 9px;
+    font-family: "Gothic A1", sans-serif;
+    margin: 0rem auto 0.5rem auto;
+    font-weight: 500;
+    cursor: pointer;
+    margin: 0%;
+    padding-bottom: 20px;
+}
+.seven_two > div > p:hover {
+    text-decoration: underline;
+}
+.foot_eight {
+    background-color: black;
+    color: white;
+    padding: 40px 30px;
 }

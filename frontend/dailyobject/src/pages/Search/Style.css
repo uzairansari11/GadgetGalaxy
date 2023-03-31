@@ -1,0 +1,17 @@
+.search_main>h1{
+    font-size: revert;
+    font-weight: revert;
+    text-align: center;
+}
+.search_tile {
+    border: 0px solid red;
+    width: 40%;
+    margin: 40px auto;
+}
+.search_result {
+    width: 85%;
+    margin: auto;
+    /* height: 500px; */
+    border-radius: 25px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}

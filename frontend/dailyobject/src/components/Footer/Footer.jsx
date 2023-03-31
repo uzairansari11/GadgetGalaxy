@@ -106,26 +106,126 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className="five_two">
-                    <h3>FOLLOW US ON</h3>
-                    <div className="five_icon">
-                        <div>
-                            <BsInstagram style={{ fontSize: "35px" }} />
-                        </div>
-                        <div>
-                            <BsFacebook style={{ fontSize: "35px" }} />
-                        </div>
-                        <div>
-                            <BsYoutube style={{ fontSize: "35px" }} />
-                        </div>
-                        <div>
-                            <BsTwitter style={{ fontSize: "35px" }} />
-                        </div>
+                    <div className="social">
+                        <h3>FOLLOW US ON</h3>
+                        <div className="five_icon">
+                            <div>
+                                <BsInstagram style={{ fontSize: "20px" }} />
+                            </div>
+                            <div>
+                                <BsFacebook style={{ fontSize: "20px" }} />
+                            </div>
+                            <div>
+                                <BsYoutube style={{ fontSize: "20px" }} />
+                            </div>
+                            <div>
+                                <BsTwitter style={{ fontSize: "20px" }} />
+                            </div>
 
-                        <div>
-                            <BsPinterest style={{ fontSize: "35px" }} />
+                            <div>
+                                <BsPinterest style={{ fontSize: "20px" }} />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="five_three">
+                        <h3>Download our app</h3>
+                        <div className="ads">
+                            <img
+                                src="https://images.dailyobjects.com/marche/icons/android.png?tr=cm-pad_resize,v-2,w-118,h-38,dpr-1"
+                                alt=""
+                            />
+                            <img
+                                src="https://images.dailyobjects.com/marche/icons/IOS.png?tr=cm-pad_resize,v-2,w-118,h-38,dpr-1"
+                                alt=""
+                            />
                         </div>
                     </div>
                 </div>
+            </div>
+            <div className="foot_six">
+                <h4>100% SECURE PAYMENT</h4>
+                <div className="pay_img">
+                    <img
+                        src="https://images.dailyobjects.com/marche/icons/payments/maestro-update.png?tr=cm-pad_resize,v-2,dpr-1"
+                        alt=""
+                    />
+                    <img
+                        src="https://images.dailyobjects.com/marche/icons/payments/amex-update.png?tr=cm-pad_resize,v-2,dpr-1"
+                        alt=""
+                    />
+                    <img
+                        src="https://images.dailyobjects.com/marche/icons/payments/mastercard-update.png?tr=cm-pad_resize,v-2,dpr-1"
+                        alt=""
+                    />
+                    <img
+                        src="https://images.dailyobjects.com/marche/icons/payments/mobikwik-update.png?tr=cm-pad_resize,v-2,dpr-1"
+                        alt=""
+                    />
+                    <img
+                        src="https://images.dailyobjects.com/marche/icons/payments/paytm-update.png?tr=cm-pad_resize,v-2,dpr-1"
+                        alt=""
+                    />
+                    <img
+                        src="https://images.dailyobjects.com/marche/icons/payments/rupay-update.png?tr=cm-pad_resize,v-2,dpr-1"
+                        alt=""
+                    />
+                    <img
+                        src="https://images.dailyobjects.com/marche/icons/payments/upi-update.png?tr=cm-pad_resize,v-2,dpr-1"
+                        alt=""
+                    />
+                    <img
+                        src="https://images.dailyobjects.com/marche/icons/payments/visa-update.png?tr=cm-pad_resize,v-2,dpr-1"
+                        alt=""
+                    />
+                </div>
+            </div>
+            <div className="foot_seven">
+                <div className="seven_one">
+                    <h4>Gifts</h4>
+                </div>
+                <div className="seven_two">
+                    <h5>Gifts by Occasions</h5>
+                    <div>
+                        <p>Propose Day Gifts</p>
+                        <p>Valentine Day Gifts</p>
+                        <p>Doctors Day Gifts</p>
+                        <p>Christmas Gifts</p>
+                        <p>New Year Gifts</p>
+                    </div>
+                </div>
+                <div className="seven_two">
+                    <h5>Gifts by Relationships</h5>
+                    <div>
+                        <p>Gifts for Men</p>
+                        <p>Gifts for Her</p>
+                        <p>Gifts for Parents</p>
+                        <p>Gifts for Boyfriend</p>
+                        <p>Gifts for Girlfriend</p>
+                    </div>
+                </div>
+                <div className="seven_two">
+                    <h5>Gifts by Persona</h5>
+                    <div>
+                        <p>Gifts for Anime Lover</p>
+                        <p>Gifts for Coffee Lover</p>
+                        <p>Gifts for Car Lover</p>
+                        <p>Gifts for Cricket Lover</p>
+                        <p>Gifts for iPhone Lover</p>
+                    </div>
+                </div>
+                <div className="seven_two">
+                    <h5>Gifts by Budget</h5>
+                    <div>
+                        <p>Gifts under 500</p>
+                        <p>Gifts under 1000</p>
+                        <p>Gifts under 2000</p>
+                        <p>Gifts under 3000</p>
+                        <p>Gifts under 4000</p>
+                    </div>
+                </div>
+            </div>
+            <div className="foot_eight">
+                <h4>© 2012 - 2023 Firki Wholesale Pvt.Ltd</h4>
             </div>
         </div>
     );
