@@ -49,7 +49,10 @@ export function Login(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         if ("email" !== "" && "password" !== "") {
-            if ("userReg".email === "email" && "userReg".password === "password") {
+            if (
+                "userReg".email === "email" &&
+                "userReg".password === "password"
+            ) {
                 toast({
                     title: "Login Successful",
                     description: "",
@@ -79,7 +82,7 @@ export function Login(props) {
                 position: "bottom-right",
             });
         }
-    }
+    };
 
     return (
         <div>
@@ -135,7 +138,7 @@ export function Login(props) {
                                     label="Name"
                                     placeholder="Your name"
                                     value={form.values.name}
-                                    prefix={<FiMail/>}
+                                    prefix={<FiMail />}
                                     onChange={(event) =>
                                         form.setFieldValue(
                                             "name",
@@ -149,7 +152,7 @@ export function Login(props) {
                             <TextInput
                                 required
                                 label="Email"
-                                placeholder="youremail@mail.com"
+                                placeholder="______@mail.com"
                                 value={form.values.email}
                                 onChange={(event) =>
                                     form.setFieldValue(
@@ -209,11 +212,13 @@ export function Login(props) {
                                 style={{
                                     borderRadius: "25px",
                                     backgroundColor: "black",
-                                    color: "white",
+                                    color: "white", // or color: "whiteAlpha.900"
                                     transition: "all .3s ease-in-out",
                                 }}
                                 _hover={{
-                                    backgroundColor: "#fafafa",
+                                    bgColor: "white",
+
+                                    color: "black",
                                     boxShadow:
                                         "10px 10px 47px 0px rgba(158,158,158,1)",
                                 }}>
