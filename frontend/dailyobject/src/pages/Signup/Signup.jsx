@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useToggle } from "@mantine/hooks";
 import { useForm } from "@mantine/form";
 import { VscArrowRight } from "react-icons/vsc";
@@ -7,7 +7,6 @@ import {
     PasswordInput,
     // Text,
     // Stack,
-    Select,
 } from "@mantine/core";
 import {
     Box,
@@ -23,73 +22,48 @@ import {
     AvatarGroup,
     useBreakpointValue,
     Icon,
+    Select,
+    option,
 } from "@chakra-ui/react";
 import "./Style.css";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer.jsx";
-import  Navbar  from "../../components/Navbar/Navbar.jsx";
+import Navbar from "../../components/Navbar/Navbar.jsx";
+import { userRegisterationToApi } from "../../redux/userauth/action";
 
-const Signup = (props) => {
+const Signup = () => {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [gender, setGender] = useState("");
+    const [age, setAge] = useState("");
+    const [password, setPassword] = useState("");
+    const [mobile_no, setMobile_no] = useState("");
     const navigate = useNavigate();
     const toast = useToast();
+    const dispatch = useDispatch();
 
-    const form = useForm({
-        initialValues: {
-            email: "",
-            name: "",
-            password: "",
-            terms: true,
-        },
-
-        validate: {
-            email: (val) => (/^\S+@\S+$/.test(val) ? null : "Invalid email"),
-            password: (val) =>
-                val.length <= 6
-                    ? "Password should include at least 6 characters"
-                    : null,
-        },
-    });
-
-    const handleClick = () => {
-        navigate("/signup");
-    };
-
+    // toast({
+    //     title: "Login Successful",
+    //     description: "",
+    //     status: "success",
+    //     duration: 2500,
+    //     isClosable: true,
+    //     position: "top",
+    // });
+    // navigate("/");
     const handleSubmit = (e) => {
         e.preventDefault();
-        if ("email" !== "" && "password" !== "") {
-            if (
-                "userReg".email === "email" &&
-                "userReg".password === "password"
-            ) {
-                toast({
-                    title: "Login Successful",
-                    description: "",
-                    status: "success",
-                    duration: 2500,
-                    isClosable: true,
-                    position: "top",
-                });
-                navigate("/");
-            } else {
-                toast({
-                    title: "Wrong Credentials",
-                    description: "Please check your details",
-                    status: "error",
-                    duration: 2500,
-                    isClosable: true,
-                    position: "bottom-right",
-                });
-            }
-        } else {
-            toast({
-                title: "Details Missing",
-                description: "Please fill all details",
-                status: "warning",
-                duration: 2500,
-                isClosable: true,
-                position: "bottom-right",
-            });
-        }
+        const payload = {
+            name,
+            email,
+            gender,
+            age,
+            password,
+            mobile_no,
+        };
+        dispatch(userRegisterationToApi(payload));
+        console.log(payload);
     };
     return (
         <div>
@@ -229,12 +203,9 @@ const Signup = (props) => {
                                         required
                                         label="Full Name"
                                         placeholder="Enter your name"
-                                        value={form.values.email}
+                                        value={name}
                                         onChange={(event) =>
-                                            form.setFieldValue(
-                                                "name",
-                                                event.currentTarget.value
-                                            )
+                                            setName(event.target.value)
                                         }
                                         radius="md"
                                     />
@@ -243,43 +214,34 @@ const Signup = (props) => {
                                         required
                                         label="Email"
                                         placeholder="______@mail.com"
-                                        value={form.values.email}
+                                        value={email}
                                         onChange={(event) =>
-                                            form.setFieldValue(
-                                                "email",
-                                                event.currentTarget.value
-                                            )
-                                        }
-                                        error={
-                                            form.errors.email && "Invalid email"
+                                            setEmail(event.target.value)
                                         }
                                         radius="md"
                                     />
                                     <Select
-                                        required
-                                        mt="md"
-                                        withinPortal
-                                        data={[
-                                            "Male",
-                                            "Female",
-                                            "Custom",
-                                            "Not set",
-                                        ]}
+                                        variant="outline"
                                         placeholder="Select gender"
-                                        label="Gender"
+                                        value={gender}
                                         onChange={(event) =>
-                                            form.setFieldValue(
-                                                "age",
-                                                event.currentTarget.value
-                                            )
-                                        }
-                                    />
+                                            setGender(event.target.value)
+                                        }>
+                                        <option value="">Select</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="custom">Custom</option>
+                                        <option value="not">Not Set</option>
+                                    </Select>
                                     <TextInput
                                         required
                                         type="number"
                                         label="Age"
                                         placeholder="Enter your age"
-                                        value={form.values.age}
+                                        value={age}
+                                        onChange={(event) =>
+                                            setAge(event.target.value)
+                                        }
                                         maxLength="2"
                                         radius="md"
                                     />
@@ -288,16 +250,9 @@ const Signup = (props) => {
                                         required
                                         label="Password"
                                         placeholder="Your password"
-                                        value={form.values.password}
+                                        value={password}
                                         onChange={(event) =>
-                                            form.setFieldValue(
-                                                "password",
-                                                event.currentTarget.value
-                                            )
-                                        }
-                                        error={
-                                            form.errors.password &&
-                                            "Password should include at least 6 characters"
+                                            setPassword(event.target.value)
                                         }
                                         radius="md"
                                     />
@@ -306,19 +261,18 @@ const Signup = (props) => {
                                         placeholder="+91 _____-_____"
                                         required
                                         radius="md"
+                                        value={mobile_no}
+                                        onChange={(event) =>
+                                            setMobile_no(event.target.value)
+                                        }
                                     />
-                                    {/* <Button
-                                        fontFamily={"heading"}
-                                        bg={"gray.200"}
-                                        color={"gray.800"}>
-                                        Upload CV
-                                    </Button> */}
                                 </Stack>
                                 <Button
                                     fontFamily={"heading"}
                                     mt={8}
                                     marginLeft={"70%"}
                                     w={"30%"}
+                                    onClick={handleSubmit}
                                     style={{
                                         borderRadius: "25px",
                                         backgroundColor: "black",
@@ -326,9 +280,6 @@ const Signup = (props) => {
                                         transition: "all .3s ease-in-out",
                                     }}
                                     _hover={{
-                                        bgColor: "white",
-
-                                        color: "black",
                                         boxShadow:
                                             "10px 10px 47px 0px rgba(158,158,158,1)",
                                     }}>
