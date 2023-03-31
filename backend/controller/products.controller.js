@@ -127,10 +127,28 @@ const deleteProduct = async (req, res) => {
 	}
 };
 
+/<-------------------Search Product ----------------------->/;
+const getSearched = async (req, res) => {
+	let query = req.query;
+	let { category } = query;
+
+	try {
+		const allProduct = await ProductModel.find({
+			Category: { $regex: `(?i)${category}` },
+		});
+
+		res.status(200).send({ data: allProduct });
+	} catch (error) {
+		res.status(400).send({
+			message: error.message,
+		});
+	}
+};
 module.exports = {
 	addProduct,
 	getProduct,
 	getSingleProduct,
 	updateProduct,
 	deleteProduct,
+	getSearched,
 };
