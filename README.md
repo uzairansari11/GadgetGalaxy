@@ -172,11 +172,11 @@ Link
 
 ## FAQ
 
-#### What is a clone of Aeropostale?
+<!--#### What is a clone of Aeropostale?-->
 
 <!-- A clone of Aeropostale is a replica or imitation of the popular clothing brand Aeropostale. It may sell similar styles of clothing or try to emulate the overall aesthetic of the brand. -->
 
-#### Is a clone of Aeropostale the same as an official Aeropostale store?
+<!--#### Is a clone of Aeropostale the same as an official Aeropostale store?-->
 
 <!-- No, a clone of Aeropostale is not an official Aeropostale store. It is a separate business that is not affiliated with the original brand. -->
 
