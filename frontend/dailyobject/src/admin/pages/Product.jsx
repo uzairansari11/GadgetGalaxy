@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, Heading } from "@chakra-ui/react";
+import { Box, Flex, Grid } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getData } from "../../redux/adminproduct/action";
@@ -7,14 +7,13 @@ import { LoadingSkeleton } from "../component/LoadingSkeleton";
 
 export const Product = () => {
 	const product = useSelector((store) => store.adminProductReducer.products);
-	
-	const dispatch = useDispatch();
 
-	console.log("Products are there", product);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(getData());
 	}, []);
+
 	return (
 		<Flex margin={"auto"} justifyContent={"space-around"} p={"2"}>
 			<Grid
@@ -29,7 +28,7 @@ export const Product = () => {
 				gap={"4"}
 			>
 				{product?.length ? (
-					product.map((ele) => <ProductCard key={ele._id} {...ele} />)
+					product.reverse().map((ele) => <ProductCard key={ele._id} {...ele} />)
 				) : (
 					<LoadingSkeleton />
 				)}

@@ -27,10 +27,11 @@ const addProduct = async (req, res) => {
 		) {
 			const newProduct = new ProductModel(payload);
 
-			await newProduct.save();
+			const savedData = await newProduct.save();
 
 			res.status(200).send({
 				message: `Product has been added successfully`,
+				data: savedData,
 			});
 		} else {
 			res.status(400).send({
@@ -84,13 +85,14 @@ const getSingleProduct = async (req, res) => {
 
 const updateProduct = async (req, res) => {
 	const id = req.params.id;
-	const isProductPresent = await ProductModel.findById({ _id: id });
 	const payload = req.body;
+	const isProductPresent = await ProductModel.find({ _id: id });
+	console.log(isProductPresent);
 	try {
 		if (isProductPresent.length) {
-			ProductModel.findByIdAndUpdate({ _id: id }, payload);
+			await ProductModel.findByIdAndUpdate({ _id: id }, payload);
 			res.status(200).send({
-				message: `${isProductPresent[0].title}  with ID: ${id} has been updated`,
+				message: `${isProductPresent[0].title}  with ID: ${id} has been deleted`,
 			});
 		} else {
 			res.status(400).send({
@@ -106,10 +108,10 @@ const updateProduct = async (req, res) => {
 /<-------------------Delete Product ----------------------->/;
 const deleteProduct = async (req, res) => {
 	const id = req.params.id;
-	const isProductPresent = await ProductModel.findById({ _id: id });
+	const isProductPresent = await ProductModel.find({ _id: id });
 	try {
 		if (isProductPresent.length) {
-			ProductModel.findByIdAndDelete({ _id: id });
+			await ProductModel.findByIdAndDelete({ _id: id });
 			res.status(200).send({
 				message: `${isProductPresent[0].title}  with ID: ${id} has been deleted`,
 			});

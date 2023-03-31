@@ -16,7 +16,22 @@ export const reducer = (state = initialState, { type, payload }) => {
 		case types.get_product: {
 			return { ...state, isLoading: false, isError: false, products: payload };
 		}
+		case types.add_product: {
+			return {
+				...state,
+				isLoading: false,
+				products: [payload, ...state.products],
+			};
+		}
+		case types.delete_product: {
+			return {
+				...state,
+				isLoading: false,
+				isError: false,
+			};
+		}
+
 		default:
-			return { state };
+			return state;
 	}
 };

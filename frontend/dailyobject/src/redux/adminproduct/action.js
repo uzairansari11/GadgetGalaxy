@@ -1,5 +1,5 @@
 import * as types from "./action.types";
-import { getProductFromApi } from "./api";
+import { deleteDataFromApi, getProductFromApi, postDataToApi } from "./api";
 
 export const loading = () => {
 	return {
@@ -27,10 +27,9 @@ export const add_products = (data) => {
 	};
 };
 
-export const delete_products = (data) => {
+export const delete_products = () => {
 	return {
 		type: types.delete_product,
-		payload: data,
 	};
 };
 
@@ -47,7 +46,33 @@ export const getData = () => async (dispatch) => {
 	dispatch(loading());
 	try {
 		const data = await getProductFromApi();
-		dispatch(get_products(data));
+		if (data) {
+			dispatch(get_products(data));
+		}
+	} catch (error) {
+		dispatch(error());
+	}
+};
+
+export const addData = (payload) => async (dispatch) => {
+	dispatch(loading());
+	try {
+		const data = await postDataToApi(payload);
+		if (data) {
+			add_products(data);
+		}
+	} catch (error) {
+		dispatch(error());
+	}
+};
+
+export const deleteData = () => async (dispatch) => {
+	dispatch(loading());
+	try {
+		const data = await deleteDataFromApi();
+		if (data) {
+			add_products(data);
+		}
 	} catch (error) {
 		dispatch(error());
 	}
