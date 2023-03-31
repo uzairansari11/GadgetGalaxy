@@ -6,11 +6,35 @@ const AllProductsCart = ({
 	Image1,
 	Image2,
 	Title,
+	Brand,
 	Discount_price,
 	Original_price,_id
 }) => {
 	const [wishlist, setwishlist] = useState(true);
 	const navigate=useNavigate()
+	const handlesumit=()=>{
+		let payload={
+			Image1: Image1,
+			Title: Title,
+			Brand: Brand,
+			Discount_price: Discount_price,
+			Quantity:1
+		}
+	console.log(payload)
+		fetch("http://localhost:8080/cart/add",{
+			method:"POST",
+			headers:{
+				'Authorization': "",
+				"Content-type":"application/json"
+			},
+			body:JSON.stringify(payload)
+		}).then(res=>res.json())
+		.then(res=>{
+			console.log(res)
+			alert(res.msg)
+		})
+		.catch(err=>console.log(err))
+	 }
 	return (
 		<Box>
 			
@@ -86,6 +110,7 @@ const AllProductsCart = ({
 								w="85%"
 								m="auto"
 								colorScheme="green"
+								onClick={handlesumit}
 							>
 								<Text>Add To Cart </Text>
 								<Image
