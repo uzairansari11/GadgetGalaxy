@@ -6,12 +6,14 @@ import { VscArrowLeft, VscArrowRight } from "react-icons/vsc";
 import "./Style.css";
 import Footer from "../../components/Footer/Footer";
 import { NotFoundImage } from "../../components/404/404";
+import { Navbar } from "../../components/Navbar/Navbar";
 
 const Search = (props) => {
     const theme = useMantineTheme();
 
     return (
         <div className="search_main">
+            <Navbar />
             <h1>Search Products</h1>
             <div className="search_tile">
                 <TextInput
