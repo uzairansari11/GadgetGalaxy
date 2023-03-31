@@ -14,7 +14,7 @@ const Navbar = () => {
       <div className="bottom_cont">
         <ul id="bottom_category">
           {gift?.map((el) => (
-            <div id="dropdown" key={el}>
+            <div id="dropdown">
               <li key={el} id="dropbtn">
                 <Link>{el.text}</Link>
               </li>
@@ -36,12 +36,12 @@ const Navbar = () => {
                     {el.lists.alldata?.map((divs) => (
                       <div key={divs.heading}>
                         <Link>
-                          {" "}
+
                           <h2 className="grid_head">{divs.heading}</h2>
                         </Link>
                         {divs.child?.map((fields) => (
                           <Link>
-                            {" "}
+                            
                             <p className="hub" key={fields}>
                               {fields}
                             </p>

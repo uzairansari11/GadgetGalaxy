@@ -5,7 +5,8 @@
     width: 100%;
     padding: 2rem;
     background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px,
+        rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
     z-index: 100;
 }
 
@@ -24,7 +25,6 @@
     display: inline-block;
     margin-right: 10px;
     position: relative;
-
 }
 
 #bottom_category li:hover {
@@ -32,7 +32,6 @@
 }
 
 #bottom_category li:hover::after {
-
     width: 100%;
     left: 0;
 }
@@ -50,17 +49,22 @@
     left: 6%;
     bottom: 0%;
     right: 3%;
+    margin-top: 55px;
     /* border: 1px solid red; */
     display: none;
     width: 1300px;
-    height: 650px;
+    /* height: 650px; */
     z-index: 10;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    border-radius: 8px;
+    transition: all .5s ease-in-out;
 }
 
 #dropdown:hover #dropcont {
     display: block;
+    transition: all .5s ease-in-out;
+
 }
 
 #parent {
@@ -99,6 +103,7 @@
 
 .big_parent {
     display: flex;
+    align-items: center;
     justify-content: space-around;
 }
 
@@ -120,19 +125,17 @@
     margin-top: 20px;
 }
 
-@media screen and (max-width:1024px) {
-
+@media screen and (max-width: 1024px) {
     #bottom_category li {
         font-size: 10px;
     }
 }
 
-@media screen and (max-width:600px) {
-
+@media screen and (max-width: 600px) {
     #bottom_category {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
-        gap: 2px
+        gap: 2px;
     }
 
     #dropcont {
@@ -145,11 +148,12 @@
         display: none;
         /* position: absolute; */
         width: 500px;
-        height: 1080px;
+        /* height: 1080px; */
         z-index: 10;
         margin-left: -10px;
         background-color: white;
-        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+        box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px,
+            rgba(0, 0, 0, 0.24) 0px 1px 2px;
     }
 
     .big_parent {
@@ -172,6 +176,5 @@
         gap: 50px;
         margin-top: 20px;
         margin-left: -15px;
-
     }
 }
