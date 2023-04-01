@@ -8,157 +8,173 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { getData } from "../../redux/adminproduct/action";
+import axios from "axios";
+import { AdminNav } from "../component/AdminNav";
+
 export const EditProduct = () => {
-	const { products } = useSelector((store) => store.adminProductReducer);
+	const navigate = useNavigate();
+	const products = useSelector((store) => store.adminProductReducer.products);
 	const dispatch = useDispatch();
-	const [data, setData] = useState({});
-	const [image1, setImage1] = useState("");
-	const [image2, setImage2] = useState("");
-	const [title, setTitle] = useState("");
-	const [category, setCategory] = useState("");
-	const [brand, setBrand] = useState("");
+	const [image1, setImage1] = useState("a");
+	const [image2, setImage2] = useState("a");
+	const [title, setTitle] = useState("a");
+	const [category, setCategory] = useState("a");
+	const [brand, setBrand] = useState("a");
 	const [discount_price, setDiscount_price] = useState(0);
 	const [original_price, setOriginal_price] = useState(0);
-	const [product_details, setProduct_details] = useState("");
+	const [product_details, setProduct_details] = useState("a");
 
 	const { id } = useParams();
 
-	// const params = useParams();
-	// const productID = params.id;
+	const handleSubmit = async () => {
+		const payload = {
+			Image1: image1,
+			Image2: image2,
+			Title: title,
+			Category: category,
+			Brand: brand,
+			Discount_price: discount_price,
+			Original_price: original_price,
+			Product_details: product_details,
+		};
 
-	// const handleSubmit = () => {
-	// 	try {
-	// 		axios.patch(
-	// 			`http://localhost:8080/products/update/${productID}`,
-	// 			payload
-	// 		);
-	// 		console.log("data updated successfully");
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	}
-	// };
-	// const getSingleProduct = () => {
-	// 	try {
-	// 		const res = axios.get(`http://localhost:8080/products/${productId}`);
-	// 		setData(res.data);
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	}
-	// };
+		try {
+			const response = await axios.patch(
+				`http://localhost:8080/products/update/${id}`,
+				payload
+			);
+			console.log(response.data);
+			navigate("/admin/product");
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	useEffect(() => {
-		dispatch(getData());
+		if (products.length === 0) {
+			dispatch(getData());
+		}
 	}, []);
 	useEffect(() => {
-		console.log(products)
-		const pdt = products.find((item) => item._id === Number(id));
-		setTitle(pdt?.Title);
+		console.log(products,"products");
+		const pdt = products.find((item) => item._id === id);
 		console.log(pdt,"pdt")
-		setData(pdt);
+		setTitle(pdt?.Title);
+		setImage1(pdt?.Image1);
+		setImage2(pdt?.Image2);
+		setCategory(pdt?.Category);
+		setBrand(pdt?.Brand);
+		setDiscount_price(pdt?.Discount_price);
+		setOriginal_price(pdt?.Original_price);
+		setProduct_details(pdt?.Product_details);
 	}, []);
-// console.log(products)
-	useEffect(() => {
-		// setTitle(products?.Title);
-		setImage1(data?.Image1);
-		setImage2(data?.Image2);
-		setCategory(data?.Category);
-		setBrand(data?.Brand);
-		setDiscount_price(data?.Discount_price);
-		setOriginal_price(data?.Original_price);
-		setProduct_details(data?.Product_details);
-	}, []);
-console.log(id, "suse2");
+
 	return (
-		<Box
-			w="60%"
-			margin="auto"
-			justifyContent={"center"}
-			textAlign="center"
-			boxShadow={"xl"}
-		>
-			<InputGroup>
-				<InputLeftAddon children="Title" color={"red"} background="none" />
-				<Input
-					value={title}
-					type="text"
-					onChange={(e) => setTitle(e.target.value)}
-				/>
-			</InputGroup>
-			<InputGroup>
-				<InputLeftAddon children="Brand" color={"red"} background="none" />
-				<Input
-					value={brand}
-					type="text"
-					onChange={(e) => setBrand(e.target.value)}
-				/>
-			</InputGroup>
-			<InputGroup>
-				<InputLeftAddon children="Category" color={"red"} background="none" />
-				<Input
-					value={category}
-					type="text"
-					onChange={(e) => setCategory(e.target.value)}
-				/>
-			</InputGroup>
-			<InputGroup>
-				<InputLeftAddon
-					children="Original_price"
-					color={"red"}
-					background="none"
-				/>
+		<>
+			<AdminNav />
+	
+				<Box
+					w="60%"
+					margin="auto"
+					justifyContent={"center"}
+					textAlign="center"
+					boxShadow={"xl"}
+				>
+					<InputGroup>
+						<InputLeftAddon children="Title" color={"red"} background="none" />
+						<Input
+							value={title}
+							type="text"
+							onChange={(e) => setTitle(e.target.value)}
+						/>
+					</InputGroup>
+					<InputGroup>
+						<InputLeftAddon children="Brand" color={"red"} background="none" />
+						<Input
+							value={brand}
+							type="text"
+							onChange={(e) => setBrand(e.target.value)}
+						/>
+					</InputGroup>
+					<InputGroup>
+						<InputLeftAddon
+							children="Category"
+							color={"red"}
+							background="none"
+						/>
+						<Input
+							value={category}
+							type="text"
+							onChange={(e) => setCategory(e.target.value)}
+						/>
+					</InputGroup>
+					<InputGroup>
+						<InputLeftAddon
+							children="Original_price"
+							color={"red"}
+							background="none"
+						/>
 
-				<Input
-					value={original_price}
-					type="number"
-					onChange={(e) => setOriginal_price(e.target.value)}
-				/>
-			</InputGroup>
-			<InputGroup>
-				<InputLeftAddon
-					children="Discount_price"
-					color={"red"}
-					background="none"
-				/>
+						<Input
+							value={original_price}
+							type="number"
+							onChange={(e) => setOriginal_price(e.target.value)}
+						/>
+					</InputGroup>
+					<InputGroup>
+						<InputLeftAddon
+							children="Discount_price"
+							color={"red"}
+							background="none"
+						/>
 
-				<Input
-					value={discount_price}
-					type="number"
-					onChange={(e) => setDiscount_price(e.target.value)}
-				/>
-			</InputGroup>
-			<InputGroup>
-				<InputLeftAddon children="Image1" color={"red"} background="none" />
-				<Input
-					value={image1}
-					type="text"
-					onChange={(e) => setImage1(e.target.value)}
-				/>
-			</InputGroup>
-			<InputGroup>
-				<InputLeftAddon children="Image2" color={"red"} background="none" />
-				<Input
-					value={image2}
-					type="text"
-					onChange={(e) => setImage2(e.target.value)}
-				/>
-			</InputGroup>
-			<InputGroup>
-				<InputLeftAddon
-					children="Product_details"
-					color={"red"}
-					background="none"
-				/>
-				<Textarea
-					value={product_details}
-					type="text"
-					onChange={(e) => setProduct_details(e.target.value)}
-				/>
-			</InputGroup>
+						<Input
+							value={discount_price}
+							type="number"
+							onChange={(e) => setDiscount_price(e.target.value)}
+						/>
+					</InputGroup>
+					<InputGroup>
+						<InputLeftAddon children="Image1" color={"red"} background="none" />
+						<Input
+							value={image1}
+							type="text"
+							onChange={(e) => setImage1(e.target.value)}
+						/>
+					</InputGroup>
+					<InputGroup>
+						<InputLeftAddon children="Image2" color={"red"} background="none" />
+						<Input
+							value={image2}
+							type="text"
+							onChange={(e) => setImage2(e.target.value)}
+						/>
+					</InputGroup>
+					<InputGroup>
+						<InputLeftAddon
+							children="Product_details"
+							color={"red"}
+							background="none"
+						/>
+						<Textarea
+							value={product_details}
+							type="text"
+							onChange={(e) => setProduct_details(e.target.value)}
+						/>
+					</InputGroup>
 
-			<Button colorScheme="red" variant="outline" m="4">
-				Button
-			</Button>
-		</Box>
+					<Button
+						colorScheme="red"
+						variant="outline"
+						m="4"
+						onClick={handleSubmit}
+					>
+						Button
+					</Button>
+				</Box>
+			
+		</>
 	);
 };
