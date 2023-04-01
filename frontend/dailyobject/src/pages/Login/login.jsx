@@ -1,27 +1,23 @@
-import { useToggle, upperFirst } from "@mantine/hooks";
 import React, { useState } from "react";
-import { useForm } from "@mantine/form";
 import {
     TextInput,
     PasswordInput,
     Text,
     Paper,
-
     Group,
     Divider,
-    Checkbox,
     Anchor,
     Stack,
 } from "@mantine/core";
 import { FcGoogle } from "react-icons/fc";
 import { SiTwitter } from "react-icons/si";
 import {
-	Box,
-	Button,
-	Center,
-	Heading,
-	useToast,
-	Spinner,
+    Spinner,
+    Box,
+    Button,
+    Center,
+    Heading,
+    useToast,
 } from "@chakra-ui/react";
 import "./Style.css";
 import { useNavigate } from "react-router-dom";
