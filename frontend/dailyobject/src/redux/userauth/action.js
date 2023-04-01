@@ -45,7 +45,6 @@ export const userRegisterationToApi = (userDetails) => async (dispatch) => {
 	try {
 		const data = await registerUser(userDetails);
 		console.log("dataUserReges", data);
-
 		dispatch(registerSuccess(data));
 		return true;
 	} catch (e) {

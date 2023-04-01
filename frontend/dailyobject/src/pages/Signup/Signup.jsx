@@ -11,7 +11,9 @@ import {
 import {
     Box,
     Flex,
+    FormControl,
     useToast,
+    Spinner,
     Stack,
     Heading,
     Text,
@@ -24,6 +26,7 @@ import {
     Icon,
     Select,
     option,
+    FormLabel,
 } from "@chakra-ui/react";
 import "./Style.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -31,6 +34,7 @@ import { useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer.jsx";
 import Navbar from "../../components/Navbar/Navbar.jsx";
 import { userRegisterationToApi } from "../../redux/userauth/action";
+import axios from "axios";
 
 const Signup = () => {
     const [name, setName] = useState("");
@@ -39,20 +43,12 @@ const Signup = () => {
     const [age, setAge] = useState("");
     const [password, setPassword] = useState("");
     const [mobile_no, setMobile_no] = useState("");
+    const [isButLoading, setIsButLoading] = useState(false);
     const navigate = useNavigate();
     const toast = useToast();
     const dispatch = useDispatch();
 
-    // toast({
-    //     title: "Login Successful",
-    //     description: "",
-    //     status: "success",
-    //     duration: 2500,
-    //     isClosable: true,
-    //     position: "top",
-    // });
-    // navigate("/");
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const payload = {
             name,
@@ -62,8 +58,60 @@ const Signup = () => {
             password,
             mobile_no,
         };
-        dispatch(userRegisterationToApi(payload));
-        console.log(payload);
+        if (
+            name !== "" &&
+            email !== "" &&
+            gender !== "" &&
+            age !== "" &&
+            password !== "" &&
+            mobile_no !== ""
+        ) {
+            try {
+                const res = await axios.post(
+                    `http://localhost:8080/users/register`,
+                    payload
+                );
+                // console.log(res);
+                if (res.data.message == "User AlreadyExists") {
+                    toast({
+                        title: "Email already Exist",
+                        description: "Try using other details",
+                        status: "warning",
+                        duration: 2500,
+                        isClosable: true,
+                        position: "bottom-right",
+                    });
+                    return;
+                } else {
+                    setIsButLoading(true);
+                    dispatch(userRegisterationToApi(payload));
+                    setTimeout(() => {
+                        setIsButLoading(false);
+                        toast({
+                            title: "Registration Successful",
+                            description: "",
+                            status: "success",
+                            duration: 2500,
+                            isClosable: true,
+                            position: "top",
+                        });
+                        navigate("/login");
+                    }, 2000);
+                }
+            } catch (error) {
+                return error;
+            }
+        } else {
+            toast({
+                title: "Details Missing",
+                description: "Please fill your details",
+                status: "warning",
+                duration: 2500,
+                isClosable: true,
+                position: "bottom-right",
+            });
+        }
+        // console.log(payload);
     };
     return (
         <div>
@@ -209,7 +257,6 @@ const Signup = () => {
                                         }
                                         radius="md"
                                     />
-
                                     <TextInput
                                         required
                                         label="Email"
@@ -220,19 +267,25 @@ const Signup = () => {
                                         }
                                         radius="md"
                                     />
-                                    <Select
-                                        variant="outline"
-                                        placeholder="Select gender"
-                                        value={gender}
-                                        onChange={(event) =>
-                                            setGender(event.target.value)
-                                        }>
-                                        <option value="">Select</option>
-                                        <option value="male">Male</option>
-                                        <option value="female">Female</option>
-                                        <option value="custom">Custom</option>
-                                        <option value="not">Not Set</option>
-                                    </Select>
+                                    <FormControl isRequired>
+                                        <FormLabel>Gender</FormLabel>
+                                        <Select
+                                            variant="outline"
+                                            placeholder="Select Gender"
+                                            value={gender}
+                                            onChange={(event) =>
+                                                setGender(event.target.value)
+                                            }>
+                                            <option value="male">Male</option>
+                                            <option value="female">
+                                                Female
+                                            </option>
+                                            <option value="custom">
+                                                Custom
+                                            </option>
+                                            <option value="not">Not Set</option>
+                                        </Select>
+                                    </FormControl>
                                     <TextInput
                                         required
                                         type="number"
@@ -245,7 +298,6 @@ const Signup = () => {
                                         maxLength="2"
                                         radius="md"
                                     />
-
                                     <PasswordInput
                                         required
                                         label="Password"
@@ -283,10 +335,21 @@ const Signup = () => {
                                         boxShadow:
                                             "10px 10px 47px 0px rgba(158,158,158,1)",
                                     }}>
-                                    Submit
-                                    <span style={{ marginLeft: "5px" }}>
-                                        <VscArrowRight />
-                                    </span>
+                                    {/* <span style={{ marginLeft: "5px" }}> */}
+                                    {/* <VscArrowRight /> */}
+                                    {/* </span> */}
+                                    {!isButLoading &&
+                                        `Submit →
+                                    `}
+                                    {isButLoading && (
+                                        <Spinner
+                                            thickness="2px"
+                                            speed="0.50s"
+                                            emptyColor="gray.200"
+                                            color="black"
+                                            size="md"
+                                        />
+                                    )}
                                 </Button>
                             </Box>
                             form

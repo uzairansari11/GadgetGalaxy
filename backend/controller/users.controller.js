@@ -21,7 +21,7 @@ const userRegister = async (req, res) => {
 
 			await newUser.save();
 
-			res.status(200).send({ message: "User Has Been Created " });
+			res.status(200).send({ message: "User Has Been Created" });
 		} else {
 			res
 				.status(400)
