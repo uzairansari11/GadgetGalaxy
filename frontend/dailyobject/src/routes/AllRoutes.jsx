@@ -12,6 +12,8 @@ import { Login } from "../pages/Login/login";
 import Search from "../pages/Search/Search";
 import Signup from "../pages/Signup/Signup";
 import Wishlist from "../pages/Wishlists/Wishlist";
+import Cart from "../pages/Cart/Cart";
+import Checkout from "../pages/Checkout/Checkout";
 export const AllRoutes = () => {
     return (
         <Routes>
@@ -26,6 +28,8 @@ export const AllRoutes = () => {
             <Route path="/admin/product/edit/:id" element={<EditProduct />} />
             <Route path="/search" element={<Search />} />
             <Route path="/wishlist" element={<Wishlist />} />
+            <Route path="/cart" element={<Cart></Cart>}></Route>
+            <Route path="/checkout" element={<Checkout></Checkout>}></Route>
             <Route path="*" element={<NotFoundImage />} />
         </Routes>
     );
