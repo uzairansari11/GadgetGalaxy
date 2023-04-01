@@ -12,6 +12,8 @@ import { Login } from "../pages/Login/login";
 import Search from "../pages/Search/Search";
 import Signup from "../pages/Signup/Signup";
 import Wishlist from "../pages/Wishlists/Wishlist";
+// import { Admin } from "../admin/pages/Admin";
+
 export const AllRoutes = () => {
     return (
         <Routes>
