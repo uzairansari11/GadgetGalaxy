@@ -1,6 +1,4 @@
-import { useToggle, upperFirst } from "@mantine/hooks";
 import React, { useState } from "react";
-import { useForm } from "@mantine/form";
 import {
     TextInput,
     PasswordInput,
@@ -8,7 +6,6 @@ import {
     Paper,
     Group,
     Divider,
-    Checkbox,
     Anchor,
     Stack,
 } from "@mantine/core";

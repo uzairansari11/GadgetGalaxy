@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import { useToggle } from "@mantine/hooks";
-import { useForm } from "@mantine/form";
-import { VscArrowRight } from "react-icons/vsc";
 import {
     TextInput,
     PasswordInput,
@@ -117,7 +114,7 @@ const Signup = () => {
         <div>
             <div>
                 <Navbar />
-                <div className="log_main">
+                <div className="sign_main">
                     <Container
                         as={SimpleGrid}
                         maxW={"7xl"}

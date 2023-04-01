@@ -15,24 +15,28 @@ import Wishlist from "../pages/Wishlists/Wishlist";
 import Cart from "../pages/Cart/Cart";
 
 import Checkout from "../pages/Checkout/Checkout";
+import { AdminLogin } from "../admin/pages/AdminLog";
+import { AdminSignup } from "../admin/pages/AdminSignup";
 
 export const AllRoutes = () => {
-	return (
-		<Routes>
-			<Route path="/" element={<Home />} />
-			<Route path="/products" element={<AllProducts />} />
-			<Route path="/login" element={<Login />} />
-			<Route path="/Signup" element={<Signup />} />
-			<Route path="/productdetails/:id" element={<ProductDetails />} />
-			<Route path="/admin" element={<Dashboard />} />
-			<Route path="/admin/product" element={<Product />} />
-			<Route path="/admin/product/add" element={<AddProduct />} />
-			<Route path="/admin/product/edit/:id" element={<EditProduct />} />
-			<Route path="/search" element={<Search />} />
-			<Route path="/wishlist" element={<Wishlist />} />
-			<Route path="/cart" element={<Cart />}></Route>
-			<Route path="/checkout" element={<Checkout />}></Route>
-			<Route path="*" element={<NotFoundImage />} />
-		</Routes>
-	);
+    return (
+        <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/products" element={<AllProducts />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/Signup" element={<Signup />} />
+            <Route path="/productdetails/:id" element={<ProductDetails />} />
+            <Route path="/admin" element={<Dashboard />} />
+            <Route path="/admin/signup" element={<AdminSignup />} />
+            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin/product" element={<Product />} />
+            <Route path="/admin/product/add" element={<AddProduct />} />
+            <Route path="/admin/product/edit/:id" element={<EditProduct />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/wishlist" element={<Wishlist />} />
+            <Route path="/cart" element={<Cart />}></Route>
+            <Route path="/checkout" element={<Checkout />}></Route>
+            <Route path="*" element={<NotFoundImage />} />
+        </Routes>
+    );
 };
