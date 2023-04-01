@@ -10,6 +10,8 @@ import {
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addData } from "../../redux/adminproduct/action";
+import { SideBar } from "../component/SideBar";
+import { AdminNav } from "../component/AdminNav";
 
 export const AddProduct = () => {
 	const dispatch = useDispatch();
@@ -53,114 +55,117 @@ export const AddProduct = () => {
 		}
 	};
 	return (
-		<Box
-			w="60%"
-			margin="auto"
-			justifyContent={"center"}
-			textAlign="center"
-			boxShadow={"xl"}
-			p="4"
-		>
-			<InputGroup>
-				<InputLeftAddon children="Title" color={"red"} background="none" />
-				<Input
-					value={title}
-					type="text"
-					onChange={(e) => {
-						setTitle(e.target.value);
-						console.log(title);
-					}}
-				/>
-			</InputGroup>
-			<InputGroup>
-				<InputLeftAddon children="Brand" color={"red"} background="none" />
-				<Input
-					value={brand}
-					type="text"
-					onChange={(e) => setBrand(e.target.value)}
-				/>
-			</InputGroup>
-			<InputGroup>
-				<InputLeftAddon children="Category" color={"red"} background="none" />
-				<Input
-					value={category}
-					type="text"
-					onChange={(e) => setCategory(e.target.value)}
-				/>
-			</InputGroup>
-			<InputGroup>
-				<InputLeftAddon
-					children="Original_Price"
-					color={"red"}
-					background="none"
-				/>
-
-				<Input
-					value={original_price}
-					type="number"
-					onChange={(e) => setOriginal_price(e.target.value)}
-				/>
-			</InputGroup>
-			<InputGroup>
-				<InputLeftAddon
-					children="Discount_Price"
-					color={"red"}
-					background="none"
-				/>
-
-				<Input
-					value={discount_price}
-					type="number"
-					onChange={(e) => setDiscount_price(e.target.value)}
-				/>
-			</InputGroup>
-			<InputGroup>
-				<InputLeftAddon children="Image1" color={"red"} background="none" />
-				<Input
-					value={image1}
-					type="text"
-					onChange={(e) => setImage1(e.target.value)}
-				/>
-			</InputGroup>
-			<InputGroup>
-				<InputLeftAddon children="Image2" color={"red"} background="none" />
-				<Input
-					value={image2}
-					type="text"
-					onChange={(e) => setImage2(e.target.value)}
-				/>
-			</InputGroup>
-			<InputGroup>
-				<InputLeftAddon
-					children="Product_Details"
-					color={"red"}
-					background="none"
-				/>
-				<Textarea
-					value={product_details}
-					type="text"
-					onChange={(e) => setProduct_details(e.target.value)}
-				/>
-			</InputGroup>
-
-			<Button
-				colorScheme="red"
-				variant="outline"
-				m="4"
-				isDisabled={
-					(title === "") | (brand === "") ||
-					category === "" ||
-					original_price === 0 ||
-					discount_price === 0 ||
-					image1 === "" ||
-					image2 === "" ||
-					product_details === ""
-				}
-				isLoading={spinner}
-				onClick={handleAddProduct}
+		<>
+			<AdminNav />
+			<Box
+				w="60%"
+				margin="auto"
+				justifyContent={"center"}
+				textAlign="center"
+				boxShadow={"xl"}
+				p="4"
 			>
-				Add Product
-			</Button>
-		</Box>
+				<InputGroup>
+					<InputLeftAddon children="Title" color={"red"} background="none" />
+					<Input
+						value={title}
+						type="text"
+						onChange={(e) => {
+							setTitle(e.target.value);
+							console.log(title);
+						}}
+					/>
+				</InputGroup>
+				<InputGroup>
+					<InputLeftAddon children="Brand" color={"red"} background="none" />
+					<Input
+						value={brand}
+						type="text"
+						onChange={(e) => setBrand(e.target.value)}
+					/>
+				</InputGroup>
+				<InputGroup>
+					<InputLeftAddon children="Category" color={"red"} background="none" />
+					<Input
+						value={category}
+						type="text"
+						onChange={(e) => setCategory(e.target.value)}
+					/>
+				</InputGroup>
+				<InputGroup>
+					<InputLeftAddon
+						children="Original_Price"
+						color={"red"}
+						background="none"
+					/>
+
+					<Input
+						value={original_price}
+						type="number"
+						onChange={(e) => setOriginal_price(e.target.value)}
+					/>
+				</InputGroup>
+				<InputGroup>
+					<InputLeftAddon
+						children="Discount_Price"
+						color={"red"}
+						background="none"
+					/>
+
+					<Input
+						value={discount_price}
+						type="number"
+						onChange={(e) => setDiscount_price(e.target.value)}
+					/>
+				</InputGroup>
+				<InputGroup>
+					<InputLeftAddon children="Image1" color={"red"} background="none" />
+					<Input
+						value={image1}
+						type="text"
+						onChange={(e) => setImage1(e.target.value)}
+					/>
+				</InputGroup>
+				<InputGroup>
+					<InputLeftAddon children="Image2" color={"red"} background="none" />
+					<Input
+						value={image2}
+						type="text"
+						onChange={(e) => setImage2(e.target.value)}
+					/>
+				</InputGroup>
+				<InputGroup>
+					<InputLeftAddon
+						children="Product_Details"
+						color={"red"}
+						background="none"
+					/>
+					<Textarea
+						value={product_details}
+						type="text"
+						onChange={(e) => setProduct_details(e.target.value)}
+					/>
+				</InputGroup>
+
+				<Button
+					colorScheme="red"
+					variant="outline"
+					m="4"
+					isDisabled={
+						(title === "") | (brand === "") ||
+						category === "" ||
+						original_price === 0 ||
+						discount_price === 0 ||
+						image1 === "" ||
+						image2 === "" ||
+						product_details === ""
+					}
+					isLoading={spinner}
+					onClick={handleAddProduct}
+				>
+					Add Product
+				</Button>
+			</Box>
+		</>
 	);
 };

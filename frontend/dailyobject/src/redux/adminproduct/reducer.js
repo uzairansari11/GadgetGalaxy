@@ -23,6 +23,17 @@ export const reducer = (state = initialState, { type, payload }) => {
 				products: [payload, ...state.products],
 			};
 		}
+		case types.update_product: {
+			return {
+				...state,
+				isLoading: false,
+				isError: false,
+				products: [
+					...state.products,
+					...state.products.filter((product) => product._id === payload.id),
+				],
+			};
+		}
 		case types.delete_product: {
 			return {
 				...state,
