@@ -168,11 +168,11 @@ export const AdminNav = () => {
 						spacing={0}
 						className={classes.hiddenMobile}
 					>
-						<ReactLink to="/admin" >Dashboard</ReactLink>
-						{/* <a href="" className={classes.link}></a> */}
-						{/* <Route path="/admin" element={<Dashboard />} />
-						<Route path="/admin/product" element={<Product />} />
-						<Route path="/admin/product/add" element={<AddProduct />} /> */}
+			
+						<a href="/admin" className={classes.link}>
+							Dashboard
+						</a>
+					
 						<a href="/admin/product" className={classes.link}>
 							Products
 						</a>

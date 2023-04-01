@@ -6,7 +6,7 @@ import {
     PasswordInput,
     Text,
     Paper,
-    Spinner,
+
     Group,
     Divider,
     Checkbox,
@@ -15,7 +15,14 @@ import {
 } from "@mantine/core";
 import { FcGoogle } from "react-icons/fc";
 import { SiTwitter } from "react-icons/si";
-import { Box, Button, Center, Heading, useToast } from "@chakra-ui/react";
+import {
+	Box,
+	Button,
+	Center,
+	Heading,
+	useToast,
+	Spinner,
+} from "@chakra-ui/react";
 import "./Style.css";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer.jsx";
