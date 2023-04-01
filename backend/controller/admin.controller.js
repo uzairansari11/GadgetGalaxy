@@ -11,7 +11,7 @@ const adminRegister = async (req, res) => {
 	const { name, email, password, gender, age, mobile_no } = payload;
 	const isAdminPresent = await AdminModel.find({ email: email });
 	if (isAdminPresent.length) {
-		return res.send({ message: "Admin AlreadyExists" });
+		return res.send({ message: "Admin AlreadyExists", data: [] });
 	}
 	try {
 		if (name && email && password && gender && age && mobile_no) {
@@ -21,7 +21,9 @@ const adminRegister = async (req, res) => {
 
 			await newAdmin.save();
 
-			res.status(200).send({ message: "Admin Has Been Created " });
+			res
+				.status(200)
+				.send({ message: "Admin Has Been Created ", data: newAdmin });
 		} else {
 			res
 				.status(400)
