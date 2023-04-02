@@ -140,8 +140,11 @@ const getSearched = async (req, res) => {
 		const allProduct = await ProductModel.find({
 			Category: { $regex: `(?i)${category}` },
 		});
-
-		res.status(200).send({ data: allProduct });
+		if (allProduct.length) {
+			res.status(200).send({ data: allProduct });
+		} else {
+			res.status(200).send({ data: allProduct });
+		}
 	} catch (error) {
 		res.status(400).send({
 			message: error.message,

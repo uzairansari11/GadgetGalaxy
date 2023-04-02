@@ -33,6 +33,7 @@
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
     "tabler-icons-react": "^1.56.0",
+    "use-throttle": "^0.0.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
