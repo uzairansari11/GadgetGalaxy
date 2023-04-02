@@ -48,7 +48,11 @@ export const getCartData = (dispatch) => {
   dispatch(getCartDataRequestAction());
 
   axios
-  .get("http://localhost:8080/cart")
+  .get("http://localhost:8080/cart",{
+    headers: {
+    'Authorization': `Bearer ${localStorage.getItem("token")}`,
+    'Content-Type': 'application/json'
+  }})
   .then((res)=>{
     dispatch(getCartDataSuccessAction(res.data));
     dispatch(handleTotalAmount(res.data));
@@ -64,9 +68,19 @@ export const getCartData = (dispatch) => {
 export const handleQuantity = (id, quantity) => (dispatch) => {
   axios.patch(`http://localhost:8080/cart/update/${id}`,{
     Quantity : +quantity
-    // totalPrice : (+price) * quantity
-  }).then((res)=>{
-    axios.get(`http://localhost:8080/cart`).then((res)=>{
+  },{
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem("token")}`,
+      'Content-Type': 'application/json'
+    }
+  }
+  ).then((res)=>{
+    axios.get(`http://localhost:8080/cart`,{
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem("token")}`,
+        'Content-Type': 'application/json'
+      }
+    }).then((res)=>{
       dispatch(getCartDataSuccessAction(res.data));
       dispatch(handleTotalAmount(res.data));
       dispatch(handleTotalItems(res.data));
@@ -75,8 +89,18 @@ export const handleQuantity = (id, quantity) => (dispatch) => {
 }
 
 export const handleRemove = (id) => (dispatch) => {
-  axios.delete(`http://localhost:8080/cart/delete/${id}`).then((res)=>{
-    axios.get(`http://localhost:8080/cart`).then((res)=>{
+  axios.delete(`http://localhost:8080/cart/delete/${id}`,{
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem("token")}`,
+      'Content-Type': 'application/json'
+    }
+  }).then((res)=>{
+    axios.get(`http://localhost:8080/cart`,{
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem("token")}`,
+        'Content-Type': 'application/json'
+      }
+    }).then((res)=>{
       dispatch(getCartDataSuccessAction(res.data));
       dispatch(handleTotalAmount(res.data));
       dispatch(handleTotalItems(res.data));
