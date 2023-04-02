@@ -10,7 +10,8 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import Navbar from "./../components/Navbar/Navbar"
+import Footer from "./../components/Footer/Footer"
 export const ProductDetails=()=>{
 
       const { isOpen, onOpen, onClose } = useDisclosure()
@@ -19,16 +20,19 @@ export const ProductDetails=()=>{
       let names = location.pathname;
       const last = names.split("/");
        let x = last[last.length - 1]
+       let token=localStorage.getItem("token")
   useEffect(()=>{
       axios.get(`http://localhost:8080/products/${x}`)
       .then((res) => setdata(res.data))
   },[x])
 
   const hadleidcheck=(Title)=>{
-	
+	if(token===null){
+		alert("Please login first")
+	   }else{
       fetch("http://localhost:8080/cart",{
            headers:{
-                 "Authorization":`Bearer ${localStorage.getItem("token")}`   
+                 "Authorization":`Bearer ${token}`   
            },
      }).then(res=>res.json())
      .then(res=>{
@@ -46,6 +50,7 @@ export const ProductDetails=()=>{
      })
      .catch(err=>console.log(err))
 }
+}
  const handlesumit=()=>{
       let payload={
             Image1: data.Image1,
@@ -58,7 +63,7 @@ export const ProductDetails=()=>{
       fetch("http://localhost:8080/cart/add",{
             method:"POST",
             headers:{
-                  'Authorization': `Bearer ${localStorage.getItem("token")}`,
+                  'Authorization': `Bearer ${token}`,
                   "Content-type":"application/json"
             },
             body:JSON.stringify(payload)
@@ -71,6 +76,8 @@ export const ProductDetails=()=>{
  }
       return(
             <>
+            <Navbar/>
+            <Box>
             <Box display={"flex"}>
            <Box w="50%">
                   <Box  backgroundColor={"#fafafa"}>
@@ -211,6 +218,8 @@ export const ProductDetails=()=>{
                   
                   
             </Box>
+            </Box>
+            <Footer/>
             </>
       )
 }

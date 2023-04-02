@@ -121,6 +121,7 @@ const Navbar = () => {
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
+
                 top: "0",
                 backgroundColor: "white",
                 borderBottom: "0.1px solid #e2e8f0",
@@ -298,7 +299,6 @@ const Navbar = () => {
                         </Button>
                     </Tooltip>
                 </div>
-            </Box>
         </Box>
     );
 };
