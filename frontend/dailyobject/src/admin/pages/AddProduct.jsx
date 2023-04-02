@@ -64,6 +64,7 @@ export const AddProduct = () => {
 				textAlign="center"
 				boxShadow={"xl"}
 				p="4"
+				mt="80px"
 			>
 				<InputGroup>
 					<InputLeftAddon children="Title" color={"red"} background="none" />

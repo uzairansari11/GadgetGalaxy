@@ -16,7 +16,7 @@ const AllProducts = () => {
     let names = location.pathname;
     const last = names.split("/");
     let x = last[last.length - 1]
-  
+
     useEffect(() => {
         if(x==="Passport%20wallet"||x==="Airpods%20pro%20Cases" ||x==="Eyewear%20cases"||
         x==="Ipad%20cover"|| x==="Laptop%20cover"|| x==="Phone%20Cases"){
@@ -27,7 +27,6 @@ const AllProducts = () => {
         axios
             .get(`http://localhost:8080/products?Category=${x}`)
             .then((res) => setdata(res.data));
-        
     }, [x]);
 
     //sort
@@ -263,7 +262,7 @@ const AllProducts = () => {
                     Eyewear cases
                     </Text>
                 </Box>
-            
+
             </Box>
             </Box>}
 

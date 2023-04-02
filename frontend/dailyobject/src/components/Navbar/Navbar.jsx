@@ -161,13 +161,41 @@ const Navbar = () => {
                     id="stack3"
                     width={"100%"}
                     align={"center"}>
-                    <Text onMouseEnter={handleMouseEnter}>NEW ARRIVALS</Text>
-                    <Text onMouseEnter={handleMouseEnter}>CASES & SLEEVES</Text>
-                    <Text onMouseEnter={handleMouseEnter}>ACCESSORIES</Text>
-                    <Text onMouseEnter={handleMouseEnter}>BAGS & WALLETS</Text>
-                    <Text onMouseEnter={handleMouseEnter}>HOME OFFICE</Text>
-                    <Text onMouseEnter={handleMouseEnter}>COLLECTIONS</Text>
-                    <Text onMouseEnter={handleMouseEnter}>GIFTING</Text>
+                    <Link
+                        to="/products/Watchbands"
+                        onMouseEnter={handleMouseEnter}>
+                        NEW ARRIVALS
+                    </Link>
+                    <Link
+                        to="/products/Phone Cases"
+                        onMouseEnter={handleMouseEnter}>
+                        CASES & SLEEVES
+                    </Link>
+                    <Link
+                        to="/products/Laptop cover"
+                        onMouseEnter={handleMouseEnter}>
+                        ACCESSORIES
+                    </Link>
+                    <Link
+                        to="/products/Macbook Sleeve"
+                        onMouseEnter={handleMouseEnter}>
+                        BAGS & WALLETS
+                    </Link>
+                    <Link
+                        to="/products/Eyewear"
+                        onMouseEnter={handleMouseEnter}>
+                        HOME OFFICE
+                    </Link>
+                    <Link
+                        to="/products/Passport wallet"
+                        onMouseEnter={handleMouseEnter}>
+                        COLLECTIONS
+                    </Link>
+                    <Link
+                        to="/products/Pedal Backpack"
+                        onMouseEnter={handleMouseEnter}>
+                        GIFTING
+                    </Link>
                     {/* <Text onMouseEnter={handleMouseEnter}>
                         Lighting & Decor
                     </Text>
@@ -308,8 +336,12 @@ const Navbar = () => {
                         </Button>
                     </Tooltip>
                 </div>
+
         </Box>
         </Box>
+
+
+
     );
 };
 export default Navbar;

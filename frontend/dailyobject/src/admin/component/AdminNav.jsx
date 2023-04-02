@@ -20,7 +20,7 @@ import {
 } from "@mantine/core";
 // import { MantineLogo } from "@mantine/ds";
 import { useDisclosure } from "@mantine/hooks";
-import { Link as ReactLink } from "react-router-dom";
+import { Link as ReactLink, useNavigate } from "react-router-dom";
 // import {
 // 	// IconNotification,
 // 	// IconCode,
@@ -37,7 +37,10 @@ import {
 	MenuList,
 	MenuItem,
 	MenuDivider,
+	useToast,
 } from "@chakra-ui/react";
+import { useDispatch, useSelector } from "react-redux";
+import { adminLogoutSuccess } from "../../redux/adminauth/action";
 const useStyles = createStyles((theme) => ({
 	link: {
 		display: "flex",
@@ -141,6 +144,12 @@ const mockdata = [
 ];
 
 export const AdminNav = () => {
+	const isAuth = useSelector((store) => store.adminAuthReducer.isAuth);
+	console.log(("isauth nav", isAuth));
+
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const toast = useToast();
 	const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
 		useDisclosure(false);
 	const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
@@ -164,8 +173,26 @@ export const AdminNav = () => {
 		</UnstyledButton>
 	));
 
+	const handleLogout = () => {
+		dispatch(adminLogoutSuccess());
+		localStorage.removeItem("adminToken");
+
+		setTimeout(() => {
+			toast({
+				title: "Logout Successful",
+				description: "",
+				status: "success",
+				duration: 2500,
+				isClosable: true,
+				position: "top",
+			});
+			navigate("/admin/login", { replace: true });
+		}, 2000);
+	};
 	return (
-		<Box>
+		<Box
+			style={{ position: "fixed", zIndex: 3, top: 0, left: 0, width: "100%" }}
+		>
 			<Header height={60} px="md">
 				<Group position="apart" sx={{ height: "100%" }}>
 					{/* <MantineLogo size={30} /> */}
@@ -187,41 +214,51 @@ export const AdminNav = () => {
 						</a>
 					</Group>
 
-					<Group className={classes.hiddenMobile}>
-						<Menu>
-							<MenuButton
-								as={Button}
-								rounded={"full"}
-								variant={"link"}
-								cursor={"pointer"}
-								// minW={0}
-							>
-								<Avatar
-									size={"sm"}
-									src={"https://avatars.dicebear.com/api/male/username.svg"}
-								/>
-							</MenuButton>
-							<MenuList alignItems={"center"}>
-								<br />
-								<Center>
+					{isAuth ? (
+						<Group className={classes.hiddenMobile}>
+							<Menu>
+								<MenuButton
+									as={Button}
+									rounded={"full"}
+									variant={"link"}
+									cursor={"pointer"}
+									// minW={0}
+								>
 									<Avatar
-										size={"2xl"}
+										size={"sm"}
 										src={"https://avatars.dicebear.com/api/male/username.svg"}
 									/>
-								</Center>
-								<br />
-								<Center>
-									<p>Username</p>
-								</Center>
-								<br />
-								<MenuDivider />
-								<MenuItem>Your Servers</MenuItem>
-								<MenuItem>Account Settings</MenuItem>
-								<MenuItem>Logout</MenuItem>
-							</MenuList>
-						</Menu>
-					</Group>
+								</MenuButton>
+								<MenuList alignItems={"center"}>
+									<br />
+									<Center>
+										{isAuth ? (
+											<Avatar
+												size={"2xl"}
+												src={
+													"https://avatars.dicebear.com/api/male/username.svg"
+												}
+											/>
+										) : (
+											""
+										)}
+									</Center>
+									<br />
+									<Center>
+										<p>Username</p>
+									</Center>
+									<br />
+									<MenuDivider />
+									{/* <MenuItem>Your Servers</MenuItem>
+								<MenuItem>Account Settings</MenuItem> */}
 
+									<MenuItem onClick={handleLogout}>Logout</MenuItem>
+								</MenuList>
+							</Menu>
+						</Group>
+					) : (
+						""
+					)}
 					<Burger
 						opened={drawerOpened}
 						onClick={toggleDrawer}

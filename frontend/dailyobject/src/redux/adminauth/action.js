@@ -1,4 +1,5 @@
 import * as types from "./action.type";
+import { adminLoginApi } from "./api";
 export const loading = () => {
 	return {
 		type: types.isLoading,
@@ -18,23 +19,24 @@ export const adminLoginSuccess = (payload) => {
 	};
 };
 
+export const adminLoginVerificationSuccess = (payload) => async (dispatch) => {
+	dispatch(loading());
+	try {
+		let data = await adminLoginApi(payload);
+		if (data) {
+			dispatch(adminLoginSuccess(data));
+		}
+	} catch (e) {
+		dispatch(error());
+	}
+};
+
 export const adminLogoutSuccess = () => {
 	return {
 		type: types.Admin_Logout_Success,
 	};
 };
 
-export const adminLoginVerificationSuccess = (payload) => (dispatch) => {
-	dispatch(adminLoginSuccess(payload));
-};
-// export const adminLoginVerificationSuccess = (payload) => async (dispatch) => {
-// 	dispatch(loading());
-// 	try {
-// 		const data = await adminLoginApi(payload);
-// 		dispatch(adminLoginSuccess());
-// 		return data;
-// 	} catch (error) {
-// 		dispatch(error());
-// 		return false;
-// 	}
+// export const adminLoginVerificationSuccess = (payload) => (dispatch) => {
+// 	dispatch(adminLoginSuccess(payload));
 // };

@@ -7,7 +7,7 @@ const initialState = {
 	isError: false,
 };
 
-export const reducer = (state = initialState, { type, payload }) => {
+export const reducer = (state = initialState, { type,payload }) => {
 	switch (type) {
 		case types.isLoading:
 			return {
@@ -18,8 +18,8 @@ export const reducer = (state = initialState, { type, payload }) => {
 		case type.Admin_Login_Success:
 			return {
 				...state,
-				isAuth: true,
-				token: payload,
+				isAuth: payload,
+				token: true,
 				isLoading: false,
 			};
 
@@ -33,11 +33,12 @@ export const reducer = (state = initialState, { type, payload }) => {
 			};
 		case types.Admin_Logout_Success:
 			return {
+				...state,
 				isAuth: false,
 				token: false,
 				isLoading: false,
 			};
 		default:
-			return { state };
+			return { ...state };
 	}
 };
