@@ -145,7 +145,7 @@ const mockdata = [
 
 export const AdminNav = () => {
 	const isAuth = useSelector((store) => store.adminAuthReducer.isAuth);
-	console.log(("isauth nav",isAuth))
+	console.log(("isauth nav", isAuth));
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -214,45 +214,51 @@ export const AdminNav = () => {
 						</a>
 					</Group>
 
-				{isAuth?<Group className={classes.hiddenMobile}>
-						<Menu>
-							<MenuButton
-								as={Button}
-								rounded={"full"}
-								variant={"link"}
-								cursor={"pointer"}
-								// minW={0}
-							>
-								<Avatar
-									size={"sm"}
-									src={"https://avatars.dicebear.com/api/male/username.svg"}
-								/>
-							</MenuButton>
-							<MenuList alignItems={"center"}>
-								<br />
-								<Center>
-									{isAuth ? (
-										<Avatar
-											size={"2xl"}
-											src={"https://avatars.dicebear.com/api/male/username.svg"}
-										/>
-									) : ""}
-								</Center>
-								<br />
-								<Center>
-									<p>Username</p>
-								</Center>
-								<br />
-								<MenuDivider />
-								{/* <MenuItem>Your Servers</MenuItem>
+					{isAuth ? (
+						<Group className={classes.hiddenMobile}>
+							<Menu>
+								<MenuButton
+									as={Button}
+									rounded={"full"}
+									variant={"link"}
+									cursor={"pointer"}
+									// minW={0}
+								>
+									<Avatar
+										size={"sm"}
+										src={"https://avatars.dicebear.com/api/male/username.svg"}
+									/>
+								</MenuButton>
+								<MenuList alignItems={"center"}>
+									<br />
+									<Center>
+										{isAuth ? (
+											<Avatar
+												size={"2xl"}
+												src={
+													"https://avatars.dicebear.com/api/male/username.svg"
+												}
+											/>
+										) : (
+											""
+										)}
+									</Center>
+									<br />
+									<Center>
+										<p>Username</p>
+									</Center>
+									<br />
+									<MenuDivider />
+									{/* <MenuItem>Your Servers</MenuItem>
 								<MenuItem>Account Settings</MenuItem> */}
 
-								<MenuItem onClick={handleLogout}>Logout</MenuItem>
-							</MenuList>
-						</Menu>
-					</Group>
-					:""
-}	
+									<MenuItem onClick={handleLogout}>Logout</MenuItem>
+								</MenuList>
+							</Menu>
+						</Group>
+					) : (
+						""
+					)}
 					<Burger
 						opened={drawerOpened}
 						onClick={toggleDrawer}

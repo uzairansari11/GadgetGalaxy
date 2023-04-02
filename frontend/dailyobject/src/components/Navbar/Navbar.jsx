@@ -328,7 +328,9 @@ const Navbar = () => {
                     </Tooltip>
                 </div>
             </Box>
-        </Box>
+
+            </Box>
+
     );
 };
 export default Navbar;
