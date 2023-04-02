@@ -60,7 +60,7 @@ const AllProducts = () => {
                 textAlign={"center"}>
                 NEW ARRIVALS
             </Text>
-            <Box w="55%" display={"flex"} gap="2%" m="auto" mt="3%">
+            <Box w={{lg:"55%",md:"95%"}} display={"flex"} gap="2%" m="auto" mt="3%">
                 <Box onClick={Allproctsshow}>
                     <Box borderRadius={"50%"} h="61%" w="68px" bg="green">
                         <Text textAlign={"center"} pt="25px" color={"white"}>
@@ -166,9 +166,7 @@ const AllProducts = () => {
             <Box display={"flex"}>
                 <Box>
                     <Grid
-                        templateColumns={
-                            filters ? "repeat(3, 1fr)" : "repeat(4, 1fr)"
-                        }
+                        templateColumns={{lg:filters ? "repeat(3, 1fr)" : "repeat(4, 1fr)",md:filters ? "repeat(2, 1fr)" : "repeat(3, 1fr)",md:filters ? "repeat(1, 1fr)" : "repeat(2, 1fr)"}}
                         gap={7}
                         w="95%"
                         m="auto">
