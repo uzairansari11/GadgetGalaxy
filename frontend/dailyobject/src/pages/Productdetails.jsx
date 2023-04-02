@@ -3,7 +3,7 @@ import { Box,Image ,Text,Button,InputGroup,Input,InputRightAddon, Modal,
       ModalContent,
       ModalHeader,
       ModalBody,
-      ModalCloseButton,useDisclosure} from "@chakra-ui/react"
+      ModalCloseButton,useDisclosure,useToast,Spinner} from "@chakra-ui/react"
 
 import {ArrowForwardIcon} from '@chakra-ui/icons'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -17,6 +17,8 @@ export const ProductDetails=()=>{
       const { isOpen, onOpen, onClose } = useDisclosure()
       const [data,setdata]=useState({})
       const location=useLocation()
+      const toast = useToast()
+      const [isButLoading, setIsButLoading] = useState(false);
       let names = location.pathname;
       const last = names.split("/");
        let x = last[last.length - 1]
@@ -27,8 +29,19 @@ export const ProductDetails=()=>{
   },[x])
 
   const hadleidcheck=(Title)=>{
+      
 	if(token===null){
-		alert("Please login first")
+            toast({
+                  title: "Please login first",
+                  description: "",
+                  status: "error",
+                  duration: 2500,
+                  isClosable: true,
+                  position: "top",
+                  
+              })
+              
+		
 	   }else{
       fetch("http://localhost:8080/cart",{
            headers:{
@@ -42,7 +55,17 @@ export const ProductDetails=()=>{
            const alreadyAdded=datacheck.filter((el)=>el.Title===Title)
             
            if(alreadyAdded.length>=1){
-                 alert("Product Alreacy  Added In Cart")
+                 
+                 toast({
+                  title: "Product Alreacy  Added In Cart",
+                  description: "",
+                  status: "error",
+                  duration: 2500,
+                  isClosable: true,
+                  position: "top",
+                  
+              })
+             
            }else{
                  handlesumit()
            }
@@ -69,8 +92,21 @@ export const ProductDetails=()=>{
             body:JSON.stringify(payload)
       }).then(res=>res.json())
       .then(res=>{
+            setIsButLoading(true) 
+            setTimeout(() => {
+                  setIsButLoading(false)     
+                  toast({
+                        title: `${res.msg}`,
+                        description: "",
+                        status: "success",
+                        duration: 2500,
+                        isClosable: true,
+                        position: "top",
+                    })
+             
+            }, 2000);
             
-            alert(res.msg)
+           
       })
       .catch(err=>console.log(err))
  }
@@ -104,7 +140,21 @@ export const ProductDetails=()=>{
                               <Text  fontSize={"2xl"} ml="3%" color={"rgb(164, 161, 161)"}   fontWeight="500"><s>{data.Original_price}</s></Text>
                               <Text mt="auto" mb="auto" fontSize={"md"} ml="2%" color={"rgb(164, 161, 161)"}  >Inclusive of all taxes</Text>
                         </Box>
-                        <Button bg="#20a87e" colorScheme={"green"}  color={"white"} display={"block"} w="65%" m="auto" mt="8%"onClick={()=>hadleidcheck(data.Title)}>ADD TO CART</Button>
+                        <Button bg="#20a87e" colorScheme={"green"}  color={"white"} display={"block"} w="65%" m="auto" mt="8%"onClick={()=>hadleidcheck(data.Title)}>
+                              
+                        {!isButLoading &&
+                                     `ADD TO CART`}
+                                {isButLoading && (
+                                    <Spinner
+                                        thickness="2px"
+                                        speed="0.50s"
+                                        emptyColor="gray.200"
+                                        color="black"
+                                        size="md"
+                                    />
+                                )}
+                                        
+                              </Button>
                         <InputGroup color={"gray.300"} m="auto" mt="7%" w="65%" border={"none"}>
    
                          <Input backgroundColor={"#fafafa"} variant='unstyled'  focusBorderColor='#20a87e' placeholder='Enter Pincode To Check Delivery' />

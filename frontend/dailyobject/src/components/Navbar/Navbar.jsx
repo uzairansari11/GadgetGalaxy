@@ -18,11 +18,20 @@ import {
 import { CiSearch, CiShoppingCart, CiUser } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogout } from "../../redux/userauth/action";
-
+import { getCartData } from "../../redux/usercart/action";
+import {useEffect} from 'react'
 const Navbar = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const items = useSelector((store) => store.cartReducer.totalItems); // for Cart items
+    // const items = useSelector((store) => store.cartReducer.totalItems);
+    // console.log(items) // for Cart items
+    const items = useSelector((store) => store.cartReducer.totalItems);
+    console.log(items)
+
+    useEffect(() => {
+       
+        dispatch(getCartData);
+    }, [items])
     const isUserLogin = useSelector((store) => store.userAuthReducer.isAuth);
     console.log(isUserLogin);
 
@@ -299,6 +308,7 @@ const Navbar = () => {
                         </Button>
                     </Tooltip>
                 </div>
+        </Box>
         </Box>
     );
 };

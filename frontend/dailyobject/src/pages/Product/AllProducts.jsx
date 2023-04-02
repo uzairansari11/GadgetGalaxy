@@ -28,7 +28,7 @@ const AllProducts = () => {
             .get(`http://localhost:8080/products?Category=${x}`)
             .then((res) => setdata(res.data));
         
-    }, []);
+    }, [x]);
 
     //sort
     const lowtohigh = () => {
