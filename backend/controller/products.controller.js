@@ -90,9 +90,13 @@ const updateProduct = async (req, res) => {
 	console.log(isProductPresent);
 	try {
 		if (isProductPresent.length) {
-			await ProductModel.findByIdAndUpdate({ _id: id }, payload);
+			const updatedData = await ProductModel.findByIdAndUpdate(
+				{ _id: id },
+				payload
+			);
 			res.status(200).send({
-				message: `${isProductPresent[0].title}  with ID: ${id} has been deleted`,
+				message: `Product with ID: ${id} has been deleted`,
+				data: updatedData,
 			});
 		} else {
 			res.status(400).send({

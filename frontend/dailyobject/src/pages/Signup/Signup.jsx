@@ -1,18 +1,16 @@
-import React from "react";
-import { useToggle } from "@mantine/hooks";
-import { useForm } from "@mantine/form";
-import { VscArrowRight } from "react-icons/vsc";
+import React, { useState } from "react";
 import {
     TextInput,
     PasswordInput,
     // Text,
     // Stack,
-    Select,
 } from "@mantine/core";
 import {
     Box,
     Flex,
+    FormControl,
     useToast,
+    Spinner,
     Stack,
     Heading,
     Text,
@@ -23,79 +21,100 @@ import {
     AvatarGroup,
     useBreakpointValue,
     Icon,
+    Select,
+    option,
+    FormLabel,
 } from "@chakra-ui/react";
 import "./Style.css";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer.jsx";
-import  Navbar  from "../../components/Navbar/Navbar.jsx";
+import Navbar from "../../components/Navbar/Navbar.jsx";
+import { userRegisterationToApi } from "../../redux/userauth/action";
+import axios from "axios";
 
-const Signup = (props) => {
+const Signup = () => {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [gender, setGender] = useState("");
+    const [age, setAge] = useState("");
+    const [password, setPassword] = useState("");
+    const [mobile_no, setMobile_no] = useState("");
+    const [isButLoading, setIsButLoading] = useState(false);
     const navigate = useNavigate();
     const toast = useToast();
+    const dispatch = useDispatch();
 
-    const form = useForm({
-        initialValues: {
-            email: "",
-            name: "",
-            password: "",
-            terms: true,
-        },
-
-        validate: {
-            email: (val) => (/^\S+@\S+$/.test(val) ? null : "Invalid email"),
-            password: (val) =>
-                val.length <= 6
-                    ? "Password should include at least 6 characters"
-                    : null,
-        },
-    });
-
-    const handleClick = () => {
-        navigate("/signup");
-    };
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if ("email" !== "" && "password" !== "") {
-            if (
-                "userReg".email === "email" &&
-                "userReg".password === "password"
-            ) {
-                toast({
-                    title: "Login Successful",
-                    description: "",
-                    status: "success",
-                    duration: 2500,
-                    isClosable: true,
-                    position: "top",
-                });
-                navigate("/");
-            } else {
-                toast({
-                    title: "Wrong Credentials",
-                    description: "Please check your details",
-                    status: "error",
-                    duration: 2500,
-                    isClosable: true,
-                    position: "bottom-right",
-                });
+        const payload = {
+            name,
+            email,
+            gender,
+            age,
+            password,
+            mobile_no,
+        };
+        if (
+            name !== "" &&
+            email !== "" &&
+            gender !== "" &&
+            age !== "" &&
+            password !== "" &&
+            mobile_no !== ""
+        ) {
+            try {
+                const res = await axios.post(
+                    `http://localhost:8080/users/register`,
+                    payload
+                );
+                // console.log(res);
+                if (res.data.message == "User AlreadyExists") {
+                    toast({
+                        title: "Email already Exist",
+                        description: "Try using other details",
+                        status: "warning",
+                        duration: 2500,
+                        isClosable: true,
+                        position: "bottom-right",
+                    });
+                    return;
+                } else {
+                    setIsButLoading(true);
+                    dispatch(userRegisterationToApi(payload));
+                    setTimeout(() => {
+                        setIsButLoading(false);
+                        toast({
+                            title: "Registration Successful",
+                            description: "",
+                            status: "success",
+                            duration: 2500,
+                            isClosable: true,
+                            position: "top",
+                        });
+                        navigate("/login");
+                    }, 2000);
+                }
+            } catch (error) {
+                return error;
             }
         } else {
             toast({
                 title: "Details Missing",
-                description: "Please fill all details",
+                description: "Please fill your details",
                 status: "warning",
                 duration: 2500,
                 isClosable: true,
                 position: "bottom-right",
             });
         }
+        // console.log(payload);
     };
     return (
         <div>
             <div>
                 <Navbar />
-                <div className="log_main">
+                <div className="sign_main">
                     <Container
                         as={SimpleGrid}
                         maxW={"7xl"}
@@ -229,75 +248,60 @@ const Signup = (props) => {
                                         required
                                         label="Full Name"
                                         placeholder="Enter your name"
-                                        value={form.values.email}
+                                        value={name}
                                         onChange={(event) =>
-                                            form.setFieldValue(
-                                                "name",
-                                                event.currentTarget.value
-                                            )
+                                            setName(event.target.value)
                                         }
                                         radius="md"
                                     />
-
                                     <TextInput
                                         required
                                         label="Email"
                                         placeholder="______@mail.com"
-                                        value={form.values.email}
+                                        value={email}
                                         onChange={(event) =>
-                                            form.setFieldValue(
-                                                "email",
-                                                event.currentTarget.value
-                                            )
-                                        }
-                                        error={
-                                            form.errors.email && "Invalid email"
+                                            setEmail(event.target.value)
                                         }
                                         radius="md"
                                     />
-                                    <Select
-                                        required
-                                        mt="md"
-                                        withinPortal
-                                        data={[
-                                            "Male",
-                                            "Female",
-                                            "Custom",
-                                            "Not set",
-                                        ]}
-                                        placeholder="Select gender"
-                                        label="Gender"
-                                        onChange={(event) =>
-                                            form.setFieldValue(
-                                                "age",
-                                                event.currentTarget.value
-                                            )
-                                        }
-                                    />
+                                    <FormControl isRequired>
+                                        <FormLabel>Gender</FormLabel>
+                                        <Select
+                                            variant="outline"
+                                            placeholder="Select Gender"
+                                            value={gender}
+                                            onChange={(event) =>
+                                                setGender(event.target.value)
+                                            }>
+                                            <option value="male">Male</option>
+                                            <option value="female">
+                                                Female
+                                            </option>
+                                            <option value="custom">
+                                                Custom
+                                            </option>
+                                            <option value="not">Not Set</option>
+                                        </Select>
+                                    </FormControl>
                                     <TextInput
                                         required
                                         type="number"
                                         label="Age"
                                         placeholder="Enter your age"
-                                        value={form.values.age}
+                                        value={age}
+                                        onChange={(event) =>
+                                            setAge(event.target.value)
+                                        }
                                         maxLength="2"
                                         radius="md"
                                     />
-
                                     <PasswordInput
                                         required
                                         label="Password"
                                         placeholder="Your password"
-                                        value={form.values.password}
+                                        value={password}
                                         onChange={(event) =>
-                                            form.setFieldValue(
-                                                "password",
-                                                event.currentTarget.value
-                                            )
-                                        }
-                                        error={
-                                            form.errors.password &&
-                                            "Password should include at least 6 characters"
+                                            setPassword(event.target.value)
                                         }
                                         radius="md"
                                     />
@@ -306,19 +310,18 @@ const Signup = (props) => {
                                         placeholder="+91 _____-_____"
                                         required
                                         radius="md"
+                                        value={mobile_no}
+                                        onChange={(event) =>
+                                            setMobile_no(event.target.value)
+                                        }
                                     />
-                                    {/* <Button
-                                        fontFamily={"heading"}
-                                        bg={"gray.200"}
-                                        color={"gray.800"}>
-                                        Upload CV
-                                    </Button> */}
                                 </Stack>
                                 <Button
                                     fontFamily={"heading"}
                                     mt={8}
                                     marginLeft={"70%"}
                                     w={"30%"}
+                                    onClick={handleSubmit}
                                     style={{
                                         borderRadius: "25px",
                                         backgroundColor: "black",
@@ -326,16 +329,24 @@ const Signup = (props) => {
                                         transition: "all .3s ease-in-out",
                                     }}
                                     _hover={{
-                                        bgColor: "white",
-
-                                        color: "black",
                                         boxShadow:
                                             "10px 10px 47px 0px rgba(158,158,158,1)",
                                     }}>
-                                    Submit
-                                    <span style={{ marginLeft: "5px" }}>
-                                        <VscArrowRight />
-                                    </span>
+                                    {/* <span style={{ marginLeft: "5px" }}> */}
+                                    {/* <VscArrowRight /> */}
+                                    {/* </span> */}
+                                    {!isButLoading &&
+                                        `Submit →
+                                    `}
+                                    {isButLoading && (
+                                        <Spinner
+                                            thickness="2px"
+                                            speed="0.50s"
+                                            emptyColor="gray.200"
+                                            color="black"
+                                            size="md"
+                                        />
+                                    )}
                                 </Button>
                             </Box>
                             form

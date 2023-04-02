@@ -1,5 +1,4 @@
-import { useToggle, upperFirst } from "@mantine/hooks";
-import { useForm } from "@mantine/form";
+import React, { useState } from "react";
 import {
     TextInput,
     PasswordInput,
@@ -7,81 +6,84 @@ import {
     Paper,
     Group,
     Divider,
-    Checkbox,
     Anchor,
     Stack,
 } from "@mantine/core";
 import { FcGoogle } from "react-icons/fc";
 import { SiTwitter } from "react-icons/si";
-import { Box, Button, Center, Heading, useToast } from "@chakra-ui/react";
+import {
+    Spinner,
+    Box,
+    Button,
+    Center,
+    Heading,
+    useToast,
+} from "@chakra-ui/react";
 import "./Style.css";
 import { useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer.jsx";
-import { FiMail } from "react-icons/fi";
+import axios from "axios";
 
 export function Login(props) {
-    const [type, toggle] = useToggle(["login", "register"]);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [isButLoading, setIsButLoading] = useState(false);
 
     const navigate = useNavigate();
     const toast = useToast();
 
-    const form = useForm({
-        initialValues: {
-            email: "",
-            name: "",
-            password: "",
-            terms: true,
-        },
-
-        validate: {
-            email: (val) => (/^\S+@\S+$/.test(val) ? null : "Invalid email"),
-            password: (val) =>
-                val.length <= 6
-                    ? "Password should include at least 6 characters"
-                    : null,
-        },
-    });
-
     const handleClick = () => {
         navigate("/signup");
     };
+    const handleAdmin = () => {
+        navigate("/admin/login");
+    };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if ("email" !== "" && "password" !== "") {
-            if (
-                "userReg".email === "email" &&
-                "userReg".password === "password"
-            ) {
-                toast({
-                    title: "Login Successful",
-                    description: "",
-                    status: "success",
-                    duration: 2500,
-                    isClosable: true,
-                    position: "top",
-                });
-                navigate("/");
-            } else {
-                toast({
-                    title: "Wrong Credentials",
-                    description: "Please check your details",
-                    status: "error",
-                    duration: 2500,
-                    isClosable: true,
-                    position: "bottom-right",
-                });
+        const payload = {
+            email,
+            password,
+        };
+        console.log(payload);
+        if (email !== "" && password !== "") {
+            try {
+                const res = await axios.post(
+                    `http://localhost:8080/users/login`,
+                    payload
+                );
+                console.log(res);
+                if (res.data.message === "Login Successful") {
+                    localStorage.setItem("token", res.data.token);
+                    setIsButLoading(true);
+                    setTimeout(() => {
+                        setIsButLoading(false);
+                        toast({
+                            title: "Login Successful",
+                            description: "",
+                            status: "success",
+                            duration: 2500,
+                            isClosable: true,
+                            position: "top",
+                        });
+                        navigate("/");
+                    }, 2000);
+                } else {
+                }
+            } catch (error) {
+                return error;
             }
         } else {
             toast({
                 title: "Details Missing",
-                description: "Please fill all details",
+                description: "Please fill your details",
                 status: "warning",
                 duration: 2500,
                 isClosable: true,
                 position: "bottom-right",
             });
         }
+        // console.log(payload);
     };
 
     return (
@@ -94,7 +96,7 @@ export function Login(props) {
                     {...props}
                     style={{ width: "40%" }}>
                     <Heading size="lg" weight={300}>
-                        Welcome to GadgetGalaxy, {type} with
+                        Welcome to GadgetGalaxy, Login with
                     </Heading>
 
                     <Box
@@ -133,34 +135,14 @@ export function Login(props) {
 
                     <form>
                         <Stack>
-                            {type === "register" && (
-                                <TextInput
-                                    label="Name"
-                                    placeholder="Your name"
-                                    value={form.values.name}
-                                    prefix={<FiMail />}
-                                    onChange={(event) =>
-                                        form.setFieldValue(
-                                            "name",
-                                            event.currentTarget.value
-                                        )
-                                    }
-                                    radius="md"
-                                />
-                            )}
-
                             <TextInput
                                 required
                                 label="Email"
                                 placeholder="______@mail.com"
-                                value={form.values.email}
+                                value={email}
                                 onChange={(event) =>
-                                    form.setFieldValue(
-                                        "email",
-                                        event.currentTarget.value
-                                    )
+                                    setEmail(event.target.value)
                                 }
-                                error={form.errors.email && "Invalid email"}
                                 radius="md"
                             />
 
@@ -168,32 +150,12 @@ export function Login(props) {
                                 required
                                 label="Password"
                                 placeholder="Your password"
-                                value={form.values.password}
+                                value={password}
                                 onChange={(event) =>
-                                    form.setFieldValue(
-                                        "password",
-                                        event.currentTarget.value
-                                    )
-                                }
-                                error={
-                                    form.errors.password &&
-                                    "Password should include at least 6 characters"
+                                    setPassword(event.target.value)
                                 }
                                 radius="md"
                             />
-
-                            {type === "register" && (
-                                <Checkbox
-                                    label="I accept terms and conditions"
-                                    checked={form.values.terms}
-                                    onChange={(event) =>
-                                        form.setFieldValue(
-                                            "terms",
-                                            event.currentTarget.checked
-                                        )
-                                    }
-                                />
-                            )}
                         </Stack>
 
                         <Group position="apart" mt="xl">
@@ -203,10 +165,17 @@ export function Login(props) {
                                 color="dimmed"
                                 onClick={handleClick}
                                 size="xs">
-                                {type === "register"
-                                    ? "Already have an account? Login"
-                                    : "Don't have an account? Register"}
+                                Don't have an account? Register
                             </Anchor>
+                            <Anchor
+                                component="button"
+                                type="button"
+                                color="dimmed"
+                                onClick={handleAdmin}
+                                size="xs">
+                                Admin Portal
+                            </Anchor>
+
                             <Button
                                 onClick={handleSubmit}
                                 style={{
@@ -216,13 +185,21 @@ export function Login(props) {
                                     transition: "all .3s ease-in-out",
                                 }}
                                 _hover={{
-                                    bgColor: "white",
-
-                                    color: "black",
                                     boxShadow:
                                         "10px 10px 47px 0px rgba(158,158,158,1)",
                                 }}>
-                                {upperFirst(type)}
+                                {!isButLoading &&
+                                    `Login
+                                    `}
+                                {isButLoading && (
+                                    <Spinner
+                                        thickness="2px"
+                                        speed="0.50s"
+                                        emptyColor="gray.200"
+                                        color="black"
+                                        size="md"
+                                    />
+                                )}
                             </Button>
                         </Group>
                     </form>

@@ -2,26 +2,28 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-const { UserModel } = require("../model/user.model");
+const { AdminModel } = require("../model/admin.model");
 
-/<-------------------Register User ----------------------->/;
+// <-------------------Register Admin ----------------------->/
 
-const userRegister = async (req, res) => {
+const adminRegister = async (req, res) => {
 	const payload = req.body;
 	const { name, email, password, gender, age, mobile_no } = payload;
-	const isUserPresent = await UserModel.find({ email: email });
-	if (isUserPresent.length) {
-		return res.send({ message: "User AlreadyExists" });
+	const isAdminPresent = await AdminModel.find({ email: email });
+	if (isAdminPresent.length) {
+		return res.send({ message: "Admin AlreadyExists", data: [] });
 	}
 	try {
 		if (name && email && password && gender && age && mobile_no) {
 			const hashedPassword = bcrypt.hashSync(password, 6);
 
-			const newUser = new UserModel({ ...payload, password: hashedPassword });
+			const newAdmin = new AdminModel({ ...payload, password: hashedPassword });
 
-			await newUser.save();
+			await newAdmin.save();
 
-			res.status(200).send({ message: "User Has Been Created" });
+			res
+				.status(200)
+				.send({ message: "Admin Has Been Created ", data: newAdmin });
 		} else {
 			res
 				.status(400)
@@ -34,22 +36,22 @@ const userRegister = async (req, res) => {
 	}
 };
 
-/<-------------------Login User ----------------------->/;
+/<-------------------Login Admin ----------------------->/;
 
-const userLogin = async (req, res) => {
+const adminLogin = async (req, res) => {
 	const payload = req.body;
 	const { email, password } = payload;
 	try {
-		const isUserPresent = await UserModel.find({ email: email });
-		if (isUserPresent.length) {
+		const isAdminPresent = await AdminModel.find({ email: email });
+		if (isAdminPresent.length) {
 			const isAuthorized = await bcrypt.compare(
 				password,
-				isUserPresent[0].password
+				isAdminPresent[0].password
 			);
 			if (isAuthorized) {
 				const token = await jwt.sign(
-					{ userID: isUserPresent[0]._id },
-					process.env.secretKey
+					{ adminID: isAdminPresent[0]._id },
+					process.env.adminSecretKey
 				);
 				res.status(200).send({ message: "Login Successful", token: token });
 			} else {
@@ -63,4 +65,4 @@ const userLogin = async (req, res) => {
 	}
 };
 
-module.exports = { userRegister, userLogin };
+module.exports = { adminRegister, adminLogin };
