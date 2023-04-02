@@ -27,7 +27,6 @@ const AllProducts = () => {
         axios
             .get(`http://localhost:8080/products?Category=${x}`)
             .then((res) => setdata(res.data));
-
     }, [x]);
 
     //sort
@@ -71,7 +70,7 @@ const AllProducts = () => {
     return (
         <>
         <Navbar/>
-        <Box>
+        <Box mt={20}>
             <Box>
                 <Image src="https://images.dailyobjects.com/marche/assets/images/other/homepage-offerbanner-by20-desktop.gif?tr=cm-pad_resize,v-2,dpr-1" />
             </Box>

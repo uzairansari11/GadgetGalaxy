@@ -1,4 +1,4 @@
-import { Flex, Box, Text, Button,Image} from "@chakra-ui/react";
+import { Flex, Box, Text, Button,Image,useToast,Spinner} from "@chakra-ui/react";
 
 import { useState } from "react";
 import HoverImage from "react-hover-image";
@@ -13,6 +13,8 @@ const AllProductsCart = ({
 }) => {
 	const [wishlist, setwishlist] = useState(true);
 	const navigate=useNavigate()
+	const toast = useToast()
+	const [isButLoading, setIsButLoading] = useState(false);
 	let token=localStorage.getItem("token")
 
 const hadleidcheck=(Title)=>{
@@ -32,7 +34,15 @@ const hadleidcheck=(Title)=>{
 			const alreadyAdded=datacheck.filter((el)=>el.Title===Title)
 			 
 			if(alreadyAdded.length>=1){
-				alert("Product Alreacy  Added In Cart")
+				
+				toast({
+					title: "Product Alreacy  Added In Cart",
+					description: "",
+					status: "error",
+					duration: 2500,
+					isClosable: true,
+					position: "top",
+				  })
 				
 			}else{
 				handlesumit()
@@ -62,7 +72,19 @@ const handlesumit=()=>{
 		}).then(res=>res.json())
 		.then(res=>{
 			
-			    alert(res.msg)
+			setIsButLoading(true) 
+			setTimeout(() => {
+				setIsButLoading(false)     
+				toast({
+					title: `${res.msg}`,
+					description: "",
+					status: "success",
+					duration: 2500,
+					isClosable: true,
+					position: "top",
+				  })
+			 
+			}, 2000)
 		
 		})
 		.catch(err=>{
@@ -149,7 +171,18 @@ const handlesumit=()=>{
 								colorScheme="green"
 								onClick={()=>hadleidcheck(Title)}
 							>
-								<Text>Add To Cart </Text>
+								{!isButLoading &&
+                                     `ADD TO CART`}
+                                {isButLoading && (
+                                    <Spinner
+                                        thickness="2px"
+                                        speed="0.50s"
+                                        emptyColor="gray.200"
+                                        color="black"
+                                        size="md"
+                                    />
+                                )}
+								
 								<Image
 									ml="5%"
 									src="https://images.dailyobjects.com/marche/icons/Bag.png?tr=cm-pad_resize,v-2,w-16,h-16,dpr-1"
