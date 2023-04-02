@@ -20,7 +20,7 @@ import {
 } from "@mantine/core";
 // import { MantineLogo } from "@mantine/ds";
 import { useDisclosure } from "@mantine/hooks";
-import {Link as ReactLink} from "react-router-dom"
+import { Link as ReactLink } from "react-router-dom";
 // import {
 // 	// IconNotification,
 // 	// IconCode,
@@ -30,7 +30,14 @@ import {Link as ReactLink} from "react-router-dom"
 // 	// IconCoin,
 // 	// IconChevronDown,
 // } from "@tabler/icons-react";
-
+import {
+	Avatar,
+	Menu,
+	MenuButton,
+	MenuList,
+	MenuItem,
+	MenuDivider,
+} from "@chakra-ui/react";
 const useStyles = createStyles((theme) => ({
 	link: {
 		display: "flex",
@@ -142,9 +149,9 @@ export const AdminNav = () => {
 	const links = mockdata.map((item) => (
 		<UnstyledButton className={classes.subLink} key={item.title}>
 			<Group noWrap align="flex-start">
-				<ThemeIcon size={34} variant="default" radius="md">
+				{/* <ThemeIcon size={34} variant="default" radius="md">
 					<item.icon size={rem(22)} color={theme.fn.primaryColor()} />
-				</ThemeIcon>
+				</ThemeIcon> */}
 				<div>
 					<Text size="sm" fw={500}>
 						{item.title}
@@ -158,7 +165,7 @@ export const AdminNav = () => {
 	));
 
 	return (
-		<Box pb={120}>
+		<Box>
 			<Header height={60} px="md">
 				<Group position="apart" sx={{ height: "100%" }}>
 					{/* <MantineLogo size={30} /> */}
@@ -168,11 +175,10 @@ export const AdminNav = () => {
 						spacing={0}
 						className={classes.hiddenMobile}
 					>
-			
 						<a href="/admin" className={classes.link}>
 							Dashboard
 						</a>
-					
+
 						<a href="/admin/product" className={classes.link}>
 							Products
 						</a>
@@ -182,8 +188,38 @@ export const AdminNav = () => {
 					</Group>
 
 					<Group className={classes.hiddenMobile}>
-						<Button variant="default">Log in</Button>
-						<Button>Sign up</Button>
+						<Menu>
+							<MenuButton
+								as={Button}
+								rounded={"full"}
+								variant={"link"}
+								cursor={"pointer"}
+								// minW={0}
+							>
+								<Avatar
+									size={"sm"}
+									src={"https://avatars.dicebear.com/api/male/username.svg"}
+								/>
+							</MenuButton>
+							<MenuList alignItems={"center"}>
+								<br />
+								<Center>
+									<Avatar
+										size={"2xl"}
+										src={"https://avatars.dicebear.com/api/male/username.svg"}
+									/>
+								</Center>
+								<br />
+								<Center>
+									<p>Username</p>
+								</Center>
+								<br />
+								<MenuDivider />
+								<MenuItem>Your Servers</MenuItem>
+								<MenuItem>Account Settings</MenuItem>
+								<MenuItem>Logout</MenuItem>
+							</MenuList>
+						</Menu>
 					</Group>
 
 					<Burger
@@ -234,8 +270,38 @@ export const AdminNav = () => {
 					/>
 
 					<Group position="center" grow pb="xl" px="md">
-						<Button variant="default">Log in</Button>
-						<Button>Sign up</Button>
+						<Menu>
+							<MenuButton
+								as={Button}
+								rounded={"full"}
+								variant={"link"}
+								cursor={"pointer"}
+								// minW={0}
+							>
+								<Avatar
+									size={"sm"}
+									src={"https://avatars.dicebear.com/api/male/username.svg"}
+								/>
+							</MenuButton>
+							<MenuList alignItems={"center"}>
+								<br />
+								<Center>
+									<Avatar
+										size={"2xl"}
+										src={"https://avatars.dicebear.com/api/male/username.svg"}
+									/>
+								</Center>
+								<br />
+								<Center>
+									<p>Username</p>
+								</Center>
+								<br />
+								<MenuDivider />
+								<MenuItem>Your Servers</MenuItem>
+								<MenuItem>Account Settings</MenuItem>
+								<MenuItem>Logout</MenuItem>
+							</MenuList>
+						</Menu>
 					</Group>
 				</ScrollArea>
 			</Drawer>

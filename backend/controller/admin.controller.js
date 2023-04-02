@@ -8,13 +8,13 @@ const { AdminModel } = require("../model/admin.model");
 
 const adminRegister = async (req, res) => {
 	const payload = req.body;
-	const { name, email, password, gender, age, mobile_no } = payload;
+	const { name, email, password, mobile_no } = payload;
 	const isAdminPresent = await AdminModel.find({ email: email });
 	if (isAdminPresent.length) {
-		return res.send({ message: "Admin AlreadyExists", data: [] });
+		return res.status(200).send({ message: "Admin AlreadyExists", data: [] });
 	}
 	try {
-		if (name && email && password && gender && age && mobile_no) {
+		if (name && email && password && mobile_no) {
 			const hashedPassword = bcrypt.hashSync(password, 6);
 
 			const newAdmin = new AdminModel({ ...payload, password: hashedPassword });
@@ -55,9 +55,12 @@ const adminLogin = async (req, res) => {
 				);
 				res.status(200).send({ message: "Login Successful", token: token });
 			} else {
-				res.status(400).send({ message: "Wrong Credentials!" });
+				res.status(201).send({ message: "Wrong Credentials!", data: [] });
 			}
+		} else {
+			res.status(201).send({ message: "Wrong Credentials!", data: [] });
 		}
+		
 	} catch (error) {
 		res.status(400).send({
 			message: `Please Try Again Something Went Wrong! \n ${error.message}`,
