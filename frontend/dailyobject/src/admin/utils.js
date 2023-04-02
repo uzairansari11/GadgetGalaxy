@@ -21,3 +21,7 @@ export const AdminRegister = async (payload) => {
 		return error;
 	}
 };
+
+export const  setToken = (token) => {
+	return token
+}

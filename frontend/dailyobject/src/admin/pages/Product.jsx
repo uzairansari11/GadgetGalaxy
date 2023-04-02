@@ -18,7 +18,7 @@ export const Product = () => {
 	return (
 		<>
 			<AdminNav />
-			<Flex margin={"auto"} justifyContent={"space-around"} p={"2"}>
+			<Flex margin={"auto"} justifyContent={"space-around"} p={"2"} mt="80px">
 				<Grid
 					width={"85%"}
 					justifyContent={"space-between"}

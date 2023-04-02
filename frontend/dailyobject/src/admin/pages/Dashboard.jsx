@@ -73,8 +73,8 @@ export const Dashboard = () => {
 	const { classes } = useStyles();
 	return (
 		<div>
-			<AdminNav/>
-			<Container>
+			<AdminNav />
+			<Container mt="80px">
 				<div className={classes.inner}>
 					<div className={classes.content}>
 						<Title className={classes.title}>
@@ -125,7 +125,10 @@ export const Dashboard = () => {
 							</Button>
 						</Group>
 					</div>
-					<Image src={"https://ui.mantine.dev/_next/static/media/image.9a65bd94.svg"} className={classes.image} />
+					<Image
+						src={"https://ui.mantine.dev/_next/static/media/image.9a65bd94.svg"}
+						className={classes.image}
+					/>
 				</div>
 			</Container>
 		</div>
