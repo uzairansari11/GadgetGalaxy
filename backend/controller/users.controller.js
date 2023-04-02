@@ -11,7 +11,10 @@ const userRegister = async (req, res) => {
 	const { name, email, password, gender, age, mobile_no } = payload;
 	const isUserPresent = await UserModel.find({ email: email });
 	if (isUserPresent.length) {
-		return res.send({ message: "User AlreadyExists" });
+		return res.send({
+			message: "User AlreadyExists",
+			data: isUserPresent[0].email,
+		});
 	}
 	try {
 		if (name && email && password && gender && age && mobile_no) {
@@ -53,8 +56,10 @@ const userLogin = async (req, res) => {
 				);
 				res.status(200).send({ message: "Login Successful", token: token });
 			} else {
-				res.status(400).send({ message: "Wrong Credentials!" });
+				res.status(201).send({ message: "Wrong Credentials!", data: [] });
 			}
+		} else {
+			res.status(201).send({ message: "Wrong Credentials!", data: [] });
 		}
 	} catch (error) {
 		res.status(400).send({

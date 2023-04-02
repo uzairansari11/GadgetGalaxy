@@ -2,11 +2,9 @@ import * as types from "./action.type.js";
 
 const initialState = {
 	isLoading: false,
-	isAuth: localStorage.getItem("isAuth") ? true : false,
-	user: [],
-	token: false,
+	token: localStorage.getItem("token") ? true : false,
+	isAuth: localStorage.getItem("token") ? true : false,
 	isError: false,
-	isRegisterSuccess: false,
 };
 
 export const reducer = (state = initialState, { type, payload }) => {
@@ -21,7 +19,7 @@ export const reducer = (state = initialState, { type, payload }) => {
 			return {
 				...state,
 				isAuth: true,
-				token: true,
+				token: payload,
 				isLoading: false,
 			};
 
@@ -32,20 +30,6 @@ export const reducer = (state = initialState, { type, payload }) => {
 				token: false,
 				isLoading: false,
 				isError: true,
-			};
-
-		case types.Register_Success:
-			return {
-				...state,
-				isLoading: false,
-				user: [...state.user, payload],
-			};
-
-		case types.User_Data_Success:
-			return {
-				...state,
-				isLoading: false,
-				user: payload,
 			};
 
 		case types.User_Logout:
