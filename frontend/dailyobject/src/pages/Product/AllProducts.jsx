@@ -27,7 +27,6 @@ const AllProducts = () => {
         axios
             .get(`http://localhost:8080/products?Category=${x}`)
             .then((res) => setdata(res.data));
-
     }, [x]);
 
     //sort
