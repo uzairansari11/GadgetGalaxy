@@ -61,7 +61,6 @@ export const AdminLogin = () => {
 			dispatch(adminLoginVerificationSuccess(payload)).then(() => {
 				navigate("/admin", { replace: true });
 			});
-			
 		} else if (verifyKey === "") {
 			toast({
 				title: "Please Enter Pin",
@@ -93,7 +92,7 @@ export const AdminLogin = () => {
 		if (email !== "" && password !== "") {
 			try {
 				const response = await axios.post(
-					"http://localhost:8080/admin/login",
+					"https://gadgetgalaxy.cyclic.app/admin/login",
 					payload
 				);
 				console.log(response);
