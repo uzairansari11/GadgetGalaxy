@@ -9,12 +9,14 @@ import {
     ModalOverlay,
     useDisclosure,
     Input,
+    Badge,
+    useBreakpointValue
 } from '@chakra-ui/react'
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import SingleCartCard from './SingleCartCard';
-import { getCartData, handleCouponDiscount, handleGiftCardDiscount, handleTotalAmount } from '../../redux/usercart/action'
+import { getCartData, handleCouponDiscount, handleGiftCardDiscount } from '../../redux/usercart/action'
 
 
 
@@ -45,34 +47,57 @@ const Cart = () => {
         dispatch(handleGiftCardDiscount(giftCard,amount))
     }
 
+    const flexDirection = useBreakpointValue({ base: "column", md: "row" });
+
     return (
         <Box width="100%">
-            <Flex width="100%" height="100px" boxShadow="rgba(0,0,0,0.24) 0px 3px 8px">
-                <Box padding="10">
-                    <Image src="" ></Image>
+            <Flex width="100%" zIndex="9999" pos={"fixed"} top="0" left="0" right="0" height="80px" textTransform={"capitalize"} background="white"  boxShadow="rgba(0,0,0,0.24) 0px 3px 8px">
+                <Box ml="10">
+                    <Image w="80px" h="80px" src="https://i.ibb.co/k0J7FB2/Gadget.png" ></Image>
                 </Box>
                 <Spacer />
-                <Box padding="8" >
+                <Box mr="10" mt="4" >
                     <Image src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/user-512.png" width="50px" h="50px"></Image>
                 </Box>
             </Flex>
-            <Box >
-                <Heading textAlign="center" marginBottom="5">Shopping Bag</Heading>
+            <Box marginTop="100px">
+                <Heading textAlign="center" marginBottom="5">Shopping Bag <Badge colorScheme="green" borderRadius="full" px="3" py="2">{items}</Badge></Heading>
             </Box>
 
-            <Box w="85%" margin="auto">
-                <Flex h="500px">
-                    <Box flex='1' w="70%" >
-                        <VStack overflow="scroll" h="500px">
+            <Box shadow="sm" w="85%" margin="auto">
+                <Flex 
+                    h={{base:"500px",md:"350px",sm:"200px",xs:"140px"}} padding="0.5rem"
+                    flexDirection={flexDirection}
+                >
+                    <Box flex='1' h={{base:"500px",md:"350px",sm:"200px",xs:"140px"}} w={{base:"70%",md:"70%",sm:"100%",xs:"100%"}} >
+                        <VStack 
+                            h={{base:"500px",md:"500px",sm:"200px"}}
+                            overflowY="auto"
+                            css={{
+                                "&::-webkit-scrollbar": {
+                                width: "5px",
+                                height: "5px",
+                                },
+                                "&::-webkit-scrollbar-track": {
+                                background: "#f1f1f1",
+                                },
+                                "&::-webkit-scrollbar-thumb": {
+                                background: "#888",
+                                },
+                                "&::-webkit-scrollbar-thumb:hover": {
+                                background: "#555",
+                                },
+                            }}
+                        >
                             {cart ?.map((el) => <SingleCartCard key={el.id} product={el} />)}
                         </VStack>
 
                     </Box>
                     <Box flex='1'  >
-                        <Flex w="70%" h="auto" marginLeft="150px" marginTop="50px">
-                            <VStack w="90%" >
+                        <Flex w={{base:"70%",md:"70%",sm:"100%"}} h="auto" marginLeft={{base:"150px", md:"100px", sm:"0px"}} marginTop="50px">
+                            <VStack w={{base:"90%",sm:"100%"}} >
                                 <Box w="100%" borderRadius="0.2rem" bg="rgb(246, 239, 246)" border="rgb(233, 233, 233)">
-                                    <Button onClick={onOpen} borderColor="blue" w="100%" h="auto" bg="teal.200" borderRadius="0.5rem" padding="0.5rem" >Apply Coupan</Button>
+                                    <Button onClick={onOpen} borderColor="blue" w="100%" h="auto" bg="teal.200" borderRadius="0.5rem" padding="0.5rem" >Apply Coupon</Button>
                                 </Box>
                                 <Box border="1px solid" borderColor="#D9E1EA" w="100%" h="auto" bg="white" borderRadius="0.2rem">
                                     <HStack w="100%">
@@ -104,9 +129,9 @@ const Cart = () => {
                                         <Text padding="0.2rem" textAlign="right">₹{discount}</Text>
                                     </HStack>
                                     <HStack w="100%">
-                                        <Text padding="0.2rem" textAlign="left">Delivery Charges (Standard)</Text>
+                                        <Text padding="0.2rem" textAlign="left">Shipping</Text>
                                         <Spacer></Spacer>
-                                        <Text padding="0.2rem" textAlign="right">₹0</Text>
+                                        <Text padding="0.2rem" textAlign="right">FREE</Text>
                                     </HStack>
                                     <HStack w="100%">
                                         <Text padding="0.2rem" fontSize="1.2rem" textAlign="left" as='b'>Total Cost</Text>
@@ -135,6 +160,10 @@ const Cart = () => {
                         <ModalBody>
 
                             <Input placeholder="Enter Coupon Code" value={data} onChange={e => setData(e.target.value)}></Input>
+                            <br></br>
+                            <br></br>
+                            <Text color="blue.300"> Use code 'masai30' to get 30% discount on cart total. </Text>
+                            <br></br>
                             <Button onClick={handleCouponCode}>Apply</Button>
                         </ModalBody>
                         <ModalFooter>
