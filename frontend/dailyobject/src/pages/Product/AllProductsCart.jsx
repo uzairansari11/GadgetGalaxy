@@ -1,4 +1,5 @@
-import { Flex, Box, Text, Button, Image } from "@chakra-ui/react";
+import { Flex, Box, Text, Button,Image} from "@chakra-ui/react";
+
 import { useState } from "react";
 import HoverImage from "react-hover-image";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +13,33 @@ const AllProductsCart = ({
 }) => {
 	const [wishlist, setwishlist] = useState(true);
 	const navigate=useNavigate()
-	const handlesumit=()=>{
+	//${localStorage.getItem("token")}
+    
+const hadleidcheck=(Title)=>{
+	
+	       fetch("http://localhost:8080/cart",{
+                  headers:{
+                        "Authorization":`Bearer ${localStorage.getItem("token")}`
+				 
+                  },
+            }).then(res=>res.json())
+            .then(res=>{
+			
+                  let datacheck=(res) 
+			
+			const alreadyAdded=datacheck.filter((el)=>el.Title===Title)
+			 
+			if(alreadyAdded.length>=1){
+				alert("Product Alreacy  Added In Cart")
+			}else{
+				handlesumit()
+			}
+			
+            })
+            .catch(err=>console.log(err))
+     }
+    
+const handlesumit=()=>{
 		let payload={
 			Image1: Image1,
 			Title: Title,
@@ -20,20 +47,22 @@ const AllProductsCart = ({
 			Discount_price: Discount_price,
 			Quantity:1
 		}
-	console.log(payload)
 		fetch("http://localhost:8080/cart/add",{
 			method:"POST",
 			headers:{
-				'Authorization': "",
+				"Authorization":`Bearer ${localStorage.getItem("token")}`,
 				"Content-type":"application/json"
 			},
 			body:JSON.stringify(payload)
 		}).then(res=>res.json())
 		.then(res=>{
-			console.log(res)
-			alert(res.msg)
+			
+			    alert(res.msg)
+		
 		})
-		.catch(err=>console.log(err))
+		.catch(err=>{
+			alert(err)
+			console.log(err)})
 	 }
 	return (
 		<Box>
@@ -46,7 +75,7 @@ const AllProductsCart = ({
 					rounded="lg"
 					shadow="lg"
 					position="relative"
-					h="560px"
+					h={{lg:"573px",md:"400px",sm:"350px"}}
 				>
 					{wishlist ? (
 						<Image
@@ -88,29 +117,29 @@ const AllProductsCart = ({
 								isTruncated
 							></Box>
 						</Flex>
-						<Text textAlign={"center"}>{Title}</Text>
+						<Text h="80px" fontSize={{md:"10px",lg:"lg"}} textAlign={"center"}>{Title}</Text>
 						<Flex mt="10px" justifyContent={"space-evenly"}>
-							<Text fontWeight={"bold"} fontSize="lg">
+							<Text fontSize={{md:"17px",lg:"lg"}} fontWeight={"bold"} >
 								Rs.{Discount_price}
 							</Text>
 							<Box color={"gray.800"}>
-								<Text
+								<Text fontSize={{md:"17px",lg:"lg"}}
 									color={"rgb(164, 161, 161)"}
 									fontWeight={"bold"}
-									fontSize="lg"
+									
 								>
 									<s>{Original_price}</s>
 								</Text>
 							</Box>
 						</Flex>
-						<Flex mt="10%" >
+						<Flex mt="5%" >
 							<Button
 								bg="#20a87e"
 								color={"white"}
 								w="85%"
 								m="auto"
 								colorScheme="green"
-								onClick={handlesumit}
+								onClick={()=>hadleidcheck(Title)}
 							>
 								<Text>Add To Cart </Text>
 								<Image
