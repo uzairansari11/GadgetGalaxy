@@ -299,7 +299,8 @@ const Navbar = () => {
                         </Button>
                     </Tooltip>
                 </div>
-        </Box>
+            </Box>
+            </Box>
     );
 };
 export default Navbar;

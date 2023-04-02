@@ -45,6 +45,7 @@ const adminLogin = async (req, res) => {
 		const isAdminPresent = await AdminModel.find({ email: email });
 		if (isAdminPresent.length) {
 			const isAuthorized = await bcrypt.compare(
+				
 				password,
 				isAdminPresent[0].password
 			);

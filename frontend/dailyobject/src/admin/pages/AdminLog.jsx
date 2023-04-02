@@ -172,7 +172,7 @@ export const AdminLogin = () => {
 							style={{
 								borderRadius: "25px",
 								backgroundColor: "black",
-								color: "white", // or color: "whiteAlpha.900"
+								color: "white", 
 								transition: "all .3s ease-in-out",
 							}}
 							_hover={{
