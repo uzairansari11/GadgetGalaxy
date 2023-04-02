@@ -13,13 +13,15 @@ const AllProductsCart = ({
 }) => {
 	const [wishlist, setwishlist] = useState(true);
 	const navigate=useNavigate()
-	//${localStorage.getItem("token")}
-    
+	let token=localStorage.getItem("token")
+
 const hadleidcheck=(Title)=>{
-	
+	if(token===null){
+		alert("Please login first")
+	   }else{
 	       fetch("http://localhost:8080/cart",{
                   headers:{
-                        "Authorization":`Bearer ${localStorage.getItem("token")}`
+                        "Authorization":`Bearer ${token}`
 				 
                   },
             }).then(res=>res.json())
@@ -31,15 +33,18 @@ const hadleidcheck=(Title)=>{
 			 
 			if(alreadyAdded.length>=1){
 				alert("Product Alreacy  Added In Cart")
+				
 			}else{
 				handlesumit()
 			}
 			
             })
             .catch(err=>console.log(err))
+	}
      }
     
 const handlesumit=()=>{
+
 		let payload={
 			Image1: Image1,
 			Title: Title,
@@ -50,7 +55,7 @@ const handlesumit=()=>{
 		fetch("http://localhost:8080/cart/add",{
 			method:"POST",
 			headers:{
-				"Authorization":`Bearer ${localStorage.getItem("token")}`,
+				"Authorization":`Bearer ${token}`,
 				"Content-type":"application/json"
 			},
 			body:JSON.stringify(payload)
@@ -61,10 +66,13 @@ const handlesumit=()=>{
 		
 		})
 		.catch(err=>{
-			alert(err)
+			alert(err.message)
 			console.log(err)})
+	   
 	 }
 	return (
+		<>
+	
 		<Box>
 			
 			<Flex alignItems="center" justifyContent="center">
@@ -75,7 +83,7 @@ const handlesumit=()=>{
 					rounded="lg"
 					shadow="lg"
 					position="relative"
-					h={{lg:"573px",md:"400px",sm:"350px"}}
+					// h={{lg:"573px",md:"400px",sm:"350px"}}
 				>
 					{wishlist ? (
 						<Image
@@ -152,6 +160,9 @@ const handlesumit=()=>{
 				</Box>
 			</Flex>
 		</Box>
+		
+		
+		</>
 	);
 };
 

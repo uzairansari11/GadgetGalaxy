@@ -86,7 +86,7 @@ const Navbar = () => {
                 id="stack3"
                 width={"100%"}
                 align={"center"}>
-                <Text onMouseEnter={handleMouseEnter}>Deal Zone</Text>
+                <Text  onMouseEnter={handleMouseEnter}>Deal Zone</Text>
                 <Text onMouseEnter={handleMouseEnter}>Sofas & Recliners</Text>
                 <Text onMouseEnter={handleMouseEnter}>Living</Text>
                 <Text onMouseEnter={handleMouseEnter}>
