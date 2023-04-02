@@ -81,14 +81,14 @@ const Footer = () => {
                 <div className="five_one">
                     <div>
                         <h4>Know US</h4>
-                        <ul>
+                        <ul className="footer_ul">
                             <li>About DailyObjects</li>
                             <li>Blog</li>
                         </ul>
                     </div>
                     <div>
                         <h4>Helpdesk</h4>
-                        <ul>
+                        <ul className="footer_ul">
                             <li>Terms Of Use</li>
                             <li>Warranty Policy</li>
                             <li>Shipping Policy</li>
@@ -99,7 +99,7 @@ const Footer = () => {
                     </div>
                     <div>
                         <h4>Network</h4>
-                        <ul>
+                        <ul className="footer_ul">
                             <li>Contact Us</li>
                             <li>Corporate Gifting</li>
                         </ul>
@@ -131,10 +131,12 @@ const Footer = () => {
                         <h3>Download our app</h3>
                         <div className="ads">
                             <img
+                                style={{ cursor: "pointer" }}
                                 src="https://images.dailyobjects.com/marche/icons/android.png?tr=cm-pad_resize,v-2,w-118,h-38,dpr-1"
                                 alt=""
                             />
                             <img
+                                style={{ cursor: "pointer" }}
                                 src="https://images.dailyobjects.com/marche/icons/IOS.png?tr=cm-pad_resize,v-2,w-118,h-38,dpr-1"
                                 alt=""
                             />

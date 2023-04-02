@@ -18,10 +18,14 @@ app.get("/", (req, res) => {
 app.use(express.json());
 app.use("/users", userRouter);
 app.use("/products", productRouter);
+
 app.use("/admin",adminRouter)
+
+app.use("/shipping", orderRoute);
+
 app.use(auth)
 app.use("/cart", cartRoute);
-app.use("/shipping", orderRoute);
+
 
 app.listen(8080, async () => {
 	await connection();

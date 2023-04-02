@@ -2,19 +2,32 @@ import { Box, Button, Grid, Text, Image } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import AllProductsCart from "./AllProductsCart";
-import Footer from "../../components/Footer/Footer";
-import Navbar from "../../components/Navbar/Navbar";
+import Navbar from "../../components/Navbar/Navbar"
+import Footer from "../../components/Footer/Footer"
+import { useLocation } from "react-router-dom";
 
 
 
 const AllProducts = () => {
+    const location=useLocation()
     const [filters, setfilters] = useState(false);
     const [data, setdata] = useState([]);
-
+    const [cases,setcases]=useState(false)
+    let names = location.pathname;
+    const last = names.split("/");
+    let x = last[last.length - 1]
+  
     useEffect(() => {
+        if(x==="Passport%20wallet"||x==="Airpods%20pro%20Cases" ||x==="Eyewear%20cases"||
+        x==="Ipad%20cover"|| x==="Laptop%20cover"|| x==="Phone%20Cases"){
+            setcases(false)
+        }else{
+          setcases(true)
+        }
         axios
-            .get(`http://localhost:8080/products`)
+            .get(`http://localhost:8080/products?Category=${x}`)
             .then((res) => setdata(res.data));
+        
     }, []);
 
     //sort
@@ -44,15 +57,25 @@ const AllProducts = () => {
     const Allproctsshow = () => {
         setdata([]);
         axios
-            .get(`http://localhost:8080/products`)
+            .get(`http://localhost:8080/products?Category=Watchbands&Category=Charging Solutions&Category=Macbook Sleeve&Category=Messanger Bags&Category=Eyewear&Category=Desks`)
             .then((res) => setdata(res.data));
-    };
+    }
+
+    const Allproctsshowcase = () => {
+        setdata([]);
+        axios
+            .get(`http://localhost:8080/products?Category=Passport wallet&Category=Airpods pro Cases&Category=Eyewear cases&Category=Ipad cover&Category=Laptop cover&Category=Phone Cases`)
+            .then((res) => setdata(res.data));
+    }
 
     return (
+        <>
+        <Navbar/>
         <Box>
             <Box>
                 <Image src="https://images.dailyobjects.com/marche/assets/images/other/homepage-offerbanner-by20-desktop.gif?tr=cm-pad_resize,v-2,dpr-1" />
             </Box>
+           { cases?<Box>
             <Text
                 fontSize={"xl"}
                 mt="2%"
@@ -83,7 +106,8 @@ const AllProducts = () => {
                     </Text>
                 </Box>
 
-                <Box>
+                <Box  value="Pedal Backpack"
+                    onClick={() => productcategory("Pedal Backpack")}>
                     <Image
                         borderRadius={"50%"}
                         m="auto"
@@ -151,6 +175,97 @@ const AllProducts = () => {
                     </Text>
                 </Box>
             </Box>
+            </Box>:
+            <Box>
+            <Text
+                fontSize={"xl"}
+                mt="2%"
+                fontWeight="bold"
+                textAlign={"center"}>
+                CASES & SLEEVES
+            </Text>
+            <Box w={{lg:"55%",md:"95%"}} display={"flex"} gap="5%" m="auto" mt="3%">
+                <Box onClick={Allproctsshowcase}>
+                    <Box borderRadius={"50%"} h="55%" w="65px" bg="green">
+                        <Text textAlign={"center"} pt="25px" color={"white"}>
+                            All
+                        </Text>
+                    </Box>
+                    <Text textAlign={"center"} fontSize={"sm"}>
+                        All
+                    </Text>
+                </Box>
+
+                <Box value="Phone Cases" onClick={() => productcategory("Phone Cases")}>
+                    <Image
+                        borderRadius={"50%"}
+                        m="auto"
+                        src="https://images.dailyobjects.com/marche/tmp/phone-cases.png?tr=cm-pad_resize,v-2,w-160,h-160,dpr-1"
+                    />
+                    <Text textAlign={"center"} fontSize={"sm"}>
+                    Phone Cases
+                    </Text>
+                </Box>
+
+                <Box value="Laptop cover"
+                    onClick={() => productcategory("Laptop cover")}>
+                    <Image
+                        borderRadius={"50%"}
+                        m="auto"
+                        src="https://images.dailyobjects.com/marche/icons/category/cases-sleeves-intermediate-image.jpg?tr=cm-pad_crop,v-2,w-160,h-160,dpr-1"
+                    />
+                    <Text textAlign={"center"}>Laptop Sleeves</Text>
+                </Box>
+
+                <Box
+                    value="Airpods pro Cases"
+                    onClick={() => productcategory("Airpods pro Cases")}>
+                    <Image
+                        borderRadius={"50%"}
+                        m="auto"
+                        src="https://images.dailyobjects.com/marche/icons/category/airpod-case-cover-updated.jpg?tr=cm-pad_crop,v-2,w-160,h-160,dpr-1"
+                    />
+                    <Text textAlign={"center"} fontSize={"sm"}>
+                    Airpods Cases Cover
+                    </Text>
+                </Box>
+                <Box
+                    value="Ipad cover"
+                    onClick={() => productcategory("Ipad cover")}>
+                    <Image
+                        borderRadius={"50%"}
+                        m="auto"
+                        src="https://images.dailyobjects.com/marche/icons/category/ipad-new.png?tr=cm-pad_resize,v-2,w-160,h-160,dpr-1"
+                    />
+                    <Text textAlign={"center"} fontSize={"sm"}>
+                    Ipad covers & Sleeves
+                    </Text>
+                </Box>
+                <Box
+                    value="Passport wallet"
+                    onClick={() => productcategory("Passport wallet")}>
+                    <Image
+                        borderRadius={"50%"}
+                        m="auto"
+                        src="https://images.dailyobjects.com/marche/icons/category/passport.png?tr=cm-pad_resize,v-2,w-160,h-160,dpr-1"
+                    />
+                    <Text textAlign={"center"} fontSize={"sm"}>
+                    Passport Wallets
+                    </Text>
+                </Box>
+                <Box value="Eyewear cases" onClick={() => productcategory("Eyewear cases")}>
+                    <Image
+                        borderRadius={"50%"}
+                        m="auto"
+                        src="https://images.dailyobjects.com/marche/icons/category/eyewear-cases.png?tr=cm-pad_resize,v-2,w-160,h-160,dpr-1"
+                    />
+                    <Text textAlign={"center"} fontSize={"sm"}>
+                    Eyewear cases
+                    </Text>
+                </Box>
+            
+            </Box>
+            </Box>}
 
             <Button
                 fontSize={"lg"}
@@ -211,6 +326,8 @@ const AllProducts = () => {
                 )}
             </Box>
         </Box>
+        <Footer/>
+        </>
     );
 };
 

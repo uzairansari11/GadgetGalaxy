@@ -25,7 +25,11 @@ export const getdataSuccessAddress = (payload) => {
 export const postRequestAddress = (payload) => (dispatch) => {
   dispatch(getpostRequest());
   axios
-    .post("http://localhost:8080/shipping/add", payload)
+    .post("http://localhost:8080/shipping/add",{
+      headers: {
+      'Authorization': `Bearer ${localStorage.getItem("token")}`,
+      'Content-Type': 'application/json'
+    }},payload)
     .then((res) => {
       console.log("post", res.data);
       dispatch(getpostSuccessAddress(res.data));
@@ -38,7 +42,7 @@ export const postRequestAddress = (payload) => (dispatch) => {
 export const getRequestAddress = () => (dispatch) => {
   dispatch(getpostRequest());
   axios
-    .get("http://localhost:8080/shipping")
+    .get("http://localhost:8080/shipping",)
     .then((res) => {
         console.log("get",res.data);
       dispatch(getdataSuccessAddress(res.data));
