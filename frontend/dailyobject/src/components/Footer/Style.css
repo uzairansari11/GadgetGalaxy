@@ -116,7 +116,7 @@
     letter-spacing: 2.5px;
     margin-bottom: 15px;
 }
-ul > li {
+.footer_ul > li {
     font-family: "Gothic A1", sans-serif;
     list-style-type: none;
     font-weight: 400;
@@ -124,7 +124,7 @@ ul > li {
     line-height: 30px;
     cursor: pointer;
 }
-ul > li:hover {
+.footer_ul > li:hover {
     text-decoration: underline;
 }
 .five_two {
