@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap");
 #stack1 > * > *:hover {
-    color: #ed7745;
+    color: black;
 }
 
 /* category navbar menu */
@@ -29,17 +29,16 @@
     margin-bottom: 10px;
     white-space: nowrap;
     font-family: "Pathway Gothic One", sans-serif;
-
 }
 
 #catNav > div > div:hover > p {
-    text-decoration: underline #ed7745;
+    text-decoration: underline black;
     text-underline-offset: 10px;
 }
 
 #catNav > div > div > p:hover,
 #catNav > div > div > ul > *:hover {
-    color: #ed7745;
+    color: black;
 }
 
 #catNav > div > div > *:hover {
@@ -59,9 +58,9 @@
 }
 
 #stack3 > *:hover {
-    color: #ed7745;
+    color: black;
     cursor: default;
-    text-decoration: underline #ed7745 2px solid;
+    text-decoration: underline black 2px solid;
     text-underline-offset: 80%;
 }
 
@@ -98,10 +97,127 @@
 }
 
 #userBox > div > *:hover {
-    color: #ed7745;
+    color: black;
     cursor: pointer;
 }
 
 #userBox:hover > div {
     display: flex;
+}
+
+/* ------------New-CSS------------- */
+
+.dropdown-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.hover-account {
+    background-color: #fff;
+    /* border: 1px solid #ccc; */
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.dropdown-menu > ul {
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    border: 0px solid transparent;
+    border-radius: 20px;
+    width: 150px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    list-style: none;
+    transition: all 0.2s ease-in-out;
+    text-align: left;
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+.dropdown-menu:hover .all-log {
+    display: block;
+}
+.dropdown-menu:not(:hover) .all-log {
+    display: none;
+}
+.dropdown-menu li {
+    cursor: pointer;
+}
+
+.navAdmin {
+    position: relative;
+    display: inline-block;
+}
+
+.hover-account {
+    background-color: #fff;
+    /* border: 1px solid #ccc; */
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.navAdmin > ul {
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    border: 0px solid transparent;
+    border-radius: 20px;
+    /* width: 240px; */
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    list-style: none;
+    transition: all 0.2s ease-in-out;
+    text-align: left;
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+.navAdmin:hover .all-log {
+    display: block;
+}
+.navAdmin:not(:hover) .all-log {
+    display: none;
+}
+.navAdmin li {
+    cursor: pointer;
+}
+
+
+.navCart {
+    /* padding: 8px 16px; */
+    cursor: pointer;
+}
+.navAdmin {
+    /* padding: 8px 16px; */
+    cursor: pointer;
+}
+
+.post-nav {
+    border: 0px solid red;
+    width: 100%;
+    margin-top: 7.5rem;
+    padding: 5px 150px;
+    background-color: #17274a;
+    color: #809aaa;
+    font-size: 14px;
+    font-family: "Visuelt Pro";
+    text-align: left;
+}
+
+.post-all {
+    border: 0px solid green;
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.post-all > p {
+    display: inline;
+}
+.post-all > a {
+    padding: 0px 10px;
+    color: #809aaa;
+    text-decoration: underline;
 }
