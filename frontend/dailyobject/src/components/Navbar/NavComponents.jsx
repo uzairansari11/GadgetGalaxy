@@ -9,14 +9,15 @@ export const Dz = ({ mouseLeave }) => {
     return (
         <HStack onMouseLeave={(e) => { mouseLeave(e, "Deal Zone") }}>
             <VStack style={style}>
-                <Text>Top Deals</Text>
+                <Text>NEW ARRIVALS</Text>
                 <List>
-                    <ListItem>Daily Deals</ListItem>
-                    <ListItem>Weekday Special Deals</ListItem>
-                    <ListItem>Stunning Deals</ListItem>
-                    <ListItem>Clearance Sale</ListItem>
-                    <ListItem>All Products on Sale</ListItem>
-                    <ListItem>All Decor on Sale</ListItem>
+                    <ListItem>Desks</ListItem>
+                    <ListItem>Charging Solutions</ListItem>
+                    <ListItem>Collections</ListItem>
+                    <ListItem>Macbook Sleeves</ListItem>
+                    <ListItem>Messenger Bags</ListItem>
+                    <ListItem>Eyewear Cases</ListItem>
+                    <ListItem>Watchbands</ListItem>
                 </List>
             </VStack>
         </HStack>
@@ -26,10 +27,10 @@ export const Sr = ({ mouseLeave }) => {
     return (
         <HStack onMouseLeave={(e) => { mouseLeave(e, "Sofas & Recliners") }}>
             <VStack style={style}>
-                <Text>Sofas</Text>
+                <Text>CASES & SLEEVES</Text>
                 <List>
-                    <ListItem>All Sofas</ListItem>
-                    <ListItem>Fabric Sofa Sets</ListItem>
+                    <ListItem>Apple</ListItem>
+                    <ListItem>Samsung</ListItem>
                     <ListItem>Wooden Sofa Sets</ListItem>
                     <ListItem>Leather Sofa Sets</ListItem>
                     <ListItem>Leatherette Sofa Sets</ListItem>
