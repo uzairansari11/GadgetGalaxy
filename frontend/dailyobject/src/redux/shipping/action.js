@@ -1,43 +1,37 @@
 import axios from "axios";
 import {
-  GET_ADDRESS_SUCCESS,
-  POST_ADDRESS_SUCCESS,
-  POST_REQUEST,
-  POST_FAILURE
+	GET_ADDRESS_SUCCESS,
+	POST_ADDRESS_SUCCESS,
+	POST_REQUEST,
+	POST_FAILURE,
 } from "./action.type";
 
 export const getpostRequest = () => {
-  return { type: POST_REQUEST };
+	return { type: POST_REQUEST };
 };
 
 export const getpostFailure = () => {
-  return { type: POST_FAILURE };
+	return { type: POST_FAILURE };
 };
 
 export const getpostSuccessAddress = (payload) => {
-  return { type: POST_ADDRESS_SUCCESS };
+	return { type: POST_ADDRESS_SUCCESS };
 };
 export const getdataSuccessAddress = (payload) => {
-  return { type: GET_ADDRESS_SUCCESS, payload };
+	return { type: GET_ADDRESS_SUCCESS, payload };
 };
 
-
 export const postRequestAddress = (payload) => (dispatch) => {
-  dispatch(getpostRequest());
-  axios
+	dispatch(getpostRequest());
+	axios
 		.post(
 			"https://gadgetgalaxy.cyclic.app/shipping/add",
-			{
-				headers: {
-					Authorization: `Bearer ${localStorage.getItem("token")}`,
-					"Content-Type": "application/json",
-				},
-			},
+
 			payload
 		)
 		.then((res) => {
-			console.log("post", res.data);
-			dispatch(getpostSuccessAddress(res.data.data));
+			console.log("post", payload);
+			dispatch(getpostSuccessAddress(payload));
 		})
 		.catch((error) => {
 			dispatch(getpostFailure());
@@ -45,8 +39,8 @@ export const postRequestAddress = (payload) => (dispatch) => {
 };
 
 export const getRequestAddress = () => (dispatch) => {
-  dispatch(getpostRequest());
-  axios
+	dispatch(getpostRequest());
+	axios
 		.get("https://gadgetgalaxy.cyclic.app/shipping")
 		.then((res) => {
 			console.log("get", res.data);
@@ -56,4 +50,3 @@ export const getRequestAddress = () => (dispatch) => {
 			dispatch(getpostFailure());
 		});
 };
-
