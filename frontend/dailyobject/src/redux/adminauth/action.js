@@ -25,6 +25,7 @@ export const adminLoginVerificationSuccess = (payload) => async (dispatch) => {
 		let data = await adminLoginApi(payload);
 		if (data) {
 			dispatch(adminLoginSuccess(data));
+			return data;
 		}
 	} catch (e) {
 		dispatch(error());

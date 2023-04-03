@@ -10,7 +10,6 @@ import {
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addData } from "../../redux/adminproduct/action";
-import { SideBar } from "../component/SideBar";
 import { AdminNav } from "../component/AdminNav";
 
 export const AddProduct = () => {

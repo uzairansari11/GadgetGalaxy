@@ -27,7 +27,7 @@ import {
 } from "@chakra-ui/react";
 
 import { AdminNav } from "../component/AdminNav";
-import { useNavigate } from "react-router-dom";
+import { unstable_HistoryRouter, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -47,6 +47,7 @@ export const AdminLogin = () => {
 	const secretKey = `${process.env.REACT_APP_SecretKey}`;
 
 	const handlePinVerification = () => {
+		let data = { email, password };
 		if (verifyKey == secretKey) {
 			onClose();
 			toast({
@@ -58,9 +59,12 @@ export const AdminLogin = () => {
 				position: "top",
 			});
 			const payload = localStorage.getItem("adminToken");
-			dispatch(adminLoginVerificationSuccess(payload)).then(() => {
-				navigate("/admin", { replace: true });
+			console.log("pyaload",data)
+			dispatch(adminLoginVerificationSuccess(data)).then((data) => {
+				console.log(data, "data from sisisi");
 			});
+	
+			navigate("/admin", { replace: true });
 		} else if (verifyKey === "") {
 			toast({
 				title: "Please Enter Pin",
@@ -122,10 +126,7 @@ export const AdminLogin = () => {
 	return (
 		<>
 			<AdminNav />
-			<div
-				className="admin_log"
-				style={{  marginTop: "60px" }}
-			>
+			<div className="admin_log" style={{ marginTop: "60px" }}>
 				<Container size={420} my={40}>
 					<Title
 						align="center"
@@ -171,7 +172,7 @@ export const AdminLogin = () => {
 							style={{
 								borderRadius: "25px",
 								backgroundColor: "black",
-								color: "white", 
+								color: "white",
 								transition: "all .3s ease-in-out",
 							}}
 							_hover={{

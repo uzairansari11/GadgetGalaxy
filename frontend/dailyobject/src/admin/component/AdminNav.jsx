@@ -18,18 +18,10 @@ import {
 	ScrollArea,
 	rem,
 } from "@mantine/core";
-// import { MantineLogo } from "@mantine/ds";
+
 import { useDisclosure } from "@mantine/hooks";
 import { Link as ReactLink, useNavigate } from "react-router-dom";
-// import {
-// 	// IconNotification,
-// 	// IconCode,
-// 	// IconBook,
-// 	// IconChartPie3,
-// 	// IconFingerprint,
-// 	// IconCoin,
-// 	// IconChevronDown,
-// } from "@tabler/icons-react";
+
 import {
 	Avatar,
 	Menu,
@@ -158,9 +150,6 @@ export const AdminNav = () => {
 	const links = mockdata.map((item) => (
 		<UnstyledButton className={classes.subLink} key={item.title}>
 			<Group noWrap align="flex-start">
-				{/* <ThemeIcon size={34} variant="default" radius="md">
-					<item.icon size={rem(22)} color={theme.fn.primaryColor()} />
-				</ThemeIcon> */}
 				<div>
 					<Text size="sm" fw={500}>
 						{item.title}
@@ -195,8 +184,6 @@ export const AdminNav = () => {
 		>
 			<Header height={60} px="md">
 				<Group position="apart" sx={{ height: "100%" }}>
-					{/* <MantineLogo size={30} /> */}
-
 					<Group
 						sx={{ height: "100%" }}
 						spacing={0}
@@ -230,25 +217,11 @@ export const AdminNav = () => {
 									/>
 								</MenuButton>
 								<MenuList alignItems={"center"}>
-									<br />
-									<Center>
-										{isAuth ? (
-											<Avatar
-												size={"2xl"}
-												src={
-													"https://avatars.dicebear.com/api/male/username.svg"
-												}
-											/>
-										) : (
-											""
-										)}
-									</Center>
-									<br />
-									<Center>
+									{/* <Center>
 										<p>Username</p>
 									</Center>
 									<br />
-									<MenuDivider />
+									<MenuDivider /> */}
 									{/* <MenuItem>Your Servers</MenuItem>
 								<MenuItem>Account Settings</MenuItem> */}
 
