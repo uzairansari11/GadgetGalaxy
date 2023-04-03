@@ -1,135 +1,111 @@
-import {
-	createStyles,
-	Image,
-	Container,
-	Title,
-	Button,
-	Group,
-	Text,
-	List,
-	ThemeIcon,
-	rem,
-} from "@mantine/core";
+import { Container, Box } from "@mantine/core";
 import { AdminNav } from "../component/AdminNav";
-// import { IconCheck } from "@tabler/icons-react";
-// import image from "./image.svg";
-
-const useStyles = createStyles((theme) => ({
-	inner: {
-		display: "flex",
-		justifyContent: "space-between",
-		paddingTop: `calc(${theme.spacing.xl} * 4)`,
-		paddingBottom: `calc(${theme.spacing.xl} * 4)`,
-	},
-
-	content: {
-		maxWidth: rem(480),
-		marginRight: `calc(${theme.spacing.xl} * 3)`,
-
-		[theme.fn.smallerThan("md")]: {
-			maxWidth: "100%",
-			marginRight: 0,
-		},
-	},
-
-	title: {
-		color: theme.colorScheme === "dark" ? theme.white : theme.black,
-		fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-		fontSize: rem(44),
-		lineHeight: 1.2,
-		fontWeight: 900,
-
-		[theme.fn.smallerThan("xs")]: {
-			fontSize: rem(28),
-		},
-	},
-
-	control: {
-		[theme.fn.smallerThan("xs")]: {
-			flex: 1,
-		},
-	},
-
-	image: {
-		flex: 1,
-
-		[theme.fn.smallerThan("md")]: {
-			display: "none",
-		},
-	},
-
-	highlight: {
-		position: "relative",
-		backgroundColor: theme.fn.variant({
-			variant: "light",
-			color: theme.primaryColor,
-		}).background,
-		borderRadius: theme.radius.sm,
-		padding: `${rem(4)} ${rem(12)}`,
-	},
-}));
+import { Grid } from "@chakra-ui/react";
+import { DashboardProductCart } from "../component/DashboardProductCart";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { getData } from "../../redux/adminproduct/action";
+import { getDataFromAPi } from "../utils";
 
 export const Dashboard = () => {
-	const { classes } = useStyles();
+	const product = useSelector((store) => store.adminProductReducer.products);
+	const dispatch = useDispatch();
+	const [admin, setAdmin] = useState([]);
+	const [user, setUser] = useState([]);
+	const [order, setOrder] = useState([]);
+	const [earning, setEarning] = useState([]);
+	const usersUrl = "http://localhost:8080/users";
+	const adminsUrl = "http://localhost:8080/admin";
+	const ordersUrl = "http://localhost:8080/shipping";
+
+	useEffect(() => {
+		dispatch(getData());
+		getDataFromAPi(adminsUrl).then((res) => {
+			setAdmin(res.data.length);
+		});
+		getDataFromAPi(usersUrl).then((res) => {
+			setUser(res.data.length);
+		});
+		getDataFromAPi(ordersUrl).then((res) => {
+			console.log(res, "orders");
+			const totalProductOrder = res.reduce(
+				(acc, item) => acc + item.numOfItems,
+				0
+			);
+			console.log(totalProductOrder);
+			setOrder(totalProductOrder);
+		});
+		getDataFromAPi(ordersUrl).then((res) => {
+			console.log(res, "orders");
+			const totalEarning = res.reduce(
+				(acc, item) => acc + item.numOfItems*item.orderAmount,
+				0
+			);
+			console.log(totalEarning);
+			setEarning(totalEarning);
+		});
+	}, []);
+
 	return (
 		<div>
 			<AdminNav />
-			<Container mt="80px">
-				<div className={classes.inner}>
-					<div className={classes.content}>
-						<Title className={classes.title}>
-							A <span className={classes.highlight}>modern</span> React <br />{" "}
-							components library
-						</Title>
-						<Text color="dimmed" mt="md">
-							Build fully functional accessible web applications faster than
-							ever – Mantine includes more than 120 customizable components and
-							hooks to cover you in any situation
-						</Text>
-
-						<List
-							mt={30}
-							spacing="sm"
-							size="sm"
-							icon={
-								<ThemeIcon size={20} radius="xl">
-									{/* <IconCheck size={rem(12)} stroke={1.5} /> */}
-								</ThemeIcon>
+			<Container mt="90px" justifyContent={"center"} display={"flex"}>
+				<Grid
+					margin={"auto"}
+					templateColumns={{
+						sm: "repeat(1, 1fr)",
+						md: "repeat(2, 1fr)",
+						lg: "repeat(3, 1fr)",
+					}}
+					justifyContent={"center"}
+					alignItems={"center"}
+					gap={"4"}
+					textAlign={"center"}
+					alignSelf={"center"}
+				>
+					<Box>
+						<DashboardProductCart
+							CardTitle={"No of Product"}
+							data1={product.length}
+							data2={
+								"Above Number Show The Live Quantity of Products 	Available On Our Website"
 							}
-						>
-							<List.Item>
-								<b>TypeScript based</b> – build type safe applications, all
-								components and hooks export types
-							</List.Item>
-							<List.Item>
-								<b>Free and open source</b> – all packages have MIT license, you
-								can use Mantine in any project
-							</List.Item>
-							<List.Item>
-								<b>No annoying focus ring</b> – focus ring will appear only when
-								user navigates with keyboard
-							</List.Item>
-						</List>
-
-						<Group mt={30}>
-							<Button radius="xl" size="md" className={classes.control}>
-								Get started
-							</Button>
-							<Button
-								variant="default"
-								radius="xl"
-								size="md"
-								className={classes.control}
-							>
-								Source code
-							</Button>
-						</Group>
-					</div>
-					<Image
-						src={"https://ui.mantine.dev/_next/static/media/image.9a65bd94.svg"}
-						className={classes.image}
-					/>
-				</div>
+						/>
+					</Box>
+					<Box>
+						<DashboardProductCart
+							CardTitle={"No of Users"}
+							data1={user}
+							data2={
+								"Above Number Show The Total Number of Active Users On Our Website"
+							}
+						/>
+					</Box>
+					<Box>
+						<DashboardProductCart
+							CardTitle={"No of Orders"}
+							data1={order}
+							data2={
+								"Above Number Show  ProductS Ordered By The Users From  Our Website"
+							}
+						/>
+					</Box>
+					<Box>
+						<DashboardProductCart
+							CardTitle={"Total Earning"}
+							data1={earning}
+							data2={"Above Amount Is In INR."}
+							data3={"New Features Coming Soon ...."}
+						/>
+					</Box>
+					<Box>
+						<DashboardProductCart
+							CardTitle={"No of Admin"}
+							data1={admin}
+							data2={"Above Number Show The Total Number of Admins"}
+						/>
+					</Box>
+				</Grid>
 			</Container>
 		</div>
 	);

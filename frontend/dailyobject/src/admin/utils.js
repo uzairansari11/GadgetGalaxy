@@ -25,3 +25,12 @@ export const AdminRegister = async (payload) => {
 export const  setToken = (token) => {
 	return token
 }
+
+export const getDataFromAPi = async (url) => {
+	try {
+		const res = await axios.get(url);
+		return res.data;
+	} catch (error) {
+		return error;
+	}
+};

@@ -5,6 +5,7 @@ import {
 	InputGroup,
 	InputLeftAddon,
 	Textarea,
+	useToast,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +15,7 @@ import axios from "axios";
 import { AdminNav } from "../component/AdminNav";
 
 export const EditProduct = () => {
+	const toast = useToast();
 	const navigate = useNavigate();
 	const products = useSelector((store) => store.adminProductReducer.products);
 	const dispatch = useDispatch();
@@ -46,9 +48,28 @@ export const EditProduct = () => {
 				payload
 			);
 			console.log(response.data);
-			navigate("/admin/product");
+			setTimeout(() => {
+				toast({
+					title: "Product Updated Successful",
+					description: "",
+					status: "success",
+					duration: 1000,
+					isClosable: true,
+					position: "bottom",
+				});
+			}, 1500);
+			setTimeout(() => {
+				navigate("/admin/product");
+			}, 500);
 		} catch (error) {
-			console.log(error);
+			toast({
+				title: "Something Went Wrong",
+				description: "",
+				status: "error",
+				duration: 2500,
+				isClosable: true,
+				position: "top",
+			});
 		}
 	};
 
@@ -58,9 +79,9 @@ export const EditProduct = () => {
 		}
 	}, []);
 	useEffect(() => {
-		console.log(products,"products");
+		console.log(products, "products");
 		const pdt = products.find((item) => item._id === id);
-		console.log(pdt,"pdt")
+		console.log(pdt, "pdt");
 		setTitle(pdt?.Title);
 		setImage1(pdt?.Image1);
 		setImage2(pdt?.Image2);

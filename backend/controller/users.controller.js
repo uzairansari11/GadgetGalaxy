@@ -68,4 +68,15 @@ const userLogin = async (req, res) => {
 	}
 };
 
-module.exports = { userRegister, userLogin };
+const userData = async (req, res) => {
+	try {
+		const allUsers = await UserModel.find();
+		res.send({ message: `All Users Data`, data: allUsers });
+	} catch (error) {
+		res.status(400).send({
+			message: `Please Try Again Something Went Wrong!\n , ${error.message}`,
+		});
+	}
+};
+
+module.exports = { userRegister, userLogin, userData };

@@ -15,7 +15,7 @@ export const adminLoginApi = async (payload) => {
 			"http://localhost:8080/admin/login",
 			payload
 		);
-		return response.data.token;
+		return response.data;
 	} catch (e) {
 		console.error("userLoginAPI error", e);
 	}

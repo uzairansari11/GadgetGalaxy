@@ -25,13 +25,12 @@ export const ProductCard = ({
 		console.log(id);
 	};
 
-
 	const handleDelete = async (id) => {
 		try {
 			await deleteProduct(id);
-			await dispatch(getData());
+			dispatch(getData());
 			toast({
-				title: `Product: ${id} Has Been Deleted`,
+				title: `Product Has Been Deleted`,
 				status: "success",
 				duration: 2000,
 				isClosable: true,
