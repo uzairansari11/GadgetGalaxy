@@ -50,7 +50,7 @@ export function Login(props) {
 		if (email !== "" && password !== "") {
 			try {
 				const res = await axios.post(
-					`http://localhost:8080/users/login`,
+					`https://gadgetgalaxy.cyclic.app/users/login`,
 					payload
 				);
 				console.log(res);
