@@ -14,12 +14,11 @@ import { getData } from "../../redux/adminproduct/action";
 import { Link } from "react-router-dom";
 
 const Search = (props) => {
-	const theme = useMantineTheme();
-	const products = useSelector((store) => store.adminProductReducer.products);
 	const dispatch = useDispatch();
 	const [query, setQuery] = useState("");
 	const [suggestions, setSuggestions] = useState([]);
 	const [showDropdown, setShowDropdown] = useBoolean();
+	const product = useSelector((store) => store.adminProductReducer.products);
 
 	const throttledText = useThrottle(query, 400);
 	useEffect(() => {
@@ -32,7 +31,7 @@ const Search = (props) => {
 			setSuggestions([]);
 		} else {
 			console.log(throttledText);
-			let newSuggestions = products.filter((item) => {
+			let newSuggestions = product.filter((item) => {
 				return item.Title.split(" ")
 					.join("")
 					.trim()
@@ -46,7 +45,7 @@ const Search = (props) => {
 			setShowDropdown.on();
 		}
 	}, [throttledText]);
-
+console.log(product)
 	return (
 		<div className="search_main">
 			<Navbar />
