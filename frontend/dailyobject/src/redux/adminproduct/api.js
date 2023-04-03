@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getProductFromApi = async () => {
 	try {
-		let response = await axios.get(`http://localhost:8080/products`);
+		let response = await axios.get(`https://gadgetgalaxy.cyclic.app/products`);
 		return response.data;
 	} catch (error) {
 		return error;
@@ -11,7 +11,9 @@ export const getProductFromApi = async () => {
 
 export const getSingleProductFromApi = async (id) => {
 	try {
-		let response = await axios.get(`http://localhost:8080/products/${id}`);
+		let response = await axios.get(
+			`https://gadgetgalaxy.cyclic.app/products/${id}`
+		);
 		return response.data;
 	} catch (error) {
 		console.log(error);
@@ -21,7 +23,7 @@ export const getSingleProductFromApi = async (id) => {
 export const postDataToApi = async (payload) => {
 	try {
 		let response = await axios.post(
-			`http://localhost:8080/products/add`,
+			`https://gadgetgalaxy.cyclic.app/products/add`,
 			payload
 		);
 		return response.data;
@@ -33,7 +35,7 @@ export const postDataToApi = async (payload) => {
 export const deleteDataFromApi = async (id) => {
 	try {
 		let response = await axios.delete(
-			`http://localhost:8080/products/delete/${id}`
+			`https://gadgetgalaxy.cyclic.app/products/delete/${id}`
 		);
 		return response;
 	} catch (error) {

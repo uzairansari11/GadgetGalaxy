@@ -25,30 +25,35 @@ export const getdataSuccessAddress = (payload) => {
 export const postRequestAddress = (payload) => (dispatch) => {
   dispatch(getpostRequest());
   axios
-    .post("http://localhost:8080/shipping/add",{
-      headers: {
-      'Authorization': `Bearer ${localStorage.getItem("token")}`,
-      'Content-Type': 'application/json'
-    }},payload)
-    .then((res) => {
-      console.log("post", res.data);
-      dispatch(getpostSuccessAddress(res.data));
-    })
-    .catch((error) => {
-      dispatch(getpostFailure());
-    });
+		.post(
+			"https://gadgetgalaxy.cyclic.app/shipping/add",
+			{
+				headers: {
+					Authorization: `Bearer ${localStorage.getItem("token")}`,
+					"Content-Type": "application/json",
+				},
+			},
+			payload
+		)
+		.then((res) => {
+			console.log("post", res.data);
+			dispatch(getpostSuccessAddress(res.data.data));
+		})
+		.catch((error) => {
+			dispatch(getpostFailure());
+		});
 };
 
 export const getRequestAddress = () => (dispatch) => {
   dispatch(getpostRequest());
   axios
-    .get("http://localhost:8080/shipping",)
-    .then((res) => {
-        console.log("get",res.data);
-      dispatch(getdataSuccessAddress(res.data));
-    })
-    .catch((error) => {
-      dispatch(getpostFailure());
-    });
+		.get("https://gadgetgalaxy.cyclic.app/shipping")
+		.then((res) => {
+			console.log("get", res.data);
+			dispatch(getdataSuccessAddress(res.data));
+		})
+		.catch((error) => {
+			dispatch(getpostFailure());
+		});
 };
 

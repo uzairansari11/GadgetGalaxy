@@ -25,8 +25,8 @@ const AllProducts = () => {
           setcases(true)
         }
         axios
-            .get(`http://localhost:8080/products?Category=${x}`)
-            .then((res) => setdata(res.data));
+					.get(`https://gadgetgalaxy.cyclic.app/products?Category=${x}`)
+					.then((res) => setdata(res.data));
     }, [x]);
 
     //sort
@@ -48,23 +48,27 @@ const AllProducts = () => {
     const productcategory = (category) => {
         setdata([]);
         axios
-            .get(`http://localhost:8080/products?Category=${category}`)
-            .then((res) => setdata(res.data));
+					.get(`https://gadgetgalaxy.cyclic.app/products?Category=${category}`)
+					.then((res) => setdata(res.data));
     };
 
     //Allproduct show
     const Allproctsshow = () => {
         setdata([]);
         axios
-            .get(`http://localhost:8080/products?Category=Watchbands&Category=Charging Solutions&Category=Macbook Sleeve&Category=Messanger Bags&Category=Eyewear&Category=Desks`)
-            .then((res) => setdata(res.data));
+					.get(
+						`https://gadgetgalaxy.cyclic.app/products?Category=Watchbands&Category=Charging Solutions&Category=Macbook Sleeve&Category=Messanger Bags&Category=Eyewear&Category=Desks`
+					)
+					.then((res) => setdata(res.data));
     }
 
     const Allproctsshowcase = () => {
         setdata([]);
         axios
-            .get(`http://localhost:8080/products?Category=Passport wallet&Category=Airpods pro Cases&Category=Eyewear cases&Category=Ipad cover&Category=Laptop cover&Category=Phone Cases`)
-            .then((res) => setdata(res.data));
+					.get(
+						`https://gadgetgalaxy.cyclic.app/products?Category=Passport wallet&Category=Airpods pro Cases&Category=Eyewear cases&Category=Ipad cover&Category=Laptop cover&Category=Phone Cases`
+					)
+					.then((res) => setdata(res.data));
     }
 
     return (

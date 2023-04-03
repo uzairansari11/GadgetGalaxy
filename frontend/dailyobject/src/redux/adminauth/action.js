@@ -37,7 +37,3 @@ export const adminLogoutSuccess = () => {
 		type: types.Admin_Logout_Success,
 	};
 };
-
-// export const adminLoginVerificationSuccess = (payload) => (dispatch) => {
-// 	dispatch(adminLoginSuccess(payload));
-// };

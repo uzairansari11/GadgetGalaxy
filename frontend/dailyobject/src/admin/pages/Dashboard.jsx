@@ -14,9 +14,9 @@ export const Dashboard = () => {
 	const [user, setUser] = useState([]);
 	const [order, setOrder] = useState([]);
 	const [earning, setEarning] = useState([]);
-	const usersUrl = "http://localhost:8080/users";
-	const adminsUrl = "http://localhost:8080/admin";
-	const ordersUrl = "http://localhost:8080/shipping";
+	const usersUrl = "https://gadgetgalaxy.cyclic.app/users";
+	const adminsUrl = "https://gadgetgalaxy.cyclic.app/admin";
+	const ordersUrl = "https://gadgetgalaxy.cyclic.app/shipping";
 
 	useEffect(() => {
 		dispatch(getData());
@@ -38,10 +38,10 @@ export const Dashboard = () => {
 		getDataFromAPi(ordersUrl).then((res) => {
 			console.log(res, "orders");
 			const totalEarning = res.reduce(
-				(acc, item) => acc + item.numOfItems*item.orderAmount,
-				0
+				(acc, item) => acc + Number(item.numOfItems) * Number(item.orderAmount),0
+				
 			);
-			console.log(totalEarning);
+			console.log(totalEarning,"total eraring");
 			setEarning(totalEarning);
 		});
 	}, []);

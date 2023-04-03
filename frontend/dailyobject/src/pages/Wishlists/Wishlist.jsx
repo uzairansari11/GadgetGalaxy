@@ -12,8 +12,8 @@ const Wishlist = () => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:8080/products`)
-            .then((res) => setData(res.data));
+					.get(`https://gadgetgalaxy.cyclic.app/products`)
+					.then((res) => setData(res.data));
     }, []);
     return (
         <div className="wish_main">

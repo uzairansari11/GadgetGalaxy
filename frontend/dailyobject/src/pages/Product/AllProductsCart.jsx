@@ -19,37 +19,40 @@ const AllProductsCart = ({
 
 const hadleidcheck=(Title)=>{
 	if(token===null){
-		alert("Please login first")
+		toast({
+			title: "Please login first",
+			description: "",
+			status: "error",
+			duration: 2500,
+			isClosable: true,
+			position: "top",
+		});
 	   }else{
-	       fetch("http://localhost:8080/cart",{
-                  headers:{
-                        "Authorization":`Bearer ${token}`
-				 
-                  },
-            }).then(res=>res.json())
-            .then(res=>{
-			
-                  let datacheck=(res) 
-			
-			const alreadyAdded=datacheck.filter((el)=>el.Title===Title)
-			 
-			if(alreadyAdded.length>=1){
-				
-				toast({
-					title: "Product Alreacy  Added In Cart",
-					description: "",
-					status: "error",
-					duration: 2500,
-					isClosable: true,
-					position: "top",
-				  })
-				
-			}else{
-				handlesumit()
-			}
-			
-            })
-            .catch(err=>console.log(err))
+	       fetch("https://gadgetgalaxy.cyclic.app/cart", {
+						headers: {
+							Authorization: `Bearer ${token}`,
+						},
+					})
+						.then((res) => res.json())
+						.then((res) => {
+							let datacheck = res;
+
+							const alreadyAdded = datacheck.filter((el) => el.Title === Title);
+
+							if (alreadyAdded.length >= 1) {
+								toast({
+									title: "Product Alreacy  Added In Cart",
+									description: "",
+									status: "error",
+									duration: 2500,
+									isClosable: true,
+									position: "top",
+								});
+							} else {
+								handlesumit();
+							}
+						})
+						.catch((err) => console.log(err));
 	}
      }
     
@@ -62,34 +65,33 @@ const handlesumit=()=>{
 			Discount_price: Discount_price,
 			Quantity:1
 		}
-		fetch("http://localhost:8080/cart/add",{
-			method:"POST",
-			headers:{
-				"Authorization":`Bearer ${token}`,
-				"Content-type":"application/json"
+		fetch("https://gadgetgalaxy.cyclic.app/cart/add", {
+			method: "POST",
+			headers: {
+				Authorization: `Bearer ${token}`,
+				"Content-type": "application/json",
 			},
-			body:JSON.stringify(payload)
-		}).then(res=>res.json())
-		.then(res=>{
-			
-			setIsButLoading(true) 
-			setTimeout(() => {
-				setIsButLoading(false)     
-				toast({
-					title: `${res.msg}`,
-					description: "",
-					status: "success",
-					duration: 2500,
-					isClosable: true,
-					position: "top",
-				  })
-			 
-			}, 2000)
-		
+			body: JSON.stringify(payload),
 		})
-		.catch(err=>{
-			alert(err.message)
-			console.log(err)})
+			.then((res) => res.json())
+			.then((res) => {
+				setIsButLoading(true);
+				setTimeout(() => {
+					setIsButLoading(false);
+					toast({
+						title: `${res.msg}`,
+						description: "",
+						status: "success",
+						duration: 2500,
+						isClosable: true,
+						position: "top",
+					});
+				}, 2000);
+			})
+			.catch((err) => {
+				alert(err.message);
+				console.log(err);
+			});
 	   
 	 }
 	return (
