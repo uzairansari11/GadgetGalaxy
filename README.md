@@ -129,7 +129,7 @@ npm run deploy
 ### 9. Admin Signup
 ![AdminSignup](https://user-images.githubusercontent.com/110021464/229438692-57cbac95-19b1-47f5-9918-14f9dc8cc0f2.png)
 
-### 9. Admin Page
+### 9. Admin Dashboard
 
 ![screencapture-gadgetgalaxy-netlify-app-admin-2023-04-03-12_33_04](https://user-images.githubusercontent.com/110021464/229437157-4e66f48c-d1b8-4e0e-8d4b-362d74672f13.png)
 
@@ -137,7 +137,7 @@ npm run deploy
 
 ![Screenshot 2023-04-03 124516](https://user-images.githubusercontent.com/110021464/229438386-be4852d1-6882-44e7-9d10-d00e1afb92c4.png)
 
-### 11. Admin Dashboard
+### 11. Admin Edit Product
 
 ![AdminEditPrd](https://user-images.githubusercontent.com/110021464/229439290-ea803007-25e3-4e9d-927d-cbc9db87179c.png)
 
