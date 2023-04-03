@@ -64,7 +64,7 @@ export const AdminLogin = () => {
 				console.log(data, "data from sisisi");
 			});
 	
-			navigate("/admin", { replace: true });
+			navigate("/admin");
 		} else if (verifyKey === "") {
 			toast({
 				title: "Please Enter Pin",
