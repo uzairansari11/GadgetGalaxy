@@ -1,6 +1,6 @@
 # GadgetGalaxy.com
 
-GadgetGalaxy is known for its trendy and affordable Electric, with a focus on casual thing such as headphone, hoodies, and jeans. The brand also offers a range of accessories such as bags.
+GadgetGalaxy is a clone of an Indian online store that specializes in selling a wide range of designer mobile phone cases, laptop sleeves, and other tech accessories
 
 ## API Reference
 
