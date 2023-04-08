@@ -1,112 +1,32 @@
 @import url("https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap");
-#stack1 > * > *:hover {
-    color: black;
-}
-
-/* category navbar menu */
-
-#catNav > div {
-    background-color: white;
-    position: absolute;
-    padding: 2%;
-    align-items: flex-start;
-    border: 0.1px solid #e2e8f0;
-    gap: 4%;
-    border-radius: 0px 0px 20px 20px;
-    overflow: auto;
-}
-
-#catNav {
-    width: 100%;
-    /* padding: 0 15%; */
-    position: relative;
-    align-items: flex-start;
-}
-
-#catNav > div > div > p {
-    font-weight: 500;
-    margin-bottom: 10px;
-    white-space: nowrap;
-    font-family: "Pathway Gothic One", sans-serif;
-}
-
-#catNav > div > div:hover > p {
-    text-decoration: underline black;
-    text-underline-offset: 10px;
-}
-
-#catNav > div > div > p:hover,
-#catNav > div > div > ul > *:hover {
-    color: black;
-}
-
-#catNav > div > div > *:hover {
-    cursor: pointer;
-}
-
-/* category navbar main */
-
-#catNavMain {
-    background-color: white;
-    border-top: 0.1px solid #e2e8f0;
-    border-bottom: 0.1px solid #e2e8f0;
-}
-
-#stack3 > * {
-    transition: color 0.2s ease-in-out;
-}
-
-#stack3 > *:hover {
-    color: black;
-    cursor: default;
-    text-decoration: underline black 2px solid;
-    text-underline-offset: 80%;
-}
-
-/* navbar scrollbar */
-
-.scroller {
-    overflow-x: auto;
-    scrollbar-width: 0px;
-}
-
-.scroller > p {
-    white-space: nowrap;
-}
-
-/* User box */
-
-#userBox {
-    position: relative;
-}
-
-#userBox > div {
-    border: 0.1px solid #e2e8f0;
-    display: none;
-    position: absolute;
-    z-index: 2;
-    background-color: white;
-}
-
-#userBox > div > * {
-    transition: color 0.2s ease-in-out;
-    border-bottom: 0.1px solid #e2e8f0;
-    padding: 10px 20px 10px 20px;
-    width: 100px;
-}
-
-#userBox > div > *:hover {
-    color: black;
-    cursor: pointer;
-}
-
-#userBox:hover > div {
-    display: flex;
-}
 
 /* ------------New-CSS------------- */
 
+.nav_root {
+    position: fixed;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    top: 0;
+    margin: 0px;
+    background-color: white;
+    border-bottom: 0.1px solid #e2e8f0;
+    z-index: 100;
+}
+.nav_icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 40px;
+}
+.nav_logo {
+    width: 84px;
+    margin-left: 20px;
+    left: 20px;
+    cursor: pointer;
+}
 .dropdown-menu {
     position: relative;
     display: inline-block;
@@ -120,7 +40,7 @@
     cursor: pointer;
 }
 
-.dropdown-menu > ul {
+.all-log {
     top: 100%;
     right: 0;
     background-color: #fff;
@@ -133,7 +53,7 @@
     text-align: left;
     display: none;
     position: absolute;
-    z-index: 1;
+    z-index: 15;
 }
 .dropdown-menu:hover .all-log {
     display: block;
@@ -144,45 +64,6 @@
 .dropdown-menu li {
     cursor: pointer;
 }
-
-.navAdmin {
-    position: relative;
-    display: inline-block;
-}
-
-.hover-account {
-    background-color: #fff;
-    /* border: 1px solid #ccc; */
-    padding: 8px 16px;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-.navAdmin > ul {
-    top: 100%;
-    right: 0;
-    background-color: #fff;
-    border: 0px solid transparent;
-    border-radius: 20px;
-    /* width: 240px; */
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    list-style: none;
-    transition: all 0.2s ease-in-out;
-    text-align: left;
-    display: none;
-    position: absolute;
-    z-index: 1;
-}
-.navAdmin:hover .all-log {
-    display: block;
-}
-.navAdmin:not(:hover) .all-log {
-    display: none;
-}
-.navAdmin li {
-    cursor: pointer;
-}
-
 
 .navCart {
     /* padding: 8px 16px; */
@@ -201,7 +82,6 @@
     background-color: #17274a;
     color: #809aaa;
     font-size: 14px;
-    font-family: "Visuelt Pro";
     text-align: left;
 }
 
@@ -220,4 +100,116 @@
     padding: 0px 10px;
     color: #809aaa;
     text-decoration: underline;
+}
+.responce {
+    display: none;
+}
+.main_navbar {
+    border: 0px solid red;
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    padding: 20px 40px;
+    align-items: center;
+}
+
+.nav_link {
+    position: relative;
+    display: inline-block;
+    transition: all 0.3s ease-in-out;
+}
+.nav_link:hover div {
+    display: block;
+}
+
+.nav_child {
+    top: 100%;
+    border-radius: 8px;
+    width: 20vw;
+    padding: 20px 20px 0px 20px;
+    background-color: white;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    list-style: none;
+    text-align: left;
+    display: none;
+    position: absolute;
+    z-index: 5;
+    transition: all 0.3s ease-in-out;
+}
+
+.nav_child > h3 {
+    font-family: "Pathway Gothic One", sans-serif;
+    cursor: pointer;
+}
+.nav_child > ul > li {
+    list-style: none;
+    font-size: 12px;
+    margin: 20px 0px;
+    cursor: pointer;
+}
+.nav_child > ul > li:hover {
+    text-decoration: underline;
+}
+@media all and (min-width: 230px) and (max-width: 1200px) {
+    .responce {
+        display: block;
+        width: 50px;
+        text-align: center;
+    }
+    .nav_root > img {
+        width: 40px;
+    }
+    .main_navbar {
+        display: none;
+    }
+    .nav_icon {
+        display: none;
+    }
+    .drawerbody {
+        border: 0px solid red;
+        display: flex;
+        flex-direction: column;
+    }
+    .nav_link {
+        margin: 20px 0px 20px 10px;
+        border-bottom: 0.5px solid transparent;
+
+    }
+    .nav_link:hover {
+        /* text-decoration: underline; */
+        border-bottom: 0.5px solid gray;
+    }
+    .nav_icons {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-top: 0.5px solid #e2e8f0;
+    }
+    .dropdown-menus {
+        position: relative;
+        display: inline-block;
+    }
+    .all-logs {
+        bottom: 100%;
+        background-color: #fff;
+        border: 0px solid transparent;
+        border-radius: 20px;
+        width: 150px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        list-style: none;
+        transition: all 0.2s ease-in-out;
+        text-align: left;
+        display: none;
+        position: absolute;
+        z-index: 15;
+    }
+    .dropdown-menus:hover .all-logs {
+        display: block;
+    }
+    .dropdown-menus:not(:hover) .all-logs {
+        display: none;
+    }
+    .dropdown-menus li {
+        cursor: pointer;
+    }
 }

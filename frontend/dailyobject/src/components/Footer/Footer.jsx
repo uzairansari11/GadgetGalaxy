@@ -12,7 +12,7 @@ const Footer = () => {
     return (
         <div className="foot_main">
             <div className="foot_one">
-                <h3>
+                <h3 className="foot_h3">
                     GET EXCLUSIVE ACCESS TO NEW PRODUCTS, DEALS &amp; SURPRISE
                     TREATS
                 </h3>
@@ -20,14 +20,14 @@ const Footer = () => {
                 <button>Subscribe</button>
             </div>
             <div className="foot_two">
-                <h3>FEATURED IN</h3>
+                <h3 className="foot_h3">FEATURED IN</h3>
                 <img
                     src="https://images.dailyobjects.com/marche/icons/press-desktop.png?tr=cm-pad_resize,v-2,w-1519,h-200,dpr-1"
                     alt=""
                 />
             </div>
             <div className="foot_three">
-                <h3>HONEST REVIEWS. NOTHING ELSE.</h3>
+                <h3 className="foot_h3">HONEST REVIEWS. NOTHING ELSE.</h3>
                 <img
                     src="https://images.dailyobjects.com/marche/assets/images/other/reviews-desktop-updated-23.png?tr=cm-pad_resize,v-2,w-1519,h-200,dpr-1"
                     alt=""

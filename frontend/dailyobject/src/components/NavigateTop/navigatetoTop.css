@@ -1,32 +1,30 @@
 #up {
     height: 50px;
-    /* width: 45px; */
-    width: 4%;
+    width: 50px;
+    padding: 10px;
     position: fixed;
-    font-size: 35px;
-    bottom: 75px;
-    left: 95%;
-    padding: 0px 11px 10px 11px;
+    font-size: 28px;
+    bottom: 10%;
+    left: 93%;
     border: none;
-    /* border-radius: 50%; */
-    color: white;
-    /* background-color: rgb(78, 215, 83); */
-    /* border: 1px solid rgb(197, 195, 195); */
+    border-radius: 50%;
+    background-color: white;
+    border: 2px solid #20a87e;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 #up:hover {
     cursor: pointer;
 }
-
-@media screen and (max-width:1024px) {
+@media all and (min-width: 230px) and (max-width: 420px) {
     #up {
-        display: none;
+        left: 80%;
+        bottom: 5%;
     }
 }
-
-
-@media screen and (max-width:600) {
+@media all and (min-width: 421px) and (max-width: 3680px) {
     #up {
-        display: none;
+        left: 90%;
+        bottom: 5%;
     }
 }

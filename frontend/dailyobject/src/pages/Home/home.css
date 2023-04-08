@@ -1,14 +1,117 @@
+.home_main {
+    border: 0px solid red;
+}
+.main_box {
+    margin-top: 4rem;
+}
+.top_image_box > div {
+    margin: 20px 0px;
+    cursor: pointer;
+}
+
 .carousel_text_button_box {
-    /* border: 1px solid; */
+    border-top: 0.5px solid #e2e8f0;
+    border-bottom: 0.5px solid #e2e8f0;
+    margin: 20px auto;
 }
-
+.ads_mid {
+    margin: 20px 0px;
+    cursor: pointer;
+}
+.ads_funk {
+    cursor: pointer;
+}
 .carousel_box {
-    /* border: 1px solid; */
-    /* width: 75%; */
-    /* flex: 1; */
+    padding: 20px 0px;
+}
+.collec_ads {
+    margin-bottom: 25px;
+}
+.collec_card {
+    width: 95%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.collec_card_wrap {
+    width: 95%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.text_button {
-    /* border: 1px solid; */
-    width: 55%;
+.collec_card_wrap > div {
+    width: 32%;
+}
+.crous_head {
+    display: block;
+    width: 40%;
+}
+.crous_head_btn {
+    width: 165px;
+    margin: 25px auto;
+}
+
+@media all and (min-width: 230px) and (max-width: 420px) {
+    .collec_card {
+        flex-wrap: wrap;
+    }
+    .crous_head {
+        display: block;
+        width: 100%;
+    }
+    .carousel_box {
+        width: 90%;
+        margin: auto;
+    }
+    .collec_card_wrap {
+        flex-wrap: wrap;
+    }
+    .collec_card_wrap > div {
+        width: 100%;
+    }
+}
+@media all and (min-width: 421px) and (max-width: 767px) {
+    .collec_card {
+        flex-wrap: wrap;
+    }
+    .crous_head {
+        display: block;
+        width: 100%;
+    }
+    .carousel_box {
+        width: 90%;
+        margin: auto;
+    }
+    .collec_card_wrap {
+        flex-wrap: wrap;
+    }
+    .collec_card_wrap > div {
+        width: 47%;
+    }
+}
+@media all and (min-width: 768px) and (max-width: 1024px) {
+    .collec_card {
+        flex-wrap: wrap;
+    }
+    .crous_head {
+        display: block;
+        width: 100%;
+    }
+    .carousel_box {
+        width: 90%;
+        margin: auto;
+    }
+    .collec_card_wrap {
+        flex-wrap: nowrap;
+    }
+    /* .collec_card_wrap > div {
+        width: 47%;
+    } */
+    .crous_head_btn {
+        width: 165px;
+        margin: 25px auto;
+    }
 }

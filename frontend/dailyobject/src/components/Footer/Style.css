@@ -1,6 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Gothic+A1&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Pathway+Gothic+One&display=swap");
 
+.foot_h3 {
+    width: 80%;
+    font-size: 26px;
+    font-family: "Gothic A1", sans-serif;
+    margin-bottom: 29px;
+    line-height: 20px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin: 20px auto;
+}
 .foot_main {
     border: 0px solid red;
     padding: 40px 0px 0px 0px;
@@ -10,13 +20,7 @@
 .foot_one {
     text-align: center;
 }
-.foot_one > h3 {
-    font-size: 26px;
-    font-family: "Gothic A1", sans-serif;
-    margin-bottom: 29px;
-    line-height: 20px;
-    font-weight: 600;
-}
+
 .foot_one > input {
     padding: 15px 10px;
     border: none;
@@ -41,24 +45,12 @@
     text-align: center;
     border-bottom: 0.5px solid hsla(0, 0%, 75%, 0.5);
 }
-.foot_two > h3 {
-    font-size: 26px;
-    font-family: "Gothic A1", sans-serif;
-    margin: 5rem auto 2rem auto;
-    line-height: 20px;
-    font-weight: 600;
-}
+
 .foot_three {
     text-align: center;
     border-bottom: 0.5px solid hsla(0, 0%, 75%, 0.5);
 }
-.foot_three > h3 {
-    font-size: 26px;
-    font-family: "Gothic A1", sans-serif;
-    margin: 4rem auto 2rem auto;
-    line-height: 20px;
-    font-weight: 600;
-}
+
 .foot_four {
     display: flex;
     justify-content: space-around;
@@ -255,4 +247,112 @@
     background-color: black;
     color: white;
     padding: 40px 30px;
+}
+@media all and (min-width: 230px) and (max-width: 420px) {
+    .foot_h3 {
+        line-height: 40px;
+    }
+    .four_one {
+        padding: 0px;
+        flex-direction: column;
+        width: 50%;
+        align-items: start;
+        flex-wrap: wrap;
+    }
+    .four_one > div {
+        margin: 10px auto;
+        margin-left: 0px;
+    }
+    .foot_five {
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+    .five_one {
+        width: 100%;
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+    .five_one > div {
+        width: 100%;
+    }
+    .five_two {
+        width: 100%;
+        padding: 0px 60px;
+    }
+    .ads {
+        width: 100%;
+    }
+    .pay_img {
+        width: 80%;
+        flex-wrap: wrap;
+        /* flex-direction: column; */
+        gap: 20px;
+        margin: auto;
+    }
+    .pay_img > img {
+        width: 18%;
+    }
+    .seven_two > div {
+        width: 100%;
+    }
+}
+@media all and (min-width: 421px) and (max-width: 768px) {
+    .foot_h3 {
+        line-height: 40px;
+    }
+    .four_one {
+        padding: 25px 16px;
+        /* flex-direction: column; */
+        width: 80%;
+        align-items: start;
+        flex-wrap: wrap;
+    }
+    .four_one > div {
+        margin: 10px auto;
+        margin-left: 0px;
+    }
+    .foot_five {
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+    .five_one {
+        width: 100%;
+    }
+    .five_icon {
+        width: 100%;
+    }
+    .five_one > div {
+        width: 100%;
+    }
+    .five_two {
+        border-top: 0.5px solid hsla(0, 0%, 75%, 0.5);
+
+        width: 100%;
+        padding: 0px 60px;
+    }
+    .ads {
+        width: 80%;
+        margin: auto;
+    }
+    .ads > img {
+        justify-content: space-around;
+        width: 35%;
+    }
+    .foot_six > h4 {
+    font-size: 24px;
+
+    }
+    .pay_img {
+        width: 80%;
+        flex-wrap: wrap;
+        /* flex-direction: column; */
+        gap: 20px;
+        margin: auto;
+    }
+    .pay_img > img {
+        width: 13%;
+    }
+    .seven_two > div {
+        width: 100%;
+    }
 }
