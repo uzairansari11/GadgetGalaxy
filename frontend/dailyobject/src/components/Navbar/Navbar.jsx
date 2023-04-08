@@ -1,111 +1,43 @@
-import { useState } from "react";
-import { Dz, Sr, Li, Bm, Di, Se } from "./NavComponents";
 import "./Navbar.css";
 import Logo from "./Gadget.png";
 import { Link, useNavigate } from "react-router-dom";
-// import LoginOutlinedIcon from "@mui/icons-material/LoginOutlined";
-// import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
+import { RxHamburgerMenu } from "react-icons/rx";
 import {
     Tooltip,
     VStack,
     Button,
     Badge,
-    Box,
-    HStack,
-    Text,
     Toast,
+    DrawerBody,
+    DrawerCloseButton,
+    DrawerContent,
+    DrawerOverlay,
+    Drawer,
+    useDisclosure,
+    DrawerHeader,
+    DrawerFooter,
 } from "@chakra-ui/react";
 import { CiSearch, CiShoppingCart, CiUser } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogout } from "../../redux/userauth/action";
 import { getCartData } from "../../redux/usercart/action";
-import {useEffect} from 'react'
+import { useEffect } from "react";
+
 const Navbar = () => {
     const navigate = useNavigate();
+    const { isOpen, onOpen, onClose } = useDisclosure();
     const dispatch = useDispatch();
-    // const items = useSelector((store) => store.cartReducer.totalItems);
-    // console.log(items) // for Cart items
+
     const items = useSelector((store) => store.cartReducer.totalItems);
-    console.log(items)
+    console.log(items);
 
     useEffect(() => {
-       
         dispatch(getCartData);
-    }, [items])
+    }, [items]);
+
     const isUserLogin = useSelector((store) => store.userAuthReducer.isAuth);
     console.log(isUserLogin);
 
-    const initState = {
-        dz: false,
-        sr: false,
-        li: false,
-        bm: false,
-        di: false,
-        se: false,
-        // sy: false,
-        // ld: false,
-        // or: false,
-        // in: false,
-        // tr: false,
-    };
-    const [navCat, setNavCat] = useState(initState);
-    const handleMouseLeave = (e, val) => {
-        if (e.target.innerText === "NEW ARRIVALS" || val === "NEW ARRIVALS") {
-            setNavCat({ ...initState, dz: false });
-        } else if (
-            e.target.innerText === "CASES & SLEEVES" ||
-            val === "CASES & SLEEVES"
-        ) {
-            setNavCat({ ...initState, sr: false });
-        } else if (
-            e.target.innerText === "ACCESSORIES" ||
-            val === "ACCESSORIES"
-        ) {
-            setNavCat({ ...initState, li: false });
-        } else if (
-            e.target.innerText === "BAGS & WALLETS" ||
-            val === "BAGS & WALLETS"
-        ) {
-            setNavCat({ ...initState, bm: false });
-        } else if (
-            e.target.innerText === "HOME OFFICE" ||
-            val === "HOME OFFICE"
-        ) {
-            setNavCat({ ...initState, di: false });
-        } else if (
-            e.target.innerText === "COLLECTIONS" ||
-            val === "COLLECTIONS"
-        ) {
-            setNavCat({ ...initState, se: false });
-        }
-    };
-    const handleMouseEnter = (e) => {
-        if (e.target.innerText === "NEW ARRIVALS") {
-            setTimeout(() => {
-                setNavCat({ ...initState, dz: true });
-            }, 200);
-        } else if (e.target.innerText === "CASES & SLEEVES") {
-            setTimeout(() => {
-                setNavCat({ ...initState, sr: true });
-            }, 200);
-        } else if (e.target.innerText === "ACCESSORIES") {
-            setTimeout(() => {
-                setNavCat({ ...initState, li: true });
-            }, 200);
-        } else if (e.target.innerText === "BAGS & WALLETS") {
-            setTimeout(() => {
-                setNavCat({ ...initState, bm: true });
-            }, 200);
-        } else if (e.target.innerText === "HOME OFFICE") {
-            setTimeout(() => {
-                setNavCat({ ...initState, di: true });
-            }, 200);
-        } else if (e.target.innerText === "COLLECTIONS") {
-            setTimeout(() => {
-                setNavCat({ ...initState, se: true });
-            }, 200);
-        }
-    };
     const handleLogo = () => {
         navigate("/");
     };
@@ -123,102 +55,110 @@ const Navbar = () => {
     };
 
     return (
-        <Box
-            style={{
-                position: "fixed",
-                width: "100%",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-
-                top: "0",
-                backgroundColor: "white",
-                borderBottom: "0.1px solid #e2e8f0",
-                zIndex: "100",
-                // padding: "0px 20px",
-            }}>
-            <img
-                onClick={handleLogo}
-                src={Logo}
-                alt=""
-                style={{ width: "84px", marginLeft: "20px", cursor: "pointer" }}
-            />
-            <Box
-                style={{
-                    // position: "fixed",
-                    width: "70%",
-                    padding: "20px 40px",
-                    alignItems: "center",
-                }}
-                id="catNavMain"
-                top={0}>
-                <HStack
-                    className="scroller"
-                    position={"relative"}
-                    justify={"space-between"}
-                    h={"42px"}
-                    fontSize={"15px"}
-                    id="stack3"
-                    width={"100%"}
-                    align={"center"}>
-                    <Link
-                        to="/products/Watchbands"
-                        onMouseEnter={handleMouseEnter}>
-                        NEW ARRIVALS
-                    </Link>
-                    <Link
-                        to="/products/Phone Cases"
-                        onMouseEnter={handleMouseEnter}>
-                        CASES & SLEEVES
-                    </Link>
-                    <Link
-                        to="/products/Laptop cover"
-                        onMouseEnter={handleMouseEnter}>
-                        ACCESSORIES
-                    </Link>
-                    <Link
-                        to="/products/Macbook Sleeve"
-                        onMouseEnter={handleMouseEnter}>
-                        BAGS & WALLETS
-                    </Link>
-                    <Link
-                        to="/products/Eyewear"
-                        onMouseEnter={handleMouseEnter}>
-                        HOME OFFICE
-                    </Link>
-                    <Link
-                        to="/products/Passport wallet"
-                        onMouseEnter={handleMouseEnter}>
-                        COLLECTIONS
-                    </Link>
-                    <Link
-                        to="/products/Pedal Backpack"
-                        onMouseEnter={handleMouseEnter}>
-                        GIFTING
-                    </Link>
-                    {/* <Text onMouseEnter={handleMouseEnter}>
-                        Lighting & Decor
-                    </Text>
-                    <Text onMouseEnter={handleMouseEnter}>Outdoor</Text>
-                    <Text onMouseEnter={handleMouseEnter}>Interiors</Text>
-                    <Text onMouseEnter={handleMouseEnter}>Trending</Text> */}
-                </HStack>
-                <Box id="catNav">
-                    {navCat.dz && <Dz mouseLeave={handleMouseLeave} />}
-                    {navCat.sr && <Sr mouseLeave={handleMouseLeave} />}
-                    {navCat.li && <Li mouseLeave={handleMouseLeave} />}
-                    {navCat.bm && <Bm mouseLeave={handleMouseLeave} />}
-                    {navCat.di && <Di mouseLeave={handleMouseLeave} />}
-                    {navCat.se && <Se mouseLeave={handleMouseLeave} />}
-                </Box>
-            </Box>
-            <Box
-                style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    marginRight: "40px",
-                }}>
+        <div className="nav_root">
+            <img onClick={handleLogo} src={Logo} alt="" className="nav_logo" />
+            <div className="main_navbar" top={0}>
+                <div className="nav_link">
+                    <Link to="">NEW ARRIVALS</Link>
+                    <div className="nav_child">
+                        <h3>NEW ARRIVALS</h3>
+                        <ul>
+                            <li>Desks</li>
+                            <li>Charging Solutions</li>
+                            <li>Collections</li>
+                            <li>Macbook Sleeves</li>
+                            <li>Messenger Bags</li>
+                            <li>Eyewear Cases</li>
+                            <li>Watchbands</li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="nav_link">
+                    <Link to="">CASES & SLEEVES</Link>
+                    <div className="nav_child">
+                        <h3>CASES</h3>
+                        <ul>
+                            <li>Apple</li>
+                            <li>Samsung</li>
+                            <li>Google</li>
+                            <li>Sony</li>
+                            <li>Xiaomi</li>
+                            <li>Oneplus</li>
+                            <li>Realme</li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="nav_link">
+                    <Link to="">ACCESSORIES</Link>
+                    <div className="nav_child">
+                        <h3>ACCESSORIES</h3>
+                        <ul>
+                            <li>Watch Accessories</li>
+                            <li>Screen Guard</li>
+                            <li>Stands</li>
+                            <li>Sony</li>
+                            <li>Charging Solutions</li>
+                            <li>Wallets</li>
+                            <li>Keychains</li>
+                            <li>Masks</li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="nav_link">
+                    <Link to="">BAGS & WALLETS</Link>
+                    <div className="nav_child">
+                        <h3>BAGS & WALLETS</h3>
+                        <ul>
+                            <li>Wallets</li>
+                            <li>Crossbody Bags</li>
+                            <li>Tote Bags</li>
+                            <li>Messanger Bags</li>
+                            <li>Backpacks</li>
+                            <li>Duffle Bags</li>
+                            <li>Pouches</li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="nav_link">
+                    <Link to="">HOME OFFICE</Link>
+                    <div className="nav_child">
+                        <h3>HOME OFFICE</h3>
+                        <ul>
+                            <li>Stands</li>
+                            <li>Organisers</li>
+                            <li>Desks</li>
+                            <li>Stationery</li>
+                            <li>Drinkware</li>
+                            <li>Charging Solutions</li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="nav_link">
+                    <Link to="">COLLECTIONS</Link>
+                    <div className="nav_child">
+                        <h3>COLLECTIONS</h3>
+                        <ul>
+                            <li>Collection</li>
+                            <li>Studio</li>
+                            <li>Collaborations</li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="nav_link">
+                    <Link to="">GIFTING</Link>
+                    <div className="nav_child">
+                        <h3>GIFTING</h3>
+                        <ul>
+                            <li>Corporate Gifting</li>
+                            <li>Holiday Gifting Bundles</li>
+                            <li>E-Gift Cards</li>
+                            <li>Gifts By Budget</li>
+                            <li>Gifts By Personas</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div className="nav_icon">
                 <VStack>
                     <Tooltip
                         hasArrow
@@ -336,12 +276,210 @@ const Navbar = () => {
                         </Button>
                     </Tooltip>
                 </div>
+            </div>
+            <div className="responce">
+                <RxHamburgerMenu onClick={onOpen} style={{ margin: "auto" }} />
+                <Drawer
+                    style={{ borderRadius: "8px" }}
+                    isOpen={isOpen}
+                    placement="right"
+                    onClose={onClose}>
+                    <DrawerOverlay style={{ borderRadius: "8px" }} />
+                    <DrawerContent style={{ borderRadius: "8px" }}>
+                        <DrawerCloseButton />
+                        <DrawerHeader>GadgetGalaxy</DrawerHeader>
+                        <DrawerBody marginTop={"30px"}>
+                            <div className="drawerbody">
+                                <div className="nav_link">
+                                    <Link to="">NEW ARRIVALS</Link>
+                                </div>
+                                <div className="nav_link">
+                                    <Link to="">CASES & SLEEVES</Link>
+                                </div>
+                                <div className="nav_link">
+                                    <Link to="">ACCESSORIES</Link>
+                                </div>
+                                <div className="nav_link">
+                                    <Link to="">BAGS & WALLETS</Link>
+                                </div>
+                                <div className="nav_link">
+                                    <Link to="">HOME OFFICE</Link>
+                                </div>
+                                <div className="nav_link">
+                                    <Link to="">COLLECTIONS</Link>
+                                </div>
+                                <div className="nav_link">
+                                    <Link to="">GIFTING</Link>
+                                </div>
 
-        </Box>
-        </Box>
+                                <div className="nav_icons">
+                                    <VStack>
+                                        <Tooltip
+                                            hasArrow
+                                            placement="top"
+                                            label="Search"
+                                            bg="gray.300"
+                                            color="black">
+                                            <Button
+                                                h={{
+                                                    base: "1rem",
+                                                    lg: "1.7rem",
+                                                }}
+                                                bg={"white"}
+                                                onClick={() => {
+                                                    navigate("/search");
+                                                }}
+                                                _hover={{
+                                                    bg: "#ffffff",
+                                                }}>
+                                                <CiSearch
+                                                    style={{ fontSize: "25px" }}
+                                                />
+                                            </Button>
+                                        </Tooltip>
+                                    </VStack>
 
-
-
+                                    <div className="dropdown-menus">
+                                        <button className="hover-account">
+                                            <Tooltip
+                                                hasArrow
+                                                label="Account"
+                                                bg="gray.300"
+                                                color="black">
+                                                <CiUser
+                                                    style={{ fontSize: "25px" }}
+                                                />
+                                            </Tooltip>
+                                        </button>
+                                        <ul className="all-logs">
+                                            {isUserLogin === false ? (
+                                                <>
+                                                    <Button
+                                                        style={{
+                                                            width: "100%",
+                                                            borderTopRightRadius:
+                                                                "20px",
+                                                            borderTopLeftRadius:
+                                                                "20px",
+                                                            borderBottomRightRadius:
+                                                                "0px",
+                                                            borderBottomLeftRadius:
+                                                                "0px",
+                                                            transition:
+                                                                "all .5s ease-in-out",
+                                                            textAlign: "left",
+                                                        }}
+                                                        bg={"white"}
+                                                        onClick={() => {
+                                                            navigate("/login");
+                                                        }}
+                                                        _hover={{
+                                                            backgroundColor:
+                                                                "black",
+                                                            color: "white",
+                                                        }}>
+                                                        Login
+                                                    </Button>
+                                                    <Button
+                                                        style={{
+                                                            width: "100%",
+                                                            borderTopRightRadius:
+                                                                "0px",
+                                                            borderTopLeftRadius:
+                                                                "0px",
+                                                            borderBottomRightRadius:
+                                                                "20px",
+                                                            borderBottomLeftRadius:
+                                                                "20px",
+                                                            transition:
+                                                                "all .5s ease-in-out",
+                                                            textAlign: "left",
+                                                        }}
+                                                        bg={"white"}
+                                                        onClick={() => {
+                                                            navigate("/signup");
+                                                        }}
+                                                        _hover={{
+                                                            backgroundColor:
+                                                                "black",
+                                                            color: "white",
+                                                        }}>
+                                                        Signup
+                                                    </Button>
+                                                </>
+                                            ) : (
+                                                <Button
+                                                    style={{
+                                                        width: "100%",
+                                                        borderTopRightRadius:
+                                                            "20px",
+                                                        borderTopLeftRadius:
+                                                            "20px",
+                                                        borderBottomRightRadius:
+                                                            "20px",
+                                                        borderBottomLeftRadius:
+                                                            "20px",
+                                                        transition:
+                                                            "all .5s ease-in-out",
+                                                        textAlign: "left",
+                                                    }}
+                                                    onClick={handleLogout}
+                                                    bg={"white"}
+                                                    _hover={{
+                                                        backgroundColor:
+                                                            "black",
+                                                        color: "white",
+                                                    }}>
+                                                    Logout
+                                                </Button>
+                                            )}
+                                        </ul>
+                                    </div>
+                                    <div className="navCart">
+                                        <Tooltip
+                                            hasArrow
+                                            placement="top"
+                                            label="Cart"
+                                            bg="gray.300"
+                                            color="black">
+                                            <Button
+                                                h={{
+                                                    base: "1rem",
+                                                    lg: "1.7rem",
+                                                }}
+                                                bg={"white"}
+                                                onClick={() => {
+                                                    navigate("/cart");
+                                                }}
+                                                _hover={{
+                                                    bg: "#ffffff",
+                                                }}>
+                                                <CiShoppingCart
+                                                    style={{ fontSize: "25px" }}
+                                                />
+                                                <Badge
+                                                    borderRadius={"8px"}
+                                                    variant="subtle"
+                                                    colorScheme="green">
+                                                    {items.length > 0
+                                                        ? items
+                                                        : ""}
+                                                </Badge>
+                                            </Button>
+                                        </Tooltip>
+                                    </div>
+                                </div>
+                            </div>
+                        </DrawerBody>
+                        <DrawerFooter
+                            borderTopWidth="1px"
+                            style={{ borderRadius: "8px" }}>
+                            <p>© 2012 - 2023 Firki Wholesale Pvt. Ltd.</p>
+                        </DrawerFooter>
+                    </DrawerContent>
+                </Drawer>
+            </div>
+        </div>
     );
 };
 export default Navbar;
