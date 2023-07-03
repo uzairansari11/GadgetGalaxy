@@ -40,7 +40,7 @@ GadgetGalaxy is a clone of an Indian online store that specializes in selling a 
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/b05289d0-09c8-4f2a-833c-a58d8cd7a1fd/deploy-status)](https://gadgetgalaxy.netlify.app/)
 
-[![](https://img.shields.io/github/last-commit/uzairansari11/native-order-609?logo=Aerowear&style=for-the-badge)]()
+[![](https://img.shields.io/github/last-commit/uzairansari11/native-order-609?logo=GadgetGalaxt&style=for-the-badge)]()
 
 [![](https://img.shields.io/github/contributors-anon/uzairansari11/native-order-609?style=for-the-badge)]()
 
